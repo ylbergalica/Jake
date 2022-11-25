@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 788348777116406240}
   - component: {fileID: 1694241203094446986}
   - component: {fileID: 5495318909925169839}
-  - component: {fileID: 70612444786086621}
   - component: {fileID: 4941517664768390210}
+  - component: {fileID: 70612444786086621}
   m_Layer: 0
   m_Name: ImperialRiseSwing
   m_TagString: Weapon
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a57770c84bc9af94495084e0ac2060be, type: 3}
   m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.7882353}
   m_FlipX: 0
@@ -104,18 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &70612444786086621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562173928408626566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa03cbf1993284f48b944e31ac7ea39e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &4941517664768390210
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -583,3 +571,16 @@ PolygonCollider2D:
       - {x: 0.41, y: -9.79}
       - {x: 0.59, y: -9.78}
       - {x: 0.87, y: -9.76}
+--- !u!114 &70612444786086621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562173928408626566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa03cbf1993284f48b944e31ac7ea39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemReference: {fileID: 5441646164545249177, guid: d36e9e7d9364a2c41bf560acb91bf4f8, type: 3}

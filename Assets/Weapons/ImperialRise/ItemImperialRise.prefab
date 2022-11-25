@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: a7963427cafce0d44a6dc195c794210f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -149,4 +149,5 @@ MonoBehaviour:
   use: {fileID: 5562173928408626566, guid: 519f1d5495d661f45aab5219ade6aee2, type: 3}
   size: 4
   offset: 50
+  damage: 80
   cooldown: 0.2

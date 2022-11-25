@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     public GameObject use;
     public float size;
     public float offset;
+    public float damage;
     public float cooldown;
 
     // Start is called before the first frame update

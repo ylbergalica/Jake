@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 788348777116406240}
   - component: {fileID: 1694241203094446986}
   - component: {fileID: 5495318909925169839}
-  - component: {fileID: 1461889552367874470}
   - component: {fileID: 1688420601642443846}
+  - component: {fileID: 1461889552367874470}
   m_Layer: 0
   m_Name: SwordSwing
   m_TagString: Weapon
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: bd204f5865498be42ac79d643d299c3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,18 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1461889552367874470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562173928408626566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa03cbf1993284f48b944e31ac7ea39e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &1688420601642443846
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -367,3 +355,16 @@ PolygonCollider2D:
       - {x: -3.1499999, y: -6.29}
       - {x: -2.8999999, y: -6.2}
       - {x: -2.4299998, y: -6.04}
+--- !u!114 &1461889552367874470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562173928408626566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa03cbf1993284f48b944e31ac7ea39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemReference: {fileID: 5441646164545249177, guid: 8749c9ee6e4cdbb4eb5fda1b9e270f7d, type: 3}

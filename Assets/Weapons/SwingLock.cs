@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SwingLock : MonoBehaviour
 {
+    public GameObject itemReference;
+
     private Quaternion lockRot;
     private Quaternion lockRotParent;
     // private Vector3 lockPos;
