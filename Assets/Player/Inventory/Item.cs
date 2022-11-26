@@ -6,11 +6,15 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public Sprite sprite;
+
     public GameObject use;
     public float size;
     public float offset;
     public float damage;
     public float cooldown;
+    public float knockback;
+
+    private float lastUse;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +22,11 @@ public class Item : MonoBehaviour
         use.transform.localScale = new Vector3(size/10, size/10, 1);
     }
 
-    public Sprite GetSprite(){
-        return sprite;
+    public float GetLastUse() {
+        return lastUse;
     }
 
-    public float GetCooldown() {
-        return this.cooldown;
-    }
-
-    public void SetCooldown(float cooldown){
-        this.cooldown = cooldown;
+    public void SetLastUse(float current) {
+        lastUse = current;
     }
 }

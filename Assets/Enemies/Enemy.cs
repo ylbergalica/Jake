@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         senseArea = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), senseRadius);
 
+        // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
 
             if (collider.gameObject.tag == "Player") {
@@ -44,16 +45,21 @@ public class Enemy : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        // Can pass away into the other world of forgiveness where it shall lie in peace and forever prosper..
         if(health < 1) {
             Destroy(gameObject);
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
+        // Tage Damage from a Weapon
         if(collision.gameObject.tag == "Weapon"){
-            GameObject item = collision.GetComponent<SwingLock>().itemReference;
-            health -= item.GetComponent<Item>().damage;
+            GameObject itemReference = collision.GetComponent<SwingLock>().itemReference;
+            Item item = itemReference.GetComponent<Item>();
+
+            health -= item.damage;
+            rb.AddForce(-transform.up * item.knockback * 10000 * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 }

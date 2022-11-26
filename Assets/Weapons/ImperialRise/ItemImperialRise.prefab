@@ -150,4 +150,5 @@ MonoBehaviour:
   size: 4
   offset: 50
   damage: 80
-  cooldown: 0.2
+  cooldown: 0.3
+  knockback: 10

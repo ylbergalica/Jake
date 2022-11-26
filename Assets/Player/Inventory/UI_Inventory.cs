@@ -36,7 +36,7 @@ public class UI_Inventory : MonoBehaviour
         List<Item> items = inventory.GetItems();
 
         foreach(Item item in items){
-            slots[items.IndexOf(item)].SetSprite(item.GetSprite());
+            slots[items.IndexOf(item)].SetSprite(item.sprite);
         }
     }
 }

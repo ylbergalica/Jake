@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   speed: 0
+  rotationSpeed: 0
   rotationModifier: 0
   senseRadius: 0
 --- !u!1001 &217824256
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   speed: 0
+  rotationSpeed: 0
   rotationModifier: 0
   senseRadius: 0
 --- !u!1 &296122970
@@ -319,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   speed: 0
+  rotationSpeed: 0
   rotationModifier: 0
   senseRadius: 0
 --- !u!1001 &767235390
@@ -937,6 +940,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465884769813558239, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1695075415033085258, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
       propertyPath: m_Name
       value: Goblin (2)
@@ -984,6 +991,14 @@ PrefabInstance:
     - target: {fileID: 1695075415033085268, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5816469538167404099, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
+      propertyPath: m_Mass
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5816469538167404099, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
@@ -1633,7 +1648,7 @@ PrefabInstance:
       objectReference: {fileID: 7400000, guid: 7eaed9c960f02c940902e66641ec8a79, type: 2}
     - target: {fileID: 1010667056902049533, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: speed
-      value: 7
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1010667056902049533, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: swing
@@ -1685,11 +1700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631189613555170316, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -144
+      value: 228
       objectReference: {fileID: 0}
     - target: {fileID: 7631189613555170316, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 325
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7631189613555170316, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: m_LocalPosition.z
