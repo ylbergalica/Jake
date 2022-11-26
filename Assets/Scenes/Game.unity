@@ -141,6 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  speed: 0
+  rotationModifier: 0
+  senseRadius: 0
 --- !u!1001 &217824256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  speed: 0
+  rotationModifier: 0
+  senseRadius: 0
 --- !u!1 &296122970
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +318,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  speed: 0
+  rotationModifier: 0
+  senseRadius: 0
 --- !u!1001 &767235390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1407,6 +1416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465884769813558239, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 7497535031114637290, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
     - target: {fileID: 465884769813558239, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
       propertyPath: m_Enabled
       value: 1

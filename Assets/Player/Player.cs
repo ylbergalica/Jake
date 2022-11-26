@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        speed *= 20000;
+        speed *= 1000;
 
         inventory = new Inventory(3, ui_inventory);
         activeSlot = inventory.ActivateSlot(0);
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     }
 
     void Update(){
-        // rotate player towards mouse
+        // Rotate Player Towards Mouse
         mousePos = Input.mousePosition;
         mousePos.z = 0;
         objectPos = Camera.main.WorldToScreenPoint(transform.position);

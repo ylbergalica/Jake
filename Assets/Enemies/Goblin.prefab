@@ -135,3 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  speed: 30
+  rotationSpeed: 50
+  rotationModifier: 90
+  senseRadius: 500
