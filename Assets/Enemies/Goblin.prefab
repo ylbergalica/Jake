@@ -136,6 +136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 30
+  damage: 40
+  attackCooldown: 1
   rotationSpeed: 50
   rotationModifier: 90
   senseRadius: 500

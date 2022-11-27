@@ -151,3 +151,4 @@ MonoBehaviour:
   offset: 45
   damage: 35
   cooldown: 0.2
+  knockback: 5

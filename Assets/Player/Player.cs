@@ -23,8 +23,9 @@ public class Player : MonoBehaviour
     private float cooldown;
     private float lastAttack;
 
-    // Movement
+    // Stats
     public float speed;
+    public float health;
 
 
     // Start is called before the first frame update
@@ -91,6 +92,11 @@ public class Player : MonoBehaviour
             Vector3 offset = transform.right * heldItem.offset;
 
             Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
+        }
+
+        if(health < 0) {
+            Debug.Log("You Died!");
+            Destroy(gameObject);
         }
     }
 

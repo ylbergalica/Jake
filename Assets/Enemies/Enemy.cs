@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float health;
     public float speed;
+    public float damage;
+    public float attackCooldown;
 
     // Rotation Variables
     private Collider2D[] senseArea;
@@ -14,6 +16,8 @@ public class Enemy : MonoBehaviour
     public float senseRadius;
 
     private Rigidbody2D rb;
+
+    private float lastAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -52,14 +56,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter2D(Collider2D collider) {
         // Tage Damage from a Weapon
-        if(collision.gameObject.tag == "Weapon"){
-            GameObject itemReference = collision.GetComponent<SwingLock>().itemReference;
+        if(collider.gameObject.tag == "Weapon"){
+            GameObject itemReference = collider.GetComponent<SwingLock>().itemReference;
             Item item = itemReference.GetComponent<Item>();
 
             health -= item.damage;
             rb.AddForce(-transform.up * item.knockback * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collider) {
+        // Do Damage to Player
+        // CHANGE COOLDOWN TO PLAYER I-FRAMES
+        if(collider.gameObject.tag == "Player" && Time.realtimeSinceStartup > attackCooldown + lastAttack) {
+            lastAttack = Time.realtimeSinceStartup;
+
+            collider.gameObject.GetComponent<Player>().health -= damage;
+            rb.AddForce(-transform.up * 20000 * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 }
