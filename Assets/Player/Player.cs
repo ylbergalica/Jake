@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
 
     // Stats
     public float speed;
-    public float health;
+    public float maxHealth;
+    public float currentHealth;
 
 
     // Start is called before the first frame update
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         speed *= 1000;
+        currentHealth = maxHealth;
 
         inventory = new Inventory(3, ui_inventory);
         activeSlot = inventory.ActivateSlot(0);
@@ -74,16 +76,19 @@ public class Player : MonoBehaviour
             // Hotbar Slot 1
             activeSlot = inventory.ActivateSlot(0);
             heldItem = inventory.GetItemIn(activeSlot);
+            RefreshAnimations();
         }
         else if(Input.GetKey(KeyCode.Alpha2)){
             // Hotbar Slot 2
             activeSlot = inventory.ActivateSlot(1);
             heldItem = inventory.GetItemIn(activeSlot);
+            RefreshAnimations();
         }
         else if(Input.GetKey(KeyCode.Alpha3)){
             // Hotbar Slot 3
             activeSlot = inventory.ActivateSlot(2);
             heldItem = inventory.GetItemIn(activeSlot);
+            RefreshAnimations();
         }
 
         // Use Item in Active Slot
@@ -94,7 +99,7 @@ public class Player : MonoBehaviour
             Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
         }
 
-        if(health < 0) {
+        if(currentHealth < 0) {
             Debug.Log("You Died!");
             Destroy(gameObject);
         }
@@ -112,7 +117,13 @@ public class Player : MonoBehaviour
             // Hide the 
             collider.gameObject.SetActive(false);
 
-            // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
+            
+        }
+    }
+
+    private void RefreshAnimations() {
+        // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
+        if (inventory.GetItemCount() != 0 && heldItem != null){
             heldItemAnimator = heldItem.GetComponent<Item>().use.GetComponent<Animator>();
             heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
         }

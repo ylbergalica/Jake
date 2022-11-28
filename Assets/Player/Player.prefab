@@ -119,4 +119,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui_inventory: {fileID: 0}
   speed: 50
-  health: 100
+  maxHealth: 20
+  currentHealth: 0

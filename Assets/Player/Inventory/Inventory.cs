@@ -73,6 +73,10 @@ public class Inventory
         return allSlots;
     }
 
+    public int GetItemCount() {
+        return itemCount;
+    }
+
     public void RemoveItem(ItemSlot slot){
         // itemList[slot] = null;
     }

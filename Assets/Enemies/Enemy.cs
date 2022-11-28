@@ -72,8 +72,10 @@ public class Enemy : MonoBehaviour
         // CHANGE COOLDOWN TO PLAYER I-FRAMES
         if(collider.gameObject.tag == "Player" && Time.realtimeSinceStartup > attackCooldown + lastAttack) {
             lastAttack = Time.realtimeSinceStartup;
+            Player player = collider.gameObject.GetComponent<Player>();
 
-            collider.gameObject.GetComponent<Player>().health -= damage;
+            float playerHealth = Mathf.Clamp(player.currentHealth - damage, -1, player.maxHealth);
+            collider.gameObject.GetComponent<Player>().currentHealth = playerHealth;
             rb.AddForce(-transform.up * 20000 * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
