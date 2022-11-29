@@ -24,9 +24,16 @@ public class Player : MonoBehaviour
     private float lastAttack;
 
     // Stats
+    [Header ("Stats")]
     public float speed;
     public float maxHealth;
     public float currentHealth;
+
+    // iFrames
+    [Header ("iFrames")]
+    public float iFramesDuration;
+    public int numberOfFlashes;
+    private SpriteRenderer sprender;
 
 
     // Start is called before the first frame update
@@ -35,6 +42,7 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         speed *= 1000;
         currentHealth = maxHealth;
+        sprender = gameObject.GetComponent<SpriteRenderer>();
 
         inventory = new Inventory(3, ui_inventory);
         activeSlot = inventory.ActivateSlot(0);
@@ -117,7 +125,7 @@ public class Player : MonoBehaviour
             // Hide the 
             collider.gameObject.SetActive(false);
 
-            
+            RefreshAnimations();
         }
     }
 
@@ -127,5 +135,22 @@ public class Player : MonoBehaviour
             heldItemAnimator = heldItem.GetComponent<Item>().use.GetComponent<Animator>();
             heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
         }
+    }
+
+    // Get Hurt and Start iFrames
+    public void Hurt(float damage) {
+        currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
+        StartCoroutine(Invulnerability()); // Needs research ##########
+    }
+
+    private IEnumerator Invulnerability(){ // Needs research ##########
+        Physics2D.IgnoreLayerCollision(6, 7, true);
+        for(int i = 0; i < numberOfFlashes; i++) {
+            sprender.color = new Color(1, 1, 1, 0f);
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2)); // Needs research ##########
+            sprender.color = new Color(1, 1, 1, 1f);
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(6, 7, false);
     }
 }

@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     public float health;
     public float speed;
     public float damage;
-    public float attackCooldown;
 
     // Rotation Variables
     private Collider2D[] senseArea;
@@ -16,8 +15,6 @@ public class Enemy : MonoBehaviour
     public float senseRadius;
 
     private Rigidbody2D rb;
-
-    private float lastAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -64,18 +61,20 @@ public class Enemy : MonoBehaviour
 
             health -= item.damage;
             rb.AddForce(-transform.up * item.knockback * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+
+            // Do hit idicator when enemy gets hurtd
+            Vector3 contact = collider.bounds.ClosestPoint(transform.position);
+            GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
+            Instantiate(hitPrefab, contact, Quaternion.identity);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collider) {
-        // Do Damage to Player
-        // CHANGE COOLDOWN TO PLAYER I-FRAMES
-        if(collider.gameObject.tag == "Player" && Time.realtimeSinceStartup > attackCooldown + lastAttack) {
-            lastAttack = Time.realtimeSinceStartup;
+        // Do Damage to Player and get KB
+        if(collider.gameObject.tag == "Player") {
             Player player = collider.gameObject.GetComponent<Player>();
+            player.Hurt(damage);
 
-            float playerHealth = Mathf.Clamp(player.currentHealth - damage, -1, player.maxHealth);
-            collider.gameObject.GetComponent<Player>().currentHealth = playerHealth;
             rb.AddForce(-transform.up * 20000 * Time.deltaTime, ForceMode2D.Impulse);
         }
     }

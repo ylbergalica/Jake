@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5444415984029084573}
   - component: {fileID: 5816469538167404099}
   - component: {fileID: 465884769813558239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -137,7 +137,6 @@ MonoBehaviour:
   health: 100
   speed: 30
   damage: 40
-  attackCooldown: 1
   rotationSpeed: 50
   rotationModifier: 90
   senseRadius: 500

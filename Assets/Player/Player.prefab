@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2114547625071861842}
   - component: {fileID: 5918380845315477899}
   - component: {fileID: 1010667056902049533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -121,3 +121,5 @@ MonoBehaviour:
   speed: 50
   maxHealth: 20
   currentHealth: 0
+  iFramesDuration: 1.5
+  numberOfFlashes: 5
