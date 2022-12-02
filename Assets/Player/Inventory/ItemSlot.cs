@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public float width;
+    public float offset;
     public Sprite sprite;
 
     // Start is called before the first frame update

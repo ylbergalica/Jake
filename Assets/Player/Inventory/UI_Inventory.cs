@@ -25,7 +25,7 @@ public class UI_Inventory : MonoBehaviour
         for(int i = 0; i < 2; i++){
             slot = Instantiate(itemSlot, ui_hotBar.transform);
             slot.name = "ItemSlot" + i;
-            slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * i, 0);
+            slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * i + slot.offset * i, 0);
 
             inventory.AddItemSlot(slot);
         }
@@ -33,7 +33,7 @@ public class UI_Inventory : MonoBehaviour
         for(int i = 2; i < inventory.itemSlots; i++){
             slot = Instantiate(itemSlot, ui_pockets.transform);
             slot.name = "ItemSlot" + i;
-            slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * (i-2), 0);
+            slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * (i-2)  + slot.offset * (i-2), 0);
 
             inventory.AddItemSlot(slot);
         }

@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
 
-        inventory = new Inventory(3, ui_inventory);
+        inventory = new Inventory(5, ui_inventory);
         activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
     }
@@ -86,15 +86,9 @@ public class Player : MonoBehaviour
             heldItem = inventory.GetItemIn(activeSlot);
             RefreshAnimations();
         }
-        else if(Input.GetKey(KeyCode.Alpha2)){
+        else if(Input.GetKeyDown(KeyCode.Alpha2)){
             // Hotbar Slot 2
             activeSlot = inventory.ActivateSlot(1);
-            heldItem = inventory.GetItemIn(activeSlot);
-            RefreshAnimations();
-        }
-        else if(Input.GetKey(KeyCode.Alpha3)){
-            // Hotbar Slot 3
-            activeSlot = inventory.ActivateSlot(2);
             heldItem = inventory.GetItemIn(activeSlot);
             RefreshAnimations();
         }

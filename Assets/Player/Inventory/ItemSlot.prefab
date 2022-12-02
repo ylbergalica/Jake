@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.00025367737}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: 0, y: -0.00025177002}
+  m_SizeDelta: {x: 77.434, y: 77.434}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2126124784363684849
 CanvasRenderer:
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    m_PressedColor: {r: 0.4746885, g: 0.5566038, b: 0.47831488, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -154,8 +154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.09659958, y: 0.15629959}
-  m_SizeDelta: {x: 53.2322, y: 53.23}
+  m_AnchoredPosition: {x: -0.19942856, y: 0.25952148}
+  m_SizeDelta: {x: 79.178, y: 79.174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2126124784539511957
 CanvasRenderer:
@@ -231,8 +231,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -20}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: 30, y: -20}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3680886781070273176
 MonoBehaviour:
@@ -246,7 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05c8113d119c804e9ae3b6ec1d1d5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 65
+  width: 70
+  offset: 14
   sprite: {fileID: 0}
 --- !u!1 &2727485064983026726
 GameObject:
@@ -282,8 +283,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1875, y: 0.1875}
-  m_SizeDelta: {x: 55.875, y: 55.875}
+  m_AnchoredPosition: {x: -0.8915291, y: 1.2657013}
+  m_SizeDelta: {x: 76.559, y: 76.559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1607789094879540073
 CanvasRenderer:
