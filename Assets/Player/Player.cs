@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private Inventory inventory;
     public UI_Inventory ui_inventory;
+    public int slotsCount;
+    private GameObject ui_pockets;
     private ItemSlot activeSlot;
     private Item heldItem;
 
@@ -44,7 +46,9 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
 
-        inventory = new Inventory(5, ui_inventory);
+        inventory = new Inventory(slotsCount, ui_inventory);
+        this.ui_pockets = ui_inventory.ui_pockets;
+        ui_pockets.SetActive(false);
         activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
     }
@@ -93,17 +97,22 @@ public class Player : MonoBehaviour
             RefreshAnimations();
         }
 
+        // Open Inventory Pockets
+        if(Input.GetKeyDown(KeyCode.E)){
+            if(ui_pockets.activeSelf == false){
+                ui_pockets.SetActive(true);
+            }
+            else{
+                ui_pockets.SetActive(false);
+            }
+        }
+
         // Use Item in Active Slot
         if(Input.GetMouseButtonDown(0) && heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.cooldown + heldItemFire.length){
             heldItem.SetLastUse(Time.realtimeSinceStartup);
             Vector3 offset = transform.right * heldItem.offset;
 
             Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
-        }
-
-        if(currentHealth < 0) {
-            Debug.Log("You Died!");
-            Destroy(gameObject);
         }
     }
 
@@ -116,7 +125,7 @@ public class Player : MonoBehaviour
             inventory.AddItem(item);
             heldItem = inventory.GetItemIn(activeSlot);
 
-            // Hide the 
+            // Hide the item
             collider.gameObject.SetActive(false);
 
             RefreshAnimations();
@@ -135,6 +144,12 @@ public class Player : MonoBehaviour
     public void Hurt(float damage) {
         currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
         StartCoroutine(Invulnerability()); // Needs research ##########
+
+        // Die
+        if(currentHealth < 0) {
+            Debug.Log("You Died!");
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator Invulnerability(){ // Needs research ##########

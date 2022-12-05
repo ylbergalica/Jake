@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui_inventory: {fileID: 0}
+  slotsCount: 22
   speed: 50
   maxHealth: 20
   currentHealth: 0

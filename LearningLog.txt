@@ -1,0 +1,2 @@
+ui-> if a button is a child of an object with many children. Hover and click might not work on it bcs of other children having raycast target on.
+ui-> buttons have automatic navigation with kb keys, to prevent this, set navigation to explicit or none.
