@@ -13,8 +13,8 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         totalHealthBar.fillAmount = player.maxHealth / 600;
-        Debug.Log(player.maxHealth);
-        Debug.Log(totalHealthBar.fillAmount);
+        // Debug.Log(player.maxHealth);
+        // Debug.Log(totalHealthBar.fillAmount);
     }
 
     // Update is called once per frame

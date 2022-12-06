@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory
 {
     private UI_Inventory ui_inventory;
-    private List<Item> itemList;
+    private Item[] itemList;
     private List<ItemSlot> allSlots;
 
     private int itemCount;
@@ -16,7 +16,7 @@ public class Inventory
     // Start is called before the first frame update
     public Inventory(int itemSlots, UI_Inventory ui_inventory)
     {
-        itemList = new List<Item>();
+        itemList = new Item[itemSlots];
         this.itemSlots = itemSlots;
         this.ui_inventory = ui_inventory;
         this.allSlots = new List<ItemSlot>();
@@ -29,9 +29,9 @@ public class Inventory
     }
 
     public void AddItem(Item item){
-        for(int i = 0; i <= itemCount; i++){
-            if(itemList.Count < itemSlots) {
-                itemList.Add(item);
+        for(int i = 0; i <= itemList.Length; i++){
+            if(itemList[i] == null) {
+                itemList[i] = item;
                 break;
             }
         }
@@ -56,8 +56,18 @@ public class Inventory
         return activeSlot;
     }
 
+    public void Swap(ItemSlot slot1, ItemSlot slot2) {
+        //copyright arbnor rama
+        Item item1 = GetItemIn(slot1);
+        Item item2 = GetItemIn(slot2);
+        Item temp = item1;
+
+        SetItemIn(slot1, item2);
+        SetItemIn(slot2, temp);
+    }
+
     public Item GetItemIn(ItemSlot slot){
-        if(itemList.Count > allSlots.IndexOf(slot)){
+        if(itemList.Length > allSlots.IndexOf(slot)){
             return itemList[allSlots.IndexOf(slot)];
         }
         else{
@@ -65,7 +75,11 @@ public class Inventory
         }
     }
 
-    public List<Item> GetItems(){
+    public void SetItemIn(ItemSlot slot, Item item){
+        itemList[allSlots.IndexOf(slot)] = item;
+    }
+
+    public Item[] GetItems(){
         return itemList;
     }
 
@@ -80,8 +94,7 @@ public class Inventory
     public void RemoveItem(ItemSlot slot){
         // itemList[slot] = null;
     }
-
-    
+        
     override public string ToString(){
         string output = "Inventory: ";
 

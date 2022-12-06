@@ -1563,6 +1563,7 @@ MonoBehaviour:
   itemSlot: {fileID: 3680886781070273176, guid: 1af66b840b1de3b44b3869cf7f87f004, type: 3}
   ui_hotBar: {fileID: 1943854598}
   ui_pockets: {fileID: 1190953284}
+  stage: 0
 --- !u!1 &2053069232
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,9 +20,16 @@ public class ItemSlot : MonoBehaviour
 
         GameObject icon = transform.Find("Icon").gameObject;
         icon.GetComponent<Image>().sprite = sprite;
-
+        
         var tempColor = icon.GetComponent<Image>().color;
-        tempColor.a = 1f;
+
+        if(sprite != null) {
+            tempColor.a = 1f;
+        }
+        else{
+            tempColor.a = 0f;
+        }
+
         icon.GetComponent<Image>().color = tempColor;
     }
 }

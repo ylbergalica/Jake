@@ -114,6 +114,12 @@ public class Player : MonoBehaviour
 
             Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
         }
+
+        // Test Item Swap
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            heldItem = inventory.GetItemIn(activeSlot);
+            ui_inventory.RefreshInventory();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {

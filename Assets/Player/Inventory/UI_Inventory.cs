@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -12,20 +14,30 @@ public class UI_Inventory : MonoBehaviour
     public GameObject ui_hotBar;
     public GameObject ui_pockets;
 
-
+    private ItemSlot initSlot;
+    private ItemSlot targetSlot;
+    public int stage;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+
+    }
+
+    void Update() {
     }
 
     public void Setup(Inventory inventory){
         this.inventory = inventory;
+        this.stage = 0;
 
         for(int i = 0; i < 2; i++){
             slot = Instantiate(itemSlot, ui_hotBar.transform);
             slot.name = "ItemSlot" + i;
             slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * i + slot.offset * i, 0);
+
+            // add event listener to button
+            slot.transform.Find("Button").GetComponent<Button>().onClick.AddListener(HandleSwap);
 
             inventory.AddItemSlot(slot);
         }
@@ -34,16 +46,58 @@ public class UI_Inventory : MonoBehaviour
             slot = Instantiate(itemSlot, ui_pockets.transform);
             slot.name = "ItemSlot" + i;
 
+            // add event listener to button
+            slot.transform.Find("Button").GetComponent<Button>().onClick.AddListener(HandleSwap);
+
             inventory.AddItemSlot(slot);
+        }
+    }
+
+    public void HandleSwap(){
+        if(stage == 0){
+            GameObject temp = EventSystem.current.currentSelectedGameObject;
+            ItemSlot initSlotTemp = temp.transform.parent.GetComponent<ItemSlot>();
+            initSlot = initSlotTemp;
+
+            stage = 1;
+        }
+        else if(stage == 1) {
+            GameObject temp = EventSystem.current.currentSelectedGameObject;
+            ItemSlot targetSlotTemp = temp.transform.parent.GetComponent<ItemSlot>();
+            targetSlot = targetSlotTemp;
+
+            inventory.Swap(initSlot, targetSlot);
+            RefreshInventory();
+            
+            stage = 0;
         }
     }
 
     public void RefreshInventory(){
         List<ItemSlot> slots = inventory.GetAllSlots();
-        List<Item> items = inventory.GetItems();
+        Item[] items = inventory.GetItems();
+        Debug.Log("REFRESHING ========");
 
-        foreach(Item item in items){
-            slots[items.IndexOf(item)].SetSprite(item.sprite);
+        // foreach(ItemSlot slot in inventory.GetAllSlots()){
+        //     slot.SetSprite(null);
+        // }
+
+        // foreach(Item item in items){
+        //     if(item != null){
+        //         slots[Array.IndexOf(items, item)].SetSprite(item.sprite);
+        //     }
+        //     else{
+        //         slots[Array.IndexOf(items, item)].SetSprite(null);
+        //     }
+        // }
+
+        foreach(ItemSlot slot in slots){
+            if(inventory.GetItemIn(slot) != null){
+                slot.SetSprite(items[slots.IndexOf(slot)].sprite);
+            }
+            else{
+                slot.SetSprite(null);
+            }
         }
     }
 }
