@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -91,8 +92,11 @@ public class Inventory
         return itemCount;
     }
 
-    public void RemoveItem(ItemSlot slot){
+    public void RemoveItem(Item item){
         // itemList[slot] = null;
+        // var result = Array.Find(itemList, element => element == item);
+        itemList[Array.IndexOf(itemList, item)] = null;
+        ui_inventory.RefreshInventory();
     }
         
     override public string ToString(){

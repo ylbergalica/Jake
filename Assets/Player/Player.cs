@@ -109,13 +109,13 @@ public class Player : MonoBehaviour
 
         // Use Item in Active Slot
         if(Input.GetMouseButtonDown(0)){
+            ui_inventory.RefreshInventory();
             RefreshAnimations();
             
             if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.cooldown + heldItemFire.length){
                 heldItem.SetLastUse(Time.realtimeSinceStartup);
-                Vector3 offset = transform.right * heldItem.offset;
 
-                Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
+                heldItem.UsePrimary();
             }
         }
 
@@ -147,8 +147,10 @@ public class Player : MonoBehaviour
         heldItem = inventory.GetItemIn(activeSlot);
         
         if (inventory.GetItemCount() != 0 && heldItem != null){
-            heldItemAnimator = heldItem.GetComponent<Item>().use.GetComponent<Animator>();
-            heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
+            if(heldItem.GetComponent<Item>().itemType != "Consumable") {
+                heldItemAnimator = heldItem.GetComponent<Item>().primary.GetComponent<Animator>();
+                heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
+            }
         }
         else {
             heldItemAnimator = null;
@@ -168,6 +170,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Heal(float healing) {
+        currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
+    }
+
     private IEnumerator Invulnerability(){ // Needs research ##########
         Physics2D.IgnoreLayerCollision(6, 7, true);
         for(int i = 0; i < numberOfFlashes; i++) {
@@ -177,5 +183,9 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(6, 7, false);
+    }
+
+    public Inventory GetInventory() {
+        return this.inventory;
     }
 }
