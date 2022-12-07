@@ -16,15 +16,13 @@ public class UI_Inventory : MonoBehaviour
 
     private ItemSlot initSlot;
     private ItemSlot targetSlot;
-    public int stage;
+    private GameObject indicateSwap;
+    private int stage;
     
     // Start is called before the first frame update
     void Start()
     {
 
-    }
-
-    void Update() {
     }
 
     public void Setup(Inventory inventory){
@@ -54,22 +52,32 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public void HandleSwap(){
-        if(stage == 0){
-            GameObject temp = EventSystem.current.currentSelectedGameObject;
+        GameObject temp = EventSystem.current.currentSelectedGameObject;
+
+        if(stage == 0 && ui_pockets.activeSelf){
             ItemSlot initSlotTemp = temp.transform.parent.GetComponent<ItemSlot>();
             initSlot = initSlotTemp;
+            
+            indicateSwap = temp.transform.parent.Find("SwapIndicator").gameObject;
+            indicateSwap.SetActive(true);
 
             stage = 1;
         }
-        else if(stage == 1) {
-            GameObject temp = EventSystem.current.currentSelectedGameObject;
+        else if(stage == 1 && ui_pockets.activeSelf) {
             ItemSlot targetSlotTemp = temp.transform.parent.GetComponent<ItemSlot>();
             targetSlot = targetSlotTemp;
 
             inventory.Swap(initSlot, targetSlot);
             RefreshInventory();
             
-            stage = 0;
+            ResetStage();
+        }
+    }
+
+    public void ResetStage(){
+        stage = 0;
+        if (indicateSwap != null) {
+            indicateSwap.SetActive(false);
         }
     }
 
@@ -77,19 +85,6 @@ public class UI_Inventory : MonoBehaviour
         List<ItemSlot> slots = inventory.GetAllSlots();
         Item[] items = inventory.GetItems();
         Debug.Log("REFRESHING ========");
-
-        // foreach(ItemSlot slot in inventory.GetAllSlots()){
-        //     slot.SetSprite(null);
-        // }
-
-        // foreach(Item item in items){
-        //     if(item != null){
-        //         slots[Array.IndexOf(items, item)].SetSprite(item.sprite);
-        //     }
-        //     else{
-        //         slots[Array.IndexOf(items, item)].SetSprite(null);
-        //     }
-        // }
 
         foreach(ItemSlot slot in slots){
             if(inventory.GetItemIn(slot) != null){

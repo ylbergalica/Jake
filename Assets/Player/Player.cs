@@ -87,13 +87,11 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             // Hotbar Slot 1
             activeSlot = inventory.ActivateSlot(0);
-            heldItem = inventory.GetItemIn(activeSlot);
             RefreshAnimations();
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2)){
             // Hotbar Slot 2
             activeSlot = inventory.ActivateSlot(1);
-            heldItem = inventory.GetItemIn(activeSlot);
             RefreshAnimations();
         }
 
@@ -105,14 +103,20 @@ public class Player : MonoBehaviour
             else{
                 ui_pockets.SetActive(false);
             }
+
+            ui_inventory.ResetStage();
         }
 
         // Use Item in Active Slot
-        if(Input.GetMouseButtonDown(0) && heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.cooldown + heldItemFire.length){
-            heldItem.SetLastUse(Time.realtimeSinceStartup);
-            Vector3 offset = transform.right * heldItem.offset;
+        if(Input.GetMouseButtonDown(0)){
+            RefreshAnimations();
+            
+            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.cooldown + heldItemFire.length){
+                heldItem.SetLastUse(Time.realtimeSinceStartup);
+                Vector3 offset = transform.right * heldItem.offset;
 
-            Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
+                Instantiate(heldItem.use, transform.position + offset, transform.rotation, gameObject.transform);
+            }
         }
 
         // Test Item Swap
@@ -140,9 +144,15 @@ public class Player : MonoBehaviour
 
     private void RefreshAnimations() {
         // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
+        heldItem = inventory.GetItemIn(activeSlot);
+        
         if (inventory.GetItemCount() != 0 && heldItem != null){
             heldItemAnimator = heldItem.GetComponent<Item>().use.GetComponent<Animator>();
             heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
+        }
+        else {
+            heldItemAnimator = null;
+            heldItemFire = null;
         }
     }
 
