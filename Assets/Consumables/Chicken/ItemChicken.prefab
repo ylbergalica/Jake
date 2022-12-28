@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5441646164545249182}
   - component: {fileID: -8515371890013172320}
   - component: {fileID: 3131502648617293695}
-  - component: {fileID: -1046360929224094724}
   m_Layer: 0
   m_Name: ItemChicken
   m_TagString: Item
@@ -132,27 +131,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-1046360929224094724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5441646164545249177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dcf34076a213624ca2beffe9237aacf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Chicken
-  itemType: Consumable
-  sprite: {fileID: 21300000, guid: de82c5a2ff652fe428b2274b8c5e9996, type: 3}
-  primary: {fileID: 0}
-  alt: {fileID: 0}
-  tertiary: {fileID: 0}
-  size: 4
-  offset: 50
-  damage: 0
-  cooldown: 0.3
-  knockback: 0
-  healing: 30
