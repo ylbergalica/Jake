@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5441646164545249182}
   - component: {fileID: -8515371890013172320}
   - component: {fileID: 3131502648617293695}
-  - component: {fileID: -1046360929224094724}
+  - component: {fileID: -3710581872644711238}
   m_Layer: 0
   m_Name: ItemImperialRise
   m_TagString: Item
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-1046360929224094724
+--- !u!114 &-3710581872644711238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,18 +141,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5441646164545249177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dcf34076a213624ca2beffe9237aacf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fff240daf655eb41aa3672d5c7ff688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: ImperialRise
-  itemType: 
   sprite: {fileID: 21300000, guid: a7963427cafce0d44a6dc195c794210f, type: 3}
-  primary: {fileID: 5562173928408626566, guid: 519f1d5495d661f45aab5219ade6aee2, type: 3}
-  alt: {fileID: 0}
-  tertiary: {fileID: 0}
-  size: 4
-  offset: 50
-  damage: 80
-  cooldown: 0.3
-  knockback: 10
-  healing: 0
+  itemType: 0
+  itemReference: {fileID: 11400000, guid: d620b6b23c52ede4eb414a978a1aa9f8, type: 2}

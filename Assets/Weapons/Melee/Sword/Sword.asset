@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf3ab8719354b9844a5aea1e948efba7, type: 3}
-  m_Name: Branche
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  size: 10
-  offset: 20
-  damage: 7
-  cooldown: 5
+  size: 4
+  offset: 45
+  damage: 35
+  cooldown: 0.5
   knockback: 5
-  primary: {fileID: 5562173928408626566, guid: f7989e06d8675474fa99b5b35cce7472, type: 3}
+  primary: {fileID: 5562173928408626566, guid: 390603e9c618eb64c8a403655784b4eb, type: 3}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float health;
+    public float currentHealth;
+    public float maxHealth;
     public float speed;
     public float damage;
 
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         speed *= 1000;
+        currentHealth = maxHealth;
     }
 
     private void FixedUpdate()
@@ -44,31 +46,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Can pass away into the other world of forgiveness where it shall lie in peace and forever prosper..
-        if(health < 1) {
-            Destroy(gameObject);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collider) {
-        // Tage Damage from a Weapon
-        if(collider.gameObject.tag == "Weapon"){
-            GameObject itemReference = collider.GetComponent<SwingLock>().itemReference;
-            Item item = itemReference.GetComponent<Item>();
-
-            health -= item.damage;
-            rb.AddForce(-transform.up * item.knockback * 10000 * Time.deltaTime, ForceMode2D.Impulse);
-
-            // Do hit idicator when enemy gets hurtd
-            Vector3 contact = collider.bounds.ClosestPoint(transform.position);
-            GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
-            Instantiate(hitPrefab, contact, Quaternion.identity);
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collider) {
         // Do Damage to Player and get KB
         if(collider.gameObject.tag == "Player") {
@@ -77,5 +54,22 @@ public class Enemy : MonoBehaviour
 
             rb.AddForce(-transform.up * 20000 * Time.deltaTime, ForceMode2D.Impulse);
         }
+    }
+
+    public void Hurt(float damage) {
+        currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
+
+        // Die
+        if(currentHealth < 1) {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Heal(float healing) {
+        currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
+    }
+
+    public void Knockback(float kb) {
+        rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 }

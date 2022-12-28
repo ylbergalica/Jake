@@ -5,54 +5,37 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string itemName;
-    public string itemType;
     public Sprite sprite;
-
-    private GameObject player;
-
-    [Header ("MELEE")]
-    public GameObject primary;
-    public GameObject alt;
-    public GameObject tertiary;
-    public float size;
-    public float offset;
-    public float damage;
-    public float cooldown;
-    public float knockback;
-
-    [Header ("CONSUMALBE")]
-    public float healing;
-
+    public ItemType itemType;
+    public ScriptableObject itemReference;
+    private IItem item;
     private float lastUse;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").gameObject;
-        if (primary != null) {
-            primary.transform.localScale = new Vector3(size/10, size/10, 1);
+        item = (IItem)itemReference;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Debug.Log(item.GetStats()["damage"]);
         }
     }
 
+    public Dictionary<string, float> GetStats() {
+        return item.GetStats();
+    }
+
     public void UsePrimary(){
-        if(itemType == "Melee") {
-            Vector3 realOffset = player.transform.right * offset;
-
-            Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
-        }
-        else if(itemType == "Consumable") {
-            player.GetComponent<Player>().Heal(healing);
-
-            Inventory inventory = player.GetComponent<Player>().GetInventory();
-            inventory.RemoveItem(this);
-            // Destroy(gameObject);
-        }
+        item.UsePrimary();
     }
 
     public float GetLastUse() {
         return lastUse;
     }
-
     public void SetLastUse(float current) {
         lastUse = current;
     }

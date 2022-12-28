@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             ui_inventory.RefreshInventory();
             RefreshAnimations();
             
-            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.cooldown + heldItemFire.length){
+            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.GetStats()["cooldown"]){
                 heldItem.SetLastUse(Time.realtimeSinceStartup);
 
                 heldItem.UsePrimary();
@@ -146,16 +146,16 @@ public class Player : MonoBehaviour
         // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
         heldItem = inventory.GetItemIn(activeSlot);
         
-        if (inventory.GetItemCount() != 0 && heldItem != null){
-            if(heldItem.GetComponent<Item>().itemType != "Consumable") {
-                heldItemAnimator = heldItem.GetComponent<Item>().primary.GetComponent<Animator>();
-                heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
-            }
-        }
-        else {
-            heldItemAnimator = null;
-            heldItemFire = null;
-        }
+        // if (inventory.GetItemCount() != 0 && heldItem != null){
+        //     if(heldItem.GetComponent<Item>().primary != null) {
+        //         heldItemAnimator = heldItem.GetComponent<Item>().primary.GetComponent<Animator>();
+        //         heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
+        //     }
+        // }
+        // else {
+        //     heldItemAnimator = null;
+        //     heldItemFire = null;
+        // }
     }
 
     // Get Hurt and Start iFrames
