@@ -84,7 +84,6 @@ public class UI_Inventory : MonoBehaviour
     public void RefreshInventory(){
         List<ItemSlot> slots = inventory.GetAllSlots();
         Item[] items = inventory.GetItems();
-        Debug.Log("REFRESHING ========");
 
         foreach(ItemSlot slot in slots){
             if(inventory.GetItemIn(slot) != null){

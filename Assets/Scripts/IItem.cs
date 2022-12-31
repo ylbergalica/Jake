@@ -5,8 +5,10 @@ using UnityEngine;
 public interface IItem
 {
     public Dictionary<string, float> GetStats(); 
-    public void UsePrimary();
-    public void UseSecondary();
-    public void UseTertiary();
+    public void UsePrimary(GameObject player);
+    public void UseSecondary(GameObject player);
+    public void UseTertiary(GameObject player);
     public void Effect();
+
+    public GameObject[] GetMoves();
 }

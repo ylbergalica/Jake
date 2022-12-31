@@ -112,10 +112,20 @@ public class Player : MonoBehaviour
             ui_inventory.RefreshInventory();
             RefreshAnimations();
             
-            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse() + heldItem.GetStats()["cooldown"]){
-                heldItem.SetLastUse(Time.realtimeSinceStartup);
+            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse(1) + heldItem.GetStats()["cooldown"]){
+                heldItem.SetLastUse(1, Time.realtimeSinceStartup);
 
-                heldItem.UsePrimary();
+                heldItem.UsePrimary(gameObject);
+            }
+        }
+        else if(Input.GetMouseButtonDown(1)){
+            ui_inventory.RefreshInventory();
+            RefreshAnimations();
+            
+            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse(2) + heldItem.GetStats()["cooldown"]){
+                heldItem.SetLastUse(2, Time.realtimeSinceStartup);
+
+                heldItem.UseSecondary(gameObject);
             }
         }
 
@@ -172,6 +182,10 @@ public class Player : MonoBehaviour
 
     public void Heal(float healing) {
         currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
+    }
+
+    public void Knockback(float kb) {
+        rb.AddForce(-transform.right * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     private IEnumerator Invulnerability(){ // Needs research ##########

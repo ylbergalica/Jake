@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86bd0365da170c4da70b1aa131b7073, type: 3}
+  m_Name: Shovel
+  m_EditorClassIdentifier: 
+  size: 7
+  offset: 40
+  damage: 60
+  cooldown: 0.2
+  knockback: 7
+  primary: {fileID: 5562173928408626566, guid: f329a6fead7289b4f8b82b05b4ebe4b4, type: 3}
+  secondary: {fileID: 5562173928408626566, guid: d90c59019e1c3dc48b21ea9616768f67, type: 3}

@@ -4,5 +4,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Sword
+    Sword,
+    Shovel,
+    Food
 }
