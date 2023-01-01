@@ -43,13 +43,14 @@ public class Shovel : ScriptableObject, IItem
 		Vector3 realOffset = player.transform.right * offset;
 
         Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
+        primary.GetComponent<Animator>().Play("ShovelAnim");
 	}
 
 	public void UseSecondary(GameObject player)
 	{
 		Vector3 realOffset = player.transform.right * offset;
 
-        Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
+        Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 
         player.GetComponent<Player>().Knockback(knockback * 4);
 	}
