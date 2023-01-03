@@ -58,6 +58,47 @@ public class Item : MonoBehaviour
     public void UseTertiary(GameObject player){
         item.UseTertiary(player);
     }
+    
+    public bool isItemReady(float current) {
+        // Time.realtimeSinceStartup > heldItem.GetLastUse(1) + heldItem.GetStats()["primary_cooldown"]){
+                // heldItem.SetLastUse(1, Time.realtimeSinceStartup);
+        for (int i=1; i < 5; i++) {
+            if (current < GetLastUse(i)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    public bool isMoveReady(int move, float current) {
+        switch(move) {
+            case 1:
+                if (current > GetLastUse(move) + GetStats()["primary_cooldown"]){
+                    return true;
+                }
+                break;
+            case 2:
+                if (current > GetLastUse(move) + GetStats()["secondary_cooldown"]){
+                    return true;
+                }
+                break;
+            case 3:
+                if (current > GetLastUse(move) + GetStats()["tertiray_cooldown"]){
+                    return true;
+                }
+                break;
+            case 4:
+                if (current > GetLastUse(move) + GetStats()["effect_cooldown"]){
+                    return true;
+                }
+                break;
+            default:
+                throw new System.Exception();
+        }
+
+        return false;
+    }
 
     public float GetLastUse(int move) {
         switch(move) {

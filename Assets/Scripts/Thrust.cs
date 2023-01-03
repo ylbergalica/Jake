@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swing : MonoBehaviour
+public class Thrust : MonoBehaviour
 {
     public ScriptableObject itemReference;
     private IItem item;
@@ -31,8 +31,8 @@ public class Swing : MonoBehaviour
         // Damage an Enemy
         if(collider.gameObject.tag == "Enemy"){
             Enemy enemy = collider.GetComponent<Enemy>();
-            enemy.Hurt(item.GetStats()["swing_damage"]);
-            enemy.Knockback(item.GetStats()["swing_knockback"]);
+            enemy.Hurt(item.GetStats()["thrust_damage"]);
+            enemy.Knockback(item.GetStats()["thrust_knockback"]);
 
             // Do hit idicator when enemy gets hurtd
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);

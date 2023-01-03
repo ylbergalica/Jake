@@ -6,13 +6,13 @@ using UnityEngine;
 public class Food : ScriptableObject, IItem
 {
     public float healing;
-    public float cooldown;
+    public float secondary_cooldown;
 
     private Dictionary<string, float> stats;
     private void OnEnable() {
         stats = new Dictionary<string, float> {
             {"healing", healing},
-            {"cooldown", cooldown},
+            {"secondary_cooldown", secondary_cooldown},
         };
     }
 

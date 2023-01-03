@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 788348777116406240}
   - component: {fileID: 1694241203094446986}
-  - component: {fileID: 70612444786086621}
   - component: {fileID: 4124606989256489619}
   - component: {fileID: 8778440303937072932}
+  - component: {fileID: -6148693656395814737}
   m_Layer: 0
-  m_Name: PushShovel
+  m_Name: ThrustShovel
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &70612444786086621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562173928408626566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa03cbf1993284f48b944e31ac7ea39e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemReference: {fileID: 11400000, guid: 5f17149dffd6ff94791d010382c4bc90, type: 2}
 --- !u!95 &4124606989256489619
 Animator:
   serializedVersion: 3
@@ -108,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 5562173928408626566}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cbfd60737eeeb2642a1f374ebb1b46b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 95c1eabdde9af264cac05e3581fe9abc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,3 +120,16 @@ CapsuleCollider2D:
   m_Offset: {x: 2.9248676, y: 0.25080016}
   m_Size: {x: 0.2983831, y: 1.1701114}
   m_Direction: 0
+--- !u!114 &-6148693656395814737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562173928408626566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688146c4f847974091fe700038e5c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemReference: {fileID: 11400000, guid: 5f17149dffd6ff94791d010382c4bc90, type: 2}

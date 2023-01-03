@@ -7,9 +7,12 @@ public class Shovel : ScriptableObject, IItem
 {
 	public float size;
     public float offset;
-    public float damage;
-    public float cooldown;
-    public float knockback;
+    public float swing_damage;
+    public float thrust_damage;
+    public float swing_knockback;
+    public float thrust_knockback;
+    public float primary_cooldown;
+    public float secondary_cooldown;
     public GameObject primary;
     public GameObject secondary;
 
@@ -19,9 +22,12 @@ public class Shovel : ScriptableObject, IItem
         stats = new Dictionary<string, float> {
             {"size", size},
             {"offset", offset},
-            {"damage", damage},
-            {"knockback", knockback},
-            {"cooldown", cooldown}
+            {"swing_damage", swing_damage},
+            {"thrust_damage", thrust_damage},
+            {"swing_knockback", swing_knockback},
+            {"thrust_knockback", thrust_knockback},
+            {"primary_cooldown", primary_cooldown},
+            {"secondary_cooldown", secondary_cooldown},
         };
 
         if (primary != null) {
@@ -50,9 +56,9 @@ public class Shovel : ScriptableObject, IItem
 	{
 		Vector3 realOffset = player.transform.right * offset;
 
-        Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
+        Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 
-        player.GetComponent<Player>().Knockback(knockback * 4);
+        player.GetComponent<Player>().Knockback(thrust_knockback * 3);
 	}
 
 	public void UseTertiary(GameObject player)

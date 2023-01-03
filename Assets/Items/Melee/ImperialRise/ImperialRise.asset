@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 4
   offset: 50
-  damage: 80
-  cooldown: 0.3
-  knockback: 10
+  swing_damage: 10
+  primary_cooldown: 0.3
+  swing_knockback: 10
   primary: {fileID: 5562173928408626566, guid: 519f1d5495d661f45aab5219ade6aee2, type: 3}

@@ -7,9 +7,9 @@ public class Sword : ScriptableObject, IItem
 {
     public float size;
     public float offset;
-    public float damage;
-    public float cooldown;
-    public float knockback;
+    public float swing_damage;
+    public float primary_cooldown;
+    public float swing_knockback;
     public GameObject primary;
 
     private Dictionary<string, float> stats;
@@ -18,9 +18,9 @@ public class Sword : ScriptableObject, IItem
         stats = new Dictionary<string, float> {
             {"size", size},
             {"offset", offset},
-            {"damage", damage},
-            {"knockback", knockback},
-            {"cooldown", cooldown}
+            {"swing_damage", swing_damage},
+            {"swing_knockback", swing_knockback},
+            {"primary_cooldown", primary_cooldown}
         };
 
         if (primary != null) {

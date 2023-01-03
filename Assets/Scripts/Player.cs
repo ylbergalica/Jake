@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             ui_inventory.RefreshInventory();
             RefreshAnimations();
             
-            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse(1) + heldItem.GetStats()["cooldown"]){
+            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(1, Time.realtimeSinceStartup)){
                 heldItem.SetLastUse(1, Time.realtimeSinceStartup);
 
                 heldItem.UsePrimary(gameObject);
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
             ui_inventory.RefreshInventory();
             RefreshAnimations();
             
-            if(heldItem != null && Time.realtimeSinceStartup > heldItem.GetLastUse(2) + heldItem.GetStats()["cooldown"]){
+            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(2, Time.realtimeSinceStartup)){
                 heldItem.SetLastUse(2, Time.realtimeSinceStartup);
 
                 heldItem.UseSecondary(gameObject);
