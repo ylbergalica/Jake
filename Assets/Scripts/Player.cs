@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     public int numberOfFlashes;
     private SpriteRenderer sprender;
 
+    private bool isTekkai;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
         ui_pockets.SetActive(false);
         activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
+
+        isTekkai = false;
     }
 
     // Update is called once per frame
@@ -128,6 +132,16 @@ public class Player : MonoBehaviour
                 heldItem.UseSecondary(gameObject);
             }
         }
+        else if(Input.GetMouseButtonDown(2)){
+            ui_inventory.RefreshInventory();
+            RefreshAnimations();
+            
+            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
+                heldItem.SetLastUse(3, Time.realtimeSinceStartup);
+
+                heldItem.UseTertiary(gameObject);
+            }
+        }
 
         // Test Item Swap
         if(Input.GetKeyDown(KeyCode.Space)) {
@@ -170,13 +184,15 @@ public class Player : MonoBehaviour
 
     // Get Hurt and Start iFrames
     public void Hurt(float damage) {
-        currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
-        StartCoroutine(Invulnerability()); // Needs research ##########
+        if (!isTekkai) {
+            currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
+            StartCoroutine(Invulnerability()); // Needs research ##########
 
-        // Die
-        if(currentHealth < 0) {
-            Debug.Log("You Died!");
-            Destroy(gameObject);
+            // Die
+            if(currentHealth < 0) {
+                Debug.Log("You Died!");
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -186,6 +202,21 @@ public class Player : MonoBehaviour
 
     public void Knockback(float kb) {
         rb.AddForce(-transform.right * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+    }
+
+    public void Tekkai (float seconds) {
+        StartCoroutine(IETekkai(seconds));
+    }
+
+    private IEnumerator IETekkai (float seconds) {
+        rb.mass *= 1.2f;
+        isTekkai = true;
+
+        yield return new WaitForSeconds(seconds);
+
+        isTekkai = false;
+        rb.mass /= 1.2f;
+        Debug.Log("TEKKAI, GOU!!" + Time.time);
     }
 
     private IEnumerator Invulnerability(){ // Needs research ##########

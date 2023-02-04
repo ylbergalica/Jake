@@ -72,4 +72,17 @@ public class Enemy : MonoBehaviour
     public void Knockback(float kb) {
         rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
+
+    public void Stun (float seconds) {
+        StartCoroutine(IEStun(seconds));
+    }
+
+    private IEnumerator IEStun(float seconds) {
+        float tempSpeed = speed;
+        this.speed = 0;
+
+        yield return new WaitForSeconds(seconds);
+        this.speed = tempSpeed;
+        Debug.Log("WaitAndPrint " + Time.time);
+    }
 }

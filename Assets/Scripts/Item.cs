@@ -84,7 +84,7 @@ public class Item : MonoBehaviour
                 }
                 break;
             case 3:
-                if (current > GetLastUse(move) + GetStats()["tertiray_cooldown"]){
+                if (current > GetLastUse(move) + GetStats()["tertiary_cooldown"]){
                     return true;
                 }
                 break;
