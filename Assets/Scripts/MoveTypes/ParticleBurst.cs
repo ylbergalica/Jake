@@ -21,7 +21,7 @@ public class ParticleBurst : MonoBehaviour
         item = (IItem)itemReference;
 
         particleSystem.Play();
-        Debug.Log(particleSystem.main.duration);
+        // Debug.Log(particleSystem.main.duration);
         Destroy(gameObject, particleSystem.main.duration + 0.3f);
     }
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WandOfNudge
   m_EditorClassIdentifier: 
   size: 5
-  offset: 0
+  offset: 30
   swing_damage: 10
-  swing_knockback: 30
-  primary_cooldown: 0.5
+  swing_knockback: 20
+  primary_cooldown: 1
   primary: {fileID: 5562173928408626566, guid: b21f9a63079dbfa4e94eede0fb36a234, type: 3}

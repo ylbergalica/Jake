@@ -1,0 +1,9 @@
+Leaves
+
+Ability -> Dash [leaf particles as player dashes]
+Ability -> Leafwalk [able to walk without making sound]
+Ability -> Eternal Leaf Torch
+
+Leaf charge to break some breakable walls
+
+// ITEM // Vine, compliments both melee and ranged (can hook enemies to bring close and push away)
