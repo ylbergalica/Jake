@@ -1,9 +1,13 @@
-Leaves
 
 Ability -> Dash [leaf particles as player dashes]
+Ability -> Dodge [iframes]
+Ability -> Eternal Torch [able to see on dark rooms]
 Ability -> Leafwalk [able to walk without making sound]
-Ability -> Eternal Leaf Torch
+Ability -> Log Slam [charge to break some breakable walls]
 
-Leaf charge to break some breakable walls
-
-// ITEM // Vine, compliments both melee and ranged (can hook enemies to bring close and push away)
+// ITEM // Vine -> compliment item for both melee and ranged {
+	hook enemies to bring close;
+	whirl around to push enemies away;
+	whip to stun}
+// ITEM // Seed -> melee weapon {
+	grows roots out of seed in a cool manner}
