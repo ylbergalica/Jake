@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
 
     private Inventory inventory;
+    private List<GameObject> invItems;
     public UI_Inventory ui_inventory;
     public int slotsCount;
     private GameObject ui_pockets;
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
         sprender = gameObject.GetComponent<SpriteRenderer>();
 
         inventory = new Inventory(slotsCount, ui_inventory);
+        invItems = new List<GameObject>();
+
         this.ui_pockets = ui_inventory.ui_pockets;
         ui_pockets.SetActive(false);
         activeSlot = inventory.ActivateSlot(0);
@@ -153,6 +156,8 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider) {
         // Pick up Items
         if(collider.tag == "Item"){
+            invItems.Add(collider.gameObject);
+
             Item item = collider.GetComponent<Item>();
 
             // Add item to inventory and refresh activeslot
@@ -232,5 +237,9 @@ public class Player : MonoBehaviour
 
     public Inventory GetInventory() {
         return this.inventory;
+    }
+
+    public List<GameObject> GetItems() {
+        return this.invItems;
     }
 }
