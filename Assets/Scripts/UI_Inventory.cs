@@ -13,6 +13,7 @@ public class UI_Inventory : MonoBehaviour
     public ItemSlot itemSlot;
     public GameObject ui_hotBar;
     public GameObject ui_pockets;
+    public GameObject ui_abilities;
 
     private ItemSlot initSlot;
     private ItemSlot targetSlot;

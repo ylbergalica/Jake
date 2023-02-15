@@ -6,11 +6,15 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    private Inventory inventory;
-    private List<GameObject> invItems;
+    // Inventory
+    [Header ("Inventory")]
     public UI_Inventory ui_inventory;
     public int slotsCount;
+
+    private Inventory inventory;
+    private List<GameObject> invItems;
     private GameObject ui_pockets;
+    private GameObject ui_abilities;
     private ItemSlot activeSlot;
     private Item heldItem;
 
@@ -55,6 +59,9 @@ public class Player : MonoBehaviour
         invItems = new List<GameObject>();
 
         this.ui_pockets = ui_inventory.ui_pockets;
+        this.ui_abilities = ui_inventory.ui_abilities;
+
+        ui_abilities.SetActive(false);
         ui_pockets.SetActive(false);
         activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
@@ -108,8 +115,10 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I)){
             if(ui_pockets.activeSelf == false){
                 ui_pockets.SetActive(true);
+                ui_abilities.SetActive(true);
             }
             else{
+                ui_abilities.SetActive(false);
                 ui_pockets.SetActive(false);
             }
 
@@ -180,6 +189,10 @@ public class Player : MonoBehaviour
             collider.gameObject.SetActive(false);
 
             RefreshAnimations();
+        }
+        else if (collider.tag == "Ability") {
+            Ability ability = collider.GetComponent<Ability>();
+            inventory.AddAbility(ability.abilityName);
         }
     }
 
