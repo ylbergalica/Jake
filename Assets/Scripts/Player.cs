@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         rb = gameObject.GetComponent<Rigidbody2D>();
         speed *= 1000;
         currentHealth = maxHealth;
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
         }
 
         // Open Inventory Pockets
-        if(Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.I)){
             if(ui_pockets.activeSelf == false){
                 ui_pockets.SetActive(true);
             }
@@ -115,7 +117,17 @@ public class Player : MonoBehaviour
         }
 
         // Use Item in Active Slot
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)){
+            ui_inventory.RefreshInventory();
+            RefreshAnimations();
+            
+            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
+                heldItem.SetLastUse(3, Time.realtimeSinceStartup);
+
+                heldItem.UseTertiary(gameObject);
+            }
+        }
+        else if(Input.GetMouseButtonDown(0)){
             ui_inventory.RefreshInventory();
             RefreshAnimations();
             
@@ -135,16 +147,16 @@ public class Player : MonoBehaviour
                 heldItem.UseSecondary(gameObject);
             }
         }
-        else if(Input.GetMouseButtonDown(2)){
-            ui_inventory.RefreshInventory();
-            RefreshAnimations();
+        // else if(Input.GetMouseButtonDown(2)){
+        //     ui_inventory.RefreshInventory();
+        //     RefreshAnimations();
             
-            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
-                heldItem.SetLastUse(3, Time.realtimeSinceStartup);
+        //     if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
+        //         heldItem.SetLastUse(3, Time.realtimeSinceStartup);
 
-                heldItem.UseTertiary(gameObject);
-            }
-        }
+        //         heldItem.UseTertiary(gameObject);
+        //     }
+        // }
 
         // Test Item Swap
         if(Input.GetKeyDown(KeyCode.Space)) {

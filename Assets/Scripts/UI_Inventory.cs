@@ -18,12 +18,6 @@ public class UI_Inventory : MonoBehaviour
     private ItemSlot targetSlot;
     private GameObject indicateSwap;
     private int stage;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void Setup(Inventory inventory){
         this.inventory = inventory;

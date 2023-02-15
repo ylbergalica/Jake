@@ -9,6 +9,9 @@ public class Inventory
     private Item[] itemList;
     private List<ItemSlot> allSlots;
 
+    private Item[] abilityList; 
+    private ItemSlot[] abilitySlots;
+
     private int itemCount;
 
     public int itemSlots;
@@ -19,6 +22,10 @@ public class Inventory
     {
         itemList = new Item[itemSlots];
         this.itemSlots = itemSlots;
+        abilityList = new Item[5];
+        abilitySlots = new ItemSlot[5];
+
+
         this.ui_inventory = ui_inventory;
         this.allSlots = new List<ItemSlot>();
         ui_inventory.Setup(this);
@@ -40,6 +47,10 @@ public class Inventory
         itemCount++;
 
         ui_inventory.RefreshInventory();
+    }
+
+    public void AddAbility(Item item) {
+
     }
 
     public ItemSlot ActivateSlot(int index){
