@@ -85,6 +85,11 @@ public class Player : MonoBehaviour
         if(Input.GetKey("d")){
             rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
         }
+
+        // Dodging
+        if(Input.GetKey(KeyCode.Space)){
+            rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
+        }
     }
 
     void Update(){
@@ -168,10 +173,10 @@ public class Player : MonoBehaviour
         // }
 
         // Test Item Swap
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            heldItem = inventory.GetItemIn(activeSlot);
-            ui_inventory.RefreshInventory();
-        }
+        // if(Input.GetKeyDown(KeyCode.Space)) {
+        //     heldItem = inventory.GetItemIn(activeSlot);
+        //     ui_inventory.RefreshInventory();
+        // }
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -193,6 +198,8 @@ public class Player : MonoBehaviour
         else if (collider.tag == "Ability") {
             Ability ability = collider.GetComponent<Ability>();
             inventory.AddAbility(ability.abilityName);
+
+            Destroy(collider);
         }
     }
 
