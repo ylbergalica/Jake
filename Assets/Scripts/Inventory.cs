@@ -10,8 +10,8 @@ public class Inventory
     private List<ItemSlot> allSlots;
 
     // private Item[] abilityList;
-    // private ItemSlot[] abilitySlots;
-    private Dictionary<GameObject, bool> abilitySlots;
+    // private ItemSlot[] abilities;
+    private Dictionary<string, bool> abilities;
 
     private int itemCount;
 
@@ -24,8 +24,8 @@ public class Inventory
         itemList = new Item[itemSlots];
         this.itemSlots = itemSlots;
         // abilityList = new Item[5];
-        abilitySlots = new Dictionary<GameObject, bool> {
-            {GameObject.Find("DodgeSlot"), false}
+        abilities = new Dictionary<string, bool> {
+            {"Dodge", false}
         };
 
         this.ui_inventory = ui_inventory;
@@ -52,10 +52,19 @@ public class Inventory
     }
 
     public void AddAbility(string abilityName) {
-        foreach (KeyValuePair<GameObject, bool> ability in abilitySlots) {
-            if (ability.Key.name == abilityName && !ability.Value) {
+        string toChange = null;
+
+        foreach (KeyValuePair<string, bool> ability in abilities) {
+            if (ability.Key == abilityName && !ability.Value) {
+                toChange = abilityName;
+
                 Debug.Log("Ability added!");
             }
+        }
+
+        if (toChange != null) {
+            abilities[toChange] = true;
+            ui_inventory.RefreshInventory();
         }
     }
 
@@ -103,6 +112,10 @@ public class Inventory
 
     public List<ItemSlot> GetAllSlots(){
         return allSlots;
+    }
+
+    public Dictionary<string, bool> GetAbilities() {
+        return this.abilities;
     }
 
     public int GetItemCount() {

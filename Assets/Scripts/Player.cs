@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     private float cooldown;
     private float lastAttack;
 
+
+
     // Stats
     [Header ("Stats")]
     public float speed;
@@ -41,6 +43,10 @@ public class Player : MonoBehaviour
     public float iFramesDuration;
     public int numberOfFlashes;
     private SpriteRenderer sprender;
+
+    // Dodge Animation
+    [Header ("Dodge Variables")]
+    [SerializeField] private Animator dodgeAnimator;
 
     private bool isTekkai;
 
@@ -181,7 +187,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider) {
         // Pick up Items
-        if(collider.tag == "Item"){
+        if(collider.tag == "Item"){ // GET ITEM
             invItems.Add(collider.gameObject);
 
             Item item = collider.GetComponent<Item>();
@@ -195,11 +201,11 @@ public class Player : MonoBehaviour
 
             RefreshAnimations();
         }
-        else if (collider.tag == "Ability") {
+        else if (collider.tag == "Ability") { // GET ABILITY
             Ability ability = collider.GetComponent<Ability>();
             inventory.AddAbility(ability.abilityName);
 
-            Destroy(collider);
+            Destroy(collider.gameObject);
         }
     }
 

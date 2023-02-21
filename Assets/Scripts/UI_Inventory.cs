@@ -88,5 +88,17 @@ public class UI_Inventory : MonoBehaviour
                 slot.SetSprite(null);
             }
         }
+
+        Dictionary<string, bool> abilities = inventory.GetAbilities();
+
+        foreach (KeyValuePair<string, bool> ability in abilities) {
+            if (ability.Value) {
+                Transform abilitySlot = ui_abilities.transform.Find(ability.Key + "Slot");
+                // Debug.Log(abilitySlot.name);
+                Transform slotIcon = abilitySlot.transform.Find("Icon");
+                // Debug.Log(slotIcon.gameObject.activeSelf);
+                slotIcon.gameObject.SetActive(true);
+            }
+        }
     }
 }
