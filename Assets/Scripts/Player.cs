@@ -25,10 +25,10 @@ public class Player : MonoBehaviour
     
     // Swing Animation and Cooldown
     // public GameObject swing;
-    private Animator heldItemAnimator;
-    private AnimationClip heldItemFire;
-    private float cooldown;
-    private float lastAttack;
+    // private Animator heldItemAnimator;
+    // private AnimationClip heldItemFire;
+    // private float cooldown;
+    // private float lastAttack;
 
 
 
@@ -46,9 +46,14 @@ public class Player : MonoBehaviour
 
     // Dodge Animation
     [Header ("Dodge Variables")]
-    [SerializeField] private Animator dodgeAnimator;
+    // [SerializeField] private Animator dodgeAnimator;
+    [SerializeField] private GameObject dodgeAnim;
+    [SerializeField] private float dodgeCooldown;
+    private float dodgeLength;
+    private float dodgeLast;
 
     private bool isTekkai;
+    private bool isBusy;
 
 
     // Start is called before the first frame update
@@ -72,6 +77,8 @@ public class Player : MonoBehaviour
         activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
 
+        dodgeLength = dodgeAnim.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+
         isTekkai = false;
     }
 
@@ -89,11 +96,6 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector3(0, -speed*Time.deltaTime, 0));
         }
         if(Input.GetKey("d")){
-            rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
-        }
-
-        // Dodging
-        if(Input.GetKey(KeyCode.Space)){
             rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
         }
     }
@@ -136,35 +138,44 @@ public class Player : MonoBehaviour
             ui_inventory.ResetStage();
         }
 
-        // Use Item in Active Slot
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)){
-            ui_inventory.RefreshInventory();
-            RefreshAnimations();
-            
-            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
-                heldItem.SetLastUse(3, Time.realtimeSinceStartup);
+        if (!isBusy) {
+            // Use Item in Active Slot
+            if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)){
+                ui_inventory.RefreshInventory();
+                RefreshAnimations();
+                
+                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
+                    heldItem.SetLastUse(3, Time.realtimeSinceStartup);
 
-                heldItem.UseTertiary(gameObject);
+                    heldItem.UseTertiary(gameObject);
+                }
             }
-        }
-        else if(Input.GetMouseButtonDown(0)){
-            ui_inventory.RefreshInventory();
-            RefreshAnimations();
-            
-            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(1, Time.realtimeSinceStartup)){
-                heldItem.SetLastUse(1, Time.realtimeSinceStartup);
+            else if(Input.GetMouseButtonDown(0)){
+                ui_inventory.RefreshInventory();
+                RefreshAnimations();
+                
+                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(1, Time.realtimeSinceStartup)){
+                    heldItem.SetLastUse(1, Time.realtimeSinceStartup);
 
-                heldItem.UsePrimary(gameObject);
+                    heldItem.UsePrimary(gameObject);
+                }
             }
-        }
-        else if(Input.GetMouseButtonDown(1)){
-            ui_inventory.RefreshInventory();
-            RefreshAnimations();
-            
-            if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(2, Time.realtimeSinceStartup)){
-                heldItem.SetLastUse(2, Time.realtimeSinceStartup);
+            else if(Input.GetMouseButtonDown(1)){
+                ui_inventory.RefreshInventory();
+                RefreshAnimations();
+                
+                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(2, Time.realtimeSinceStartup)){
+                    heldItem.SetLastUse(2, Time.realtimeSinceStartup);
 
-                heldItem.UseSecondary(gameObject);
+                    heldItem.UseSecondary(gameObject);
+                }
+            }
+            
+            // Dodging
+            if(Input.GetKeyDown(KeyCode.Space) && Time.realtimeSinceStartup > dodgeLast + dodgeCooldown + dodgeLength){
+                Instantiate(dodgeAnim, transform.position, transform.rotation, transform);
+                dodgeLast = Time.realtimeSinceStartup;
+                Busy(dodgeLength);
             }
         }
         // else if(Input.GetMouseButtonDown(2)){
@@ -245,6 +256,16 @@ public class Player : MonoBehaviour
 
     public void Knockback(float kb) {
         rb.AddForce(-transform.right * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+    }
+
+    public void Busy(float seconds) {
+        StartCoroutine(IEBusy(seconds));
+    }
+
+    private IEnumerator IEBusy (float seconds) {
+        this.isBusy = true;
+        yield return new WaitForSeconds(seconds);
+        this.isBusy = false;
     }
 
     public void Tekkai (float seconds) {

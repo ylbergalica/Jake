@@ -2015,6 +2015,8 @@ MonoBehaviour:
   currentHealth: 0
   iFramesDuration: 1.5
   numberOfFlashes: 5
+  dodgeAnim: {fileID: 5287455704836322265, guid: 15ff667352f54664190723d1ebd68989, type: 3}
+  dodgeCooldown: 0.5
 --- !u!1 &8984748607767732857
 GameObject:
   m_ObjectHideFlags: 0
