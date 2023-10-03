@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         mousePos.y = mousePos.y - objectPos.y;
 
         angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
 
         // Hotbar Selected Slot
         if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -179,21 +179,11 @@ public class Player : MonoBehaviour
             }
         }
         // else if(Input.GetMouseButtonDown(2)){
-        //     ui_inventory.RefreshInventory();
-        //     RefreshAnimations();
-            
-        //     if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
-        //         heldItem.SetLastUse(3, Time.realtimeSinceStartup);
-
-        //         heldItem.UseTertiary(gameObject);
-        //     }
-        // }
-
-        // Test Item Swap
+        
+		// }
         // if(Input.GetKeyDown(KeyCode.Space)) {
-        //     heldItem = inventory.GetItemIn(activeSlot);
-        //     ui_inventory.RefreshInventory();
-        // }
+        
+		// }
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -255,7 +245,7 @@ public class Player : MonoBehaviour
     }
 
     public void Knockback(float kb) {
-        rb.AddForce(-transform.right * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     public void Busy(float seconds) {

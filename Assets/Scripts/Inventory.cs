@@ -57,14 +57,15 @@ public class Inventory
         foreach (KeyValuePair<string, bool> ability in abilities) {
             if (ability.Key == abilityName && !ability.Value) {
                 toChange = abilityName;
-
-                Debug.Log("Ability added!");
+				break;
             }
         }
 
         if (toChange != null) {
             abilities[toChange] = true;
             ui_inventory.RefreshInventory();
+			Debug.Log("Ability added!");
+			Debug.Log(abilities[toChange]);
         }
     }
 

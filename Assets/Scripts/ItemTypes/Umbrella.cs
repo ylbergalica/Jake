@@ -51,21 +51,21 @@ public class Umbrella : ScriptableObject, IItem
 
 	public void UsePrimary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.right * offset;
+		Vector3 realOffset = player.transform.up * offset;
 
         Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
 
 	public void UseSecondary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.right * offset;
+		Vector3 realOffset = player.transform.up * offset;
 
         Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
 
 	public void UseTertiary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.right * offset;
+		Vector3 realOffset = player.transform.up * offset;
 
         Instantiate(tertiary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}

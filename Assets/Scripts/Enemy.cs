@@ -33,7 +33,6 @@ public class Enemy : MonoBehaviour
         foreach (Collider2D collider in senseArea){
 
             if (collider.gameObject.tag == "Player") {
-                
                 // roses are red, violets are blue, your code is my code too
                 Vector3 vectorToTarget = collider.transform.position - transform.position;
                 float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotationModifier;
@@ -52,7 +51,11 @@ public class Enemy : MonoBehaviour
             Player player = collider.gameObject.GetComponent<Player>();
             player.Hurt(damage);
 
-            rb.AddForce(-transform.up * 20000 * Time.deltaTime, ForceMode2D.Impulse);
+			float distance = Vector3.Distance(collider.transform.position, transform.position);
+			float cos = (transform.position.x - collider.transform.position.x) / distance;
+			float sin = (transform.position.y - collider.transform.position.y) / distance;
+			Vector3 direction = new Vector3(cos, sin, 0);
+            rb.AddForce(direction * 20000 * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 
@@ -69,8 +72,16 @@ public class Enemy : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
     }
 
-    public void Knockback(float kb) {
-        rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+    public void Knockback(Transform attacker, float kb) {
+		Debug.Log(attacker.up.x + " " + attacker.up.y + " " + attacker.up.z);
+		Debug.Log(attacker.position);
+        // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+
+		float distance = Vector3.Distance(attacker.position, transform.position);
+		float cos = (transform.position.x - attacker.position.x) / distance;
+		float sin = (transform.position.y - attacker.position.y) / distance;
+		Vector3 direction = new Vector3(cos, sin, 0);
+        rb.AddForce(direction * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     public void Stun (float seconds) {

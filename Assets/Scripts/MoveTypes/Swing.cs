@@ -32,7 +32,7 @@ public class Swing : MonoBehaviour
         if(collider.gameObject.tag == "Enemy"){
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.Hurt(item.GetStats()["swing_damage"]);
-            enemy.Knockback(item.GetStats()["swing_knockback"]);
+            enemy.Knockback(transform, item.GetStats()["swing_knockback"]);
 
             // Do hit idicator when enemy gets hurtd
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);

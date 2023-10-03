@@ -39,8 +39,9 @@ public class Wand : ScriptableObject, IItem
 
 	public void UsePrimary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.right * offset;
+		Vector3 realOffset = player.transform.up * offset;
 
+		Debug.Log(player.transform.rotation + " ROTAIION");
         Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
 

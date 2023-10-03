@@ -32,7 +32,7 @@ public class Thrust : MonoBehaviour
         if(collider.gameObject.tag == "Enemy"){
             Enemy enemy = collider.GetComponent<Enemy>();
             enemy.Hurt(item.GetStats()["thrust_damage"]);
-            enemy.Knockback(item.GetStats()["thrust_knockback"]);
+            enemy.Knockback(transform, item.GetStats()["thrust_knockback"]);
 
             // Do hit idicator when enemy gets hurtd
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);
