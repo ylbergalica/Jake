@@ -55,9 +55,9 @@ public class Shovel : ScriptableObject, IItem
 	{
 		Vector3 realOffset = player.transform.up * offset;
 
-        Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
+        GameObject secondaryInst = Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 
-        player.GetComponent<Player>().Knockback(thrust_knockback * 3);
+        player.GetComponent<Player>().Knockback(secondaryInst.transform, thrust_knockback * 2);
 	}
 
 	public void UseTertiary(GameObject player)

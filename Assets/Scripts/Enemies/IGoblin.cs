@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IGoblin {
     public Dictionary<string, float> GetStats(); 
-	public void Primary();
-	public void Secondary();
+	public GameObject[] GetMoves();
+	public void UsePrimary(GameObject goblin);
+	public void UseSecondary(GameObject goblin);
 }

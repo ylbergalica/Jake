@@ -11,6 +11,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private float currentHealth;
 	private float speed;
 
+	private float timeToReady;
+
 	// Targetting
     private Collider2D[] senseArea;
 	private GameObject target;
@@ -32,13 +34,14 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 			float distance = Vector3.Distance(target.transform.position, transform.position);
 
 			if (distance > stats["senseRadius"]
-				|| target.GetComponent<Player>().currentHealth < 1) {
+				|| target.GetComponent<Player>().currentHealth < 0) {
 				target = null;
 			}
-			else if (distance < 180f) {
-				// Attack if close enough
-				Debug.Log("ATTACK");
-				// target.GetComponent<Player>().Hurt(stats["damage"]);
+			else if (distance < 180f
+				&& timeToReady + 0.1f < Time.time) {
+				// Primary Attack if close enough
+				timeToReady = + Time.time + enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+				enemyType.UsePrimary(gameObject);
 			}	
 		}
 
@@ -103,6 +106,5 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 
         yield return new WaitForSeconds(seconds);
         speed = tempSpeed;
-        Debug.Log("WaitAndPrint " + Time.time);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Goblin", menuName = "Enemy/Goblin")]
 public class Goblin : ScriptableObject, IGoblin
 {
+	public float offset;
     public float maxHealth;
     public float speed;
     public float damage;
@@ -13,6 +14,9 @@ public class Goblin : ScriptableObject, IGoblin
     public float rotationSpeed;
     public float rotationModifier;
     public float senseRadius;
+
+    public GameObject primary;
+    public GameObject secondary;
 
 	private Dictionary<string, float> stats;
 
@@ -26,20 +30,29 @@ public class Goblin : ScriptableObject, IGoblin
 			{"senseRadius", senseRadius}
         };
 
-        // if (primary != null) {
-        //     primary.transform.localScale = new Vector3(size/10, size/10, 1);
-        // }
+        if (primary != null) {
+            primary.transform.localScale = new Vector3(4, 4, 1);
+        }
     }
 
 	public Dictionary<string, float> GetStats() {
         return this.stats;
     }
 
-    public void Primary() {
+    public void UsePrimary(GameObject goblin) {
+		Vector3 realOffset = goblin.transform.up * offset;
+		Debug.Log("ATTACKING: " + goblin.transform.position + realOffset);
 
+        Instantiate(primary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}
 	
-	public void Secondary() {
+	public void UseSecondary(GameObject goblin) {
 
 	}
+
+	public GameObject[] GetMoves() {
+        GameObject[] moves = {this.primary, this.secondary};
+
+        return moves;
+    }
 }

@@ -233,8 +233,13 @@ public class Player : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
     }
 
-    public void Knockback(float kb) {
-        rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+    public void Knockback(Transform attacker, float kb) {
+		float distance = Vector3.Distance(attacker.position, transform.position);
+		float cos = (transform.position.x - attacker.position.x) / distance;
+		float sin = (transform.position.y - attacker.position.y) / distance;
+		Vector3 direction = new Vector3(cos, sin, 0);
+        rb.AddForce(direction * kb * 20000 * Time.deltaTime, ForceMode2D.Impulse);
+        // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     public void Busy(float seconds) {
