@@ -30,7 +30,7 @@ public class Swing : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider) {
         // Damage an Enemy
         if(collider.gameObject.tag == "Enemy"){
-            Enemy enemy = collider.GetComponent<Enemy>();
+            IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["swing_damage"]);
             enemy.Knockback(transform, item.GetStats()["swing_knockback"]);
 

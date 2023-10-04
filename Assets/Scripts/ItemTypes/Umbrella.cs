@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Shovel", menuName = "Item/Melee/Umbrella")]
+[CreateAssetMenu(fileName = "Umbrella", menuName = "Item/Melee/Umbrella")]
 public class Umbrella : ScriptableObject, IItem
 {
 	public float size;

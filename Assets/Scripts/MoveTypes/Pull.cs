@@ -33,11 +33,11 @@ public class Pull : MonoBehaviour
         if(collider.gameObject.tag == "Enemy"){
             player.GetComponent<Player>().Tekkai(0.5f);
 
-            Enemy enemy = collider.GetComponent<Enemy>();
+            IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["pull_damage"]);
 
             Vector3 pullLine = player.transform.position - transform.position; 
-            enemy.gameObject.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position) * 20, ForceMode2D.Impulse);
+            collider.gameObject.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position) * 20, ForceMode2D.Impulse);
             enemy.Stun(0.7f);
 
             // Do hit idicator when enemy gets hurtd

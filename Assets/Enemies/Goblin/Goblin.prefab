@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1695075415033085269}
   - component: {fileID: 5444415984029084573}
   - component: {fileID: 5816469538167404099}
-  - component: {fileID: 465884769813558239}
+  - component: {fileID: 3404786284123809488}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &465884769813558239
+--- !u!114 &3404786284123809488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,13 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695075415033085258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2571c66562e6eb4b8f216ff4825cd1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6928a791ddc281f4ea09edd3a2ee48fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
-  speed: 50
-  damage: 20
-  rotationSpeed: 50
-  rotationModifier: 90
-  senseRadius: 600
+  enemyReference: {fileID: 11400000, guid: 74f83e00d523b9d4787194690b2db4ec, type: 2}

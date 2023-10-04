@@ -2,54 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
-{
-    public float currentHealth;
-    public float maxHealth;
-    public float speed;
-    public float damage;
-
-    // Rotation Variables
-    private Collider2D[] senseArea;
-    public float rotationSpeed;
-    public float rotationModifier;
-    public float senseRadius;
+public class GoblinAI : MonoBehaviour, IEnemy {
+	public ScriptableObject enemyReference;
+	private IGoblin enemyType;
+	private Dictionary<string, float> stats;
 
     private Rigidbody2D rb;
+    private float currentHealth;
+	private float speed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        speed *= 1000;
-        currentHealth = maxHealth;
-    }
+	// Targetting
+    private Collider2D[] senseArea;
+	private GameObject target;
 
-    private void FixedUpdate()
-    {
-        senseArea = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), senseRadius);
+	void Awake() {
+		enemyType = (IGoblin)enemyReference;
+		stats = enemyType.GetStats();
+
+		rb = gameObject.GetComponent<Rigidbody2D>();
+        speed = stats["speed"] * 1000;
+        currentHealth = stats["maxHealth"];
+	}
+
+	private void FixedUpdate() {
+		senseArea = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), stats["senseRadius"]);
+
+		// Check if target is still in range
+		if (target != null) {
+			float distance = Vector3.Distance(target.transform.position, transform.position);
+
+			if (distance > stats["senseRadius"]
+				|| target.GetComponent<Player>().currentHealth < 1) {
+				target = null;
+			}
+			else if (distance < 180f) {
+				// Attack if close enough
+				Debug.Log("ATTACK");
+				// target.GetComponent<Player>().Hurt(stats["damage"]);
+			}	
+		}
 
         // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
-
             if (collider.gameObject.tag == "Player") {
                 // roses are red, violets are blue, your code is my code too
                 Vector3 vectorToTarget = collider.transform.position - transform.position;
-                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotationModifier;
+                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
                 Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, quart, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, quart, Time.deltaTime * stats["rotationSpeed"]);
 
                 // Chase Player
                 rb.AddForce(transform.up * speed * Time.deltaTime);
+				target = collider.gameObject;
             }
         }
-    }
+	}
 
-    private void OnCollisionEnter2D(Collision2D collider) {
+	private void OnCollisionEnter2D(Collision2D collider) {
         // Do Damage to Player and get KB
         if(collider.gameObject.tag == "Player") {
             Player player = collider.gameObject.GetComponent<Player>();
-            player.Hurt(damage);
+            player.Hurt(stats["damage"]);
 
 			float distance = Vector3.Distance(collider.transform.position, transform.position);
 			float cos = (transform.position.x - collider.transform.position.x) / distance;
@@ -60,7 +73,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Hurt(float damage) {
-        currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, -1, stats["maxHealth"]);
 
         // Die
         if(currentHealth < 1) {
@@ -69,19 +82,15 @@ public class Enemy : MonoBehaviour
     }
 
     public void Heal(float healing) {
-        currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth + healing, -1, stats["maxHealth"]);
     }
 
     public void Knockback(Transform attacker, float kb) {
-		Debug.Log(attacker.up.x + " " + attacker.up.y + " " + attacker.up.z);
-		Debug.Log(attacker.position);
-        // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
-
 		float distance = Vector3.Distance(attacker.position, transform.position);
 		float cos = (transform.position.x - attacker.position.x) / distance;
 		float sin = (transform.position.y - attacker.position.y) / distance;
 		Vector3 direction = new Vector3(cos, sin, 0);
-        rb.AddForce(direction * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(direction * kb * 20000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     public void Stun (float seconds) {
@@ -90,10 +99,10 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator IEStun(float seconds) {
         float tempSpeed = speed;
-        this.speed = 0;
+        speed = 0;
 
         yield return new WaitForSeconds(seconds);
-        this.speed = tempSpeed;
+        speed = tempSpeed;
         Debug.Log("WaitAndPrint " + Time.time);
     }
 }

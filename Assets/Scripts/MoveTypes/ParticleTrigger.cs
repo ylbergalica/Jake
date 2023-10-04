@@ -23,13 +23,10 @@ public class ParticleTrigger : MonoBehaviour
 
         Vector3 pos = collisionEvents[0].intersection;
 
-        Debug.Log(pos);
-
         Debug.Log("Hit");
         if(collider.gameObject.tag == "Enemy"){
-            Enemy enemy = collider.GetComponent<Enemy>();
+            IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["swing_damage"]);
-			Debug.Log(part.transform);
             enemy.Knockback(part.transform, item.GetStats()["swing_knockback"]);
 
             // Do hit idicator when enemy gets hurtd

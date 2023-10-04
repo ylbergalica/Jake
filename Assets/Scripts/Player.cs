@@ -213,17 +213,6 @@ public class Player : MonoBehaviour
     private void RefreshAnimations() {
         // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
         heldItem = inventory.GetItemIn(activeSlot);
-        
-        // if (inventory.GetItemCount() != 0 && heldItem != null){
-        //     if(heldItem.GetComponent<Item>().primary != null) {
-        //         heldItemAnimator = heldItem.GetComponent<Item>().primary.GetComponent<Animator>();
-        //         heldItemFire = heldItemAnimator.runtimeAnimatorController.animationClips[0];
-        //     }
-        // }
-        // else {
-        //     heldItemAnimator = null;
-        //     heldItemFire = null;
-        // }
     }
 
     // Get Hurt and Start iFrames

@@ -30,7 +30,7 @@ public class Thrust : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider) {
         // Damage an Enemy
         if(collider.gameObject.tag == "Enemy"){
-            Enemy enemy = collider.GetComponent<Enemy>();
+            IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["thrust_damage"]);
             enemy.Knockback(transform, item.GetStats()["thrust_knockback"]);
 
