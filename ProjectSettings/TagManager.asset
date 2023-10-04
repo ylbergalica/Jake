@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Enemy
   - Ability
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

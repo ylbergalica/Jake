@@ -2236,10 +2236,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1225773401}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: senseRadius
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1695075415033085258, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
       propertyPath: m_Name
       value: Goblin (4)
@@ -14925,10 +14921,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1225773401}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 7497535031114637290, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
     - target: {fileID: 1695075415033085258, guid: 6f3d71a709cd224438cd63bd410a58f1, type: 3}
       propertyPath: m_Name
       value: Goblin
@@ -15333,10 +15325,6 @@ PrefabInstance:
     - target: {fileID: 7497535031114637290, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: m_Name
       value: Player-inst
-      objectReference: {fileID: 0}
-    - target: {fileID: 7497535031114637290, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7631189613555170316, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
       propertyPath: m_RootOrder

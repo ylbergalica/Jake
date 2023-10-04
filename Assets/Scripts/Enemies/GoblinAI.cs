@@ -11,11 +11,15 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private float currentHealth;
 	private float speed;
 
-	private float timeToReady;
-
 	// Targetting
     private Collider2D[] senseArea;
 	private GameObject target;
+
+	private float timeToReady;
+    private float lastPrimary;
+    private float primaryLength;
+    private float lastSecondary;
+    private float secondaryLength;
 
 	void Awake() {
 		enemyType = (IGoblin)enemyReference;
@@ -24,6 +28,9 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		rb = gameObject.GetComponent<Rigidbody2D>();
         speed = stats["speed"] * 1000;
         currentHealth = stats["maxHealth"];
+
+		primaryLength = enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+		secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 	}
 
 	private void FixedUpdate() {
@@ -37,10 +44,21 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				|| target.GetComponent<Player>().currentHealth < 0) {
 				target = null;
 			}
+			else if (distance < 400f 
+				&& Random.Range(0, 100) < 3
+				&& lastSecondary + stats["secondaryCooldown"] + secondaryLength < Time.time
+				&& timeToReady < Time.time) {
+				// Secondary Attack if close enough
+				lastSecondary = Time.time;
+				timeToReady = Time.time + primaryLength + 0.1f;
+				enemyType.UseSecondary(gameObject);
+			}
 			else if (distance < 180f
-				&& timeToReady + 0.1f < Time.time) {
+				&& lastPrimary + 0.1f + primaryLength < Time.time
+				&& timeToReady < Time.time) {
 				// Primary Attack if close enough
-				timeToReady = + Time.time + enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+				lastPrimary = Time.time;
+				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UsePrimary(gameObject);
 			}	
 		}

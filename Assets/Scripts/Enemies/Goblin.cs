@@ -9,6 +9,7 @@ public class Goblin : ScriptableObject, IGoblin
     public float maxHealth;
     public float speed;
     public float damage;
+	public float secondaryCooldown;
 
     // Rotation Variables
     public float rotationSpeed;
@@ -27,11 +28,15 @@ public class Goblin : ScriptableObject, IGoblin
 			{"damage", damage},
 			{"rotationSpeed", rotationSpeed},
 			{"rotationModifier", rotationModifier},
-			{"senseRadius", senseRadius}
+			{"senseRadius", senseRadius},
+			{"secondaryCooldown", secondaryCooldown},
         };
 
         if (primary != null) {
             primary.transform.localScale = new Vector3(4, 4, 1);
+        }
+		if (secondary != null) {
+            secondary.transform.localScale = new Vector3(7, 7, 1);
         }
     }
 
@@ -41,13 +46,14 @@ public class Goblin : ScriptableObject, IGoblin
 
     public void UsePrimary(GameObject goblin) {
 		Vector3 realOffset = goblin.transform.up * offset;
-		Debug.Log("ATTACKING: " + goblin.transform.position + realOffset);
 
         Instantiate(primary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}
 	
 	public void UseSecondary(GameObject goblin) {
+		Vector3 realOffset = goblin.transform.up * offset;
 
+        Instantiate(secondary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}
 
 	public GameObject[] GetMoves() {

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2491828334539070565}
   - component: {fileID: 2675781003966687884}
-  - component: {fileID: -2045530679087383709}
   - component: {fileID: 5055842342758778132}
-  - component: {fileID: 703777065723433107}
+  - component: {fileID: 6246519389640362041}
+  - component: {fileID: 8074509828769750281}
   m_Layer: 7
-  m_Name: GoblinSwing
+  m_Name: GoblinThrowSwing
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8134859221687891006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: fda732c47f8ee0947b699e864b8e103e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1d299348bc1aa04da6b93c0fc9764b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,25 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &-2045530679087383709
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8134859221687891006}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2183f920a0b3409419f80c76b631693c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!60 &5055842342758778132
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -111,7 +92,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8134859221687891006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -121,7 +102,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20, y: 20}
+    oldSize: {x: 10, y: 10}
     newSize: {x: 20, y: 20}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -137,7 +118,7 @@ PolygonCollider2D:
       - {x: -1.5711929, y: 6.3018336}
       - {x: 3.4274218, y: 4.1619864}
       - {x: 6.0099487, y: 3.9303193}
---- !u!114 &703777065723433107
+--- !u!114 &6246519389640362041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +127,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8134859221687891006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe331d09c729afe4a9638c045fe32493, type: 3}
+  m_Script: {fileID: 11500000, guid: 67fd59e36c95eef4fa6e2b5ac71ade63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyReference: {fileID: 11400000, guid: 74f83e00d523b9d4787194690b2db4ec, type: 2}
+--- !u!95 &8074509828769750281
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8134859221687891006}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e919ef00f9e9241469c2b8ed4fb71592, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
