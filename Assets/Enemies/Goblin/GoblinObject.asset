@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: GoblinObject
   m_EditorClassIdentifier: 
   offset: 40
-  maxHealth: 2000
+  maxHealth: 100
   speed: 60
   damage: 20
-  secondaryCooldown: 10
+  throwChance: 100
+  secondaryCooldown: 2
   rotationSpeed: 50
   rotationModifier: 90
   senseRadius: 600

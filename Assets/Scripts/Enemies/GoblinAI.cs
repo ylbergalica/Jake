@@ -15,6 +15,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private Collider2D[] senseArea;
 	private GameObject target;
 
+	private float throwChance;
+
 	private float timeToReady;
     private float lastPrimary;
     private float primaryLength;
@@ -28,6 +30,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		rb = gameObject.GetComponent<Rigidbody2D>();
         speed = stats["speed"] * 1000;
         currentHealth = stats["maxHealth"];
+		throwChance = (stats["throwChance"]/100) * 10000;
 
 		primaryLength = enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 		secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
@@ -45,7 +48,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				target = null;
 			}
 			else if (distance < 400f 
-				&& Random.Range(0, 100) < 3
+				&& Random.Range(0, 100000) < throwChance
 				&& lastSecondary + stats["secondaryCooldown"] + secondaryLength < Time.time
 				&& timeToReady < Time.time) {
 				// Secondary Attack if close enough

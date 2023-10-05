@@ -9,6 +9,7 @@ public class Goblin : ScriptableObject, IGoblin
     public float maxHealth;
     public float speed;
     public float damage;
+	public float throwChance;
 	public float secondaryCooldown;
 
     // Rotation Variables
@@ -29,6 +30,7 @@ public class Goblin : ScriptableObject, IGoblin
 			{"rotationSpeed", rotationSpeed},
 			{"rotationModifier", rotationModifier},
 			{"senseRadius", senseRadius},
+			{"throwChance", throwChance},
 			{"secondaryCooldown", secondaryCooldown},
         };
 
