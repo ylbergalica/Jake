@@ -14,6 +14,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 	// Targetting
     private Collider2D[] senseArea;
 	private GameObject target;
+	private Vector3 senseOffset;
 
 	private float throwChance;
 
@@ -37,7 +38,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 	}
 
 	private void FixedUpdate() {
-		senseArea = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), stats["senseRadius"]);
+		senseOffset = transform.up * (stats["senseRadius"] / 3f);
+		senseArea = Physics2D.OverlapCircleAll(transform.position + senseOffset, stats["senseRadius"]);
 
 		// Check if target is still in range
 		if (target != null) {
@@ -86,7 +88,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
         // Do Damage to Player and get KB
         if(collider.gameObject.tag == "Player") {
             Player player = collider.gameObject.GetComponent<Player>();
-            player.Hurt(stats["damage"]);
+            player.Hurt(stats["primaryDamage"]);
 
 			float distance = Vector3.Distance(collider.transform.position, transform.position);
 			float cos = (transform.position.x - collider.transform.position.x) / distance;

@@ -8,7 +8,10 @@ public class Goblin : ScriptableObject, IGoblin
 	public float offset;
     public float maxHealth;
     public float speed;
-    public float damage;
+    
+	public float primaryDamage;
+	public float primaryKnockback;
+
 	public float throwChance;
 	public float secondaryCooldown;
 
@@ -26,10 +29,11 @@ public class Goblin : ScriptableObject, IGoblin
         stats = new Dictionary<string, float> {
             {"maxHealth", maxHealth},
 			{"speed", speed},
-			{"damage", damage},
 			{"rotationSpeed", rotationSpeed},
 			{"rotationModifier", rotationModifier},
 			{"senseRadius", senseRadius},
+			{"primaryDamage", primaryDamage},
+			{"primaryKnockback", primaryKnockback},
 			{"throwChance", throwChance},
 			{"secondaryCooldown", secondaryCooldown},
         };

@@ -33,8 +33,8 @@ public class GoblinSwing : MonoBehaviour
         // Damage an Enemy
         if(collider.gameObject.tag == "Player"){
             Player player = collider.gameObject.GetComponent<Player>();
-            player.Hurt(enemyType.GetStats()["damage"]);
-            player.Knockback(transform, enemyType.GetStats()["damage"] / 4);
+            player.Hurt(enemyType.GetStats()["primaryDamage"]);
+            player.Knockback(transform, enemyType.GetStats()["primaryKnockback"]);
 
             // Do hit idicator when enemy gets hurt
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);
