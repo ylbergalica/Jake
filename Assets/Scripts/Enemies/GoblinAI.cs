@@ -15,6 +15,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private Collider2D[] senseArea;
 	private GameObject target;
 	private Vector3 senseOffset;
+	private bool isBusy;
 
 	private float throwChance;
 
@@ -70,7 +71,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 
         // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
-            if (collider.gameObject.tag == "Player") {
+            if (collider.gameObject.tag == "Player" && !isBusy) {
                 // roses are red, violets are blue, your code is my code too
                 Vector3 vectorToTarget = collider.transform.position - transform.position;
                 float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
@@ -118,6 +119,16 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		Vector3 direction = new Vector3(cos, sin, 0);
         rb.AddForce(direction * kb * 20000 * Time.deltaTime, ForceMode2D.Impulse);
     }
+	
+	public void Busy (float seconds) {
+		StartCoroutine(IEBusy(seconds));
+	}
+
+	private IEnumerator IEBusy(float seconds) {
+		isBusy = true;
+		yield return new WaitForSeconds(seconds);
+		isBusy = false;
+	}
 
     public void Stun (float seconds) {
         StartCoroutine(IEStun(seconds));

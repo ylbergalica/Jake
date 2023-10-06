@@ -16,10 +16,12 @@ public class GoblinSwing : MonoBehaviour
     {
         lockRotParent = transform.parent.rotation;
         lockRot = transform.rotation;
+		float swingLength = gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
 		enemyType = (IGoblin)enemyReference;
 		goblin = transform.parent.GetComponent<GoblinAI>();
-		goblin.Stun(gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length);
+		goblin.Stun(swingLength);
+		goblin.Busy(swingLength);
     }
 
     // Update is called once per frame

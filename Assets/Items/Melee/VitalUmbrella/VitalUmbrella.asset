@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 5
   offset: 40
-  swing_damage: 10
-  pull_damage: 5
-  thrust_damage: 15
+  swing_damage: 40
+  pull_damage: 20
+  thrust_damage: 70
   swing_knockback: 4
   thrust_knockback: 10
   primary_cooldown: 0.1
