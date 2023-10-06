@@ -29,7 +29,6 @@ public class Rock : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log(collision.gameObject.name);
 		if (rb.velocity.magnitude > 150 && !HasHit(collision.gameObject.name)) {
 			if (collision.gameObject.CompareTag("Enemy"))
 			{

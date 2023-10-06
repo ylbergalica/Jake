@@ -178,10 +178,14 @@ public class Player : MonoBehaviour
             }
             
             // Dodging
-            if(Input.GetKeyDown(KeyCode.Space) && Time.realtimeSinceStartup > dodgeLast + dodgeCooldown + dodgeLength){
+            if(inventory.HasAbility("Dodge") 
+				&& Input.GetKeyDown(KeyCode.Space) 
+				&& Time.realtimeSinceStartup > dodgeLast + dodgeCooldown + dodgeLength) {
+				// Dodge
                 Instantiate(dodgeAnim, transform.position, transform.rotation, transform);
                 dodgeLast = Time.realtimeSinceStartup;
                 Busy(dodgeLength);
+				StartCoroutine(Dodge());
             }
         }
     }
@@ -270,6 +274,14 @@ public class Player : MonoBehaviour
         rb.mass /= 1.2f;
         Debug.Log("TEKKAI, GOU!!" + Time.time);
     }
+
+	private IEnumerator Dodge() {
+        Physics2D.IgnoreLayerCollision(6, 7, true);
+		sprender.color = new Color(1, 1, 1, 0.5f);
+		yield return new WaitForSeconds(0.6f);
+		sprender.color = new Color(1, 1, 1, 1f);
+        Physics2D.IgnoreLayerCollision(6, 7, false);
+	}
 
     private IEnumerator Invulnerability(){ // Needs research ##########
         Physics2D.IgnoreLayerCollision(6, 7, true);

@@ -25,7 +25,11 @@ public class Inventory
         this.itemSlots = itemSlots;
         // abilityList = new Item[5];
         abilities = new Dictionary<string, bool> {
-            {"Dodge", false}
+            {"Dodge", false},
+			{"Dash", false},
+			{"Light", false},
+			{"Silent", false},
+			{"Slam", false}
         };
 
         this.ui_inventory = ui_inventory;
@@ -51,6 +55,10 @@ public class Inventory
         ui_inventory.RefreshInventory();
     }
 
+	public bool HasAbility(string abilityName) {
+		return abilities[abilityName];
+	}
+
     public void AddAbility(string abilityName) {
         string toChange = null;
 
@@ -64,8 +72,6 @@ public class Inventory
         if (toChange != null) {
             abilities[toChange] = true;
             ui_inventory.RefreshInventory();
-			Debug.Log("Ability added!");
-			Debug.Log(abilities[toChange]);
         }
     }
 
