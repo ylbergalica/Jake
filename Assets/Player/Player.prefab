@@ -2013,6 +2013,7 @@ MonoBehaviour:
   speed: 120
   maxHealth: 600
   currentHealth: 0
+  grabRadius: 100
   iFramesDuration: 1.5
   numberOfFlashes: 5
   dodgeAnim: {fileID: 5287455704836322265, guid: 15ff667352f54664190723d1ebd68989, type: 3}

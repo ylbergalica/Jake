@@ -23,7 +23,6 @@ public class ParticleTrigger : MonoBehaviour
 
         Vector3 pos = collisionEvents[0].intersection;
 
-        Debug.Log("Hit");
         if(collider.gameObject.tag == "Enemy"){
             IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["swing_damage"]);

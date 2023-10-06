@@ -41,7 +41,6 @@ public class Wand : ScriptableObject, IItem
 	{
 		Vector3 realOffset = player.transform.up * offset;
 
-		Debug.Log(player.transform.rotation + " ROTAIION");
         Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
 

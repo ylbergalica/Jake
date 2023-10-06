@@ -44,8 +44,6 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		// Check if target is still in range
 		if (target != null) {
 			float distance = Vector3.Distance(target.transform.position, transform.position);
-			Debug.Log(distance);
-			Debug.Log("Target: " + target.transform.position + " | Goblin: " + transform.position);
 
 			if (distance > stats["senseRadius"]
 				|| target.GetComponent<Player>().currentHealth < 0) {

@@ -22,21 +22,14 @@ public class Player : MonoBehaviour
     private Vector3 mousePos;
     private Vector3 objectPos;
     private float angle;
-    
-    // Swing Animation and Cooldown
-    // public GameObject swing;
-    // private Animator heldItemAnimator;
-    // private AnimationClip heldItemFire;
-    // private float cooldown;
-    // private float lastAttack;
-
-
 
     // Stats
     [Header ("Stats")]
     public float speed;
     public float maxHealth;
     public float currentHealth;
+	public float grabRadius;
+	private Collider2D[] grabArea;
 
     // iFrames
     [Header ("iFrames")]
@@ -98,6 +91,17 @@ public class Player : MonoBehaviour
         if(Input.GetKey("d")){
             rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
         }
+
+		// 
+		grabArea = Physics2D.OverlapCircleAll(transform.position, grabRadius);
+		foreach (Collider2D collider in grabArea){
+			if (collider.gameObject.CompareTag("Item")) {
+				// Pick up Items
+				Rigidbody2D itemBody = collider.gameObject.GetComponent<Rigidbody2D>();
+				Vector3 direction = transform.position - collider.transform.position;
+				itemBody.AddForce(direction * 1000 * Time.deltaTime, ForceMode2D.Force);
+			}
+		}
     }
 
     void Update(){
@@ -178,29 +182,12 @@ public class Player : MonoBehaviour
                 Busy(dodgeLength);
             }
         }
-        // else if(Input.GetMouseButtonDown(2)){
-        
-		// }
-        // if(Input.GetKeyDown(KeyCode.Space)) {
-        
-		// }
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
         // Pick up Items
         if(collider.tag == "Item"){ // GET ITEM
-            invItems.Add(collider.gameObject);
-
-            Item item = collider.GetComponent<Item>();
-
-            // Add item to inventory and refresh activeslot
-            inventory.AddItem(item);
-            heldItem = inventory.GetItemIn(activeSlot);
-
-            // Hide the item
-            collider.gameObject.SetActive(false);
-
-            RefreshAnimations();
+            PickUpItem(collider.gameObject);
         }
         else if (collider.tag == "Ability") { // GET ABILITY
             Ability ability = collider.GetComponent<Ability>();
@@ -209,6 +196,21 @@ public class Player : MonoBehaviour
             Destroy(collider.gameObject);
         }
     }
+
+	private void PickUpItem(GameObject itemObject) {
+		invItems.Add(itemObject);
+
+		Item item = itemObject.GetComponent<Item>();
+
+		// Add item to inventory and refresh activeslot
+		inventory.AddItem(item);
+		heldItem = inventory.GetItemIn(activeSlot);
+
+		// Hide the item
+		itemObject.SetActive(false);
+
+		RefreshAnimations();
+	}
 
     private void RefreshAnimations() {
         // Set the held item animation info on pick up ///WORKS BCS PASSING BY REFERENCE///
