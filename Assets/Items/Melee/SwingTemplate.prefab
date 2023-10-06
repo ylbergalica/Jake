@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5495318909925169839}
   - component: {fileID: 70612444786086621}
   - component: {fileID: 4941517664768390210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SwingTemplate
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9, y: 14}
+    oldSize: {x: 14, y: 9}
     newSize: {x: 6, y: 12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

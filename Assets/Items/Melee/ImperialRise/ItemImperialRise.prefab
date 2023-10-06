@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3131502648617293695}
   - component: {fileID: -3710581872644711238}
   - component: {fileID: 3553216738189183461}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ItemImperialRise
   m_TagString: Item
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4124606989256489619}
   - component: {fileID: 8778440303937072932}
   - component: {fileID: -6148693656395814737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ThrustShovel
   m_TagString: Weapon
   m_Icon: {fileID: 0}

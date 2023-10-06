@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3131502648617293695}
   - component: {fileID: -8524922835071750819}
   - component: {fileID: 2030486675507377493}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ItemShovel
   m_TagString: Item
   m_Icon: {fileID: 0}

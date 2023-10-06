@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
         dodgeLength = dodgeAnim.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
         isTekkai = false;
+        Physics2D.IgnoreLayerCollision(8, 9, true);
     }
 
     // Update is called once per frame
@@ -187,10 +188,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider) {
         // Pick up Items
-        if(collider.tag == "Item"){ // GET ITEM
+        if(collider.gameObject.CompareTag("Item")){ // GET ITEM
             PickUpItem(collider.gameObject);
         }
-        else if (collider.tag == "Ability") { // GET ABILITY
+        else if (collider.gameObject.CompareTag("Ability")) { // GET ABILITY
             Ability ability = collider.GetComponent<Ability>();
             inventory.AddAbility(ability.abilityName);
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5495318909925169839}
   - component: {fileID: 70612444786086621}
   - component: {fileID: 4941517664768390210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SwingShovel
   m_TagString: Weapon
   m_Icon: {fileID: 0}

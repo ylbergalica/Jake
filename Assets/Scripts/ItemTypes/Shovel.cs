@@ -8,10 +8,11 @@ public class Shovel : ScriptableObject, IItem
 	public float size;
     public float offset;
     public float swing_damage;
-    public float thrust_damage;
     public float swing_knockback;
-    public float thrust_knockback;
     public float primary_cooldown;
+    public float thrust_damage;
+    public float thrust_knockback;
+	public float thrust_multiplier;
     public float secondary_cooldown;
     public GameObject primary;
     public GameObject secondary;
@@ -26,6 +27,7 @@ public class Shovel : ScriptableObject, IItem
             {"thrust_damage", thrust_damage},
             {"swing_knockback", swing_knockback},
             {"thrust_knockback", thrust_knockback},
+			{"thrust_multiplier", thrust_multiplier},
             {"primary_cooldown", primary_cooldown},
             {"secondary_cooldown", secondary_cooldown},
         };
@@ -57,7 +59,7 @@ public class Shovel : ScriptableObject, IItem
 
         GameObject secondaryInst = Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 
-        player.GetComponent<Player>().Knockback(secondaryInst.transform, thrust_knockback * 2);
+        player.GetComponent<Player>().Knockback(secondaryInst.transform, thrust_knockback * thrust_multiplier);
 	}
 
 	public void UseTertiary(GameObject player)
