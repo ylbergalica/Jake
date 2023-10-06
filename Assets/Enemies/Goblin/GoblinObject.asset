@@ -15,9 +15,10 @@ MonoBehaviour:
   offset: 40
   maxHealth: 100
   speed: 60
-  damage: 20
-  throwChance: 100
-  secondaryCooldown: 2
+  primaryDamage: 25
+  primaryKnockback: 5
+  throwChance: 10
+  secondaryCooldown: 6
   rotationSpeed: 50
   rotationModifier: 90
   senseRadius: 600

@@ -6,7 +6,8 @@ public class Rock : MonoBehaviour
 {
 	public float speed = 10f;
 	public float lifetime = 5f;
-	public int damage = 10;
+	public float damage = 10f;
+	public float knockback = 1.5f;
 
 	private Rigidbody2D rb;
 
@@ -36,7 +37,7 @@ public class Rock : MonoBehaviour
 				if (enemy != null)
 				{
 					enemy.Hurt(damage);
-					enemy.Knockback(transform, damage / 2);
+					enemy.Knockback(transform, knockback / 1.5f);
 				}
 			}
 			else if (collision.gameObject.CompareTag("Player"))
@@ -45,7 +46,7 @@ public class Rock : MonoBehaviour
 				if (player != null)
 				{
 					player.Hurt(damage);
-					player.Knockback(transform, damage / 4);
+					player.Knockback(transform, knockback);
 				}
 			}
 		}

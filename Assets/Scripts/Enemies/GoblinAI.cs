@@ -44,6 +44,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		// Check if target is still in range
 		if (target != null) {
 			float distance = Vector3.Distance(target.transform.position, transform.position);
+			Debug.Log(distance);
+			Debug.Log("Target: " + target.transform.position + " | Goblin: " + transform.position);
 
 			if (distance > stats["senseRadius"]
 				|| target.GetComponent<Player>().currentHealth < 0) {
@@ -58,7 +60,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UseSecondary(gameObject);
 			}
-			else if (distance < 180f
+			else if (distance < 140f
 				&& lastPrimary + 0.1f + primaryLength < Time.time
 				&& timeToReady < Time.time) {
 				// Primary Attack if close enough
