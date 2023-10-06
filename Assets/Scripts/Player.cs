@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public float currentHealth;
 	public float grabRadius;
 	private Collider2D[] grabArea;
+	private float grabMultiplier;
 
     // iFrames
     [Header ("iFrames")]
@@ -47,7 +48,6 @@ public class Player : MonoBehaviour
 
     private bool isTekkai;
     private bool isBusy;
-
 
     // Start is called before the first frame update
     void Start()
@@ -99,7 +99,8 @@ public class Player : MonoBehaviour
 				// Pick up Items
 				Rigidbody2D itemBody = collider.gameObject.GetComponent<Rigidbody2D>();
 				Vector3 direction = transform.position - collider.transform.position;
-				itemBody.AddForce(direction * 1000 * Time.deltaTime, ForceMode2D.Force);
+				float distance = Vector3.Distance(transform.position, collider.transform.position);
+				itemBody.AddForce((direction * (Mathf.Pow(distance, 2f)/1.5f)) * Time.deltaTime, ForceMode2D.Force);
 			}
 		}
     }

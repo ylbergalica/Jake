@@ -18,10 +18,13 @@ public class Item : MonoBehaviour
     private float tertiaryLength;
     private float lastEffect;
 
+	private float randomTimeFactor;
+
     // Start is called before the first frame update
     void Start()
     {
         item = (IItem)itemReference;
+		randomTimeFactor = Random.Range(0f, 2.5f);
 
         try {
             primaryLength = item.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
@@ -36,6 +39,12 @@ public class Item : MonoBehaviour
         }
         catch (System.Exception) { tertiaryLength = 0f; }
     }
+
+	void FixedUpdate()	{
+		//Bob up and down
+		float bobbingValue = Mathf.Sin((Time.time + randomTimeFactor) * 2.5f) * 0.4f;
+		transform.position = new Vector3(transform.position.x, transform.position.y + bobbingValue, transform.position.z);
+	}
 
     public Dictionary<string, float> GetStats() {
         return item.GetStats();
