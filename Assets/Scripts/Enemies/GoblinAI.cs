@@ -30,7 +30,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		stats = enemyType.GetStats();
 
 		rb = gameObject.GetComponent<Rigidbody2D>();
-        speed = stats["speed"] * 1000;
+        speed = stats["speed"] * 100;
         currentHealth = stats["maxHealth"];
 		throwChance = (stats["throwChance"]/100) * 10000;
 
@@ -76,10 +76,10 @@ public class GoblinAI : MonoBehaviour, IEnemy {
                 Vector3 vectorToTarget = collider.transform.position - transform.position;
                 float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
                 Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, quart, Time.deltaTime * stats["rotationSpeed"]);
+                transform.rotation = Quaternion.Slerp(transform.rotation, quart, stats["rotationSpeed"]);
 
                 // Chase Player
-                rb.AddForce(transform.up * speed * Time.deltaTime);
+                rb.AddForce(transform.up * speed);
 				target = collider.gameObject;
             }
         }
@@ -95,7 +95,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 			float cos = (transform.position.x - collider.transform.position.x) / distance;
 			float sin = (transform.position.y - collider.transform.position.y) / distance;
 			Vector3 direction = new Vector3(cos, sin, 0);
-            rb.AddForce(direction * 20000 * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(direction * 20000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
     }
 
@@ -117,7 +117,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 		float cos = (transform.position.x - attacker.position.x) / distance;
 		float sin = (transform.position.y - attacker.position.y) / distance;
 		Vector3 direction = new Vector3(cos, sin, 0);
-        rb.AddForce(direction * kb * 20000 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(direction * kb * 20000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 	
 	public void Busy (float seconds) {

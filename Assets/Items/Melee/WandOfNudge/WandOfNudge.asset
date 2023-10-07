@@ -15,6 +15,6 @@ MonoBehaviour:
   size: 5
   offset: 30
   swing_damage: 20
-  swing_knockback: 20
+  swing_knockback: 5
   primary_cooldown: 1
   primary: {fileID: 5562173928408626566, guid: b21f9a63079dbfa4e94eede0fb36a234, type: 3}

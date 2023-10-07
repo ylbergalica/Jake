@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 				Rigidbody2D itemBody = collider.gameObject.GetComponent<Rigidbody2D>();
 				Vector3 direction = transform.position - collider.transform.position;
 				float distance = Vector3.Distance(transform.position, collider.transform.position);
-				itemBody.AddForce((direction * (Mathf.Pow(distance, 2f)/1.5f)), ForceMode2D.Force);
+				itemBody.AddForce((direction * (Mathf.Pow(distance, 1.5f)/5f)), ForceMode2D.Force);
 			}
 		}
     }
@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
 		float cos = (transform.position.x - attacker.position.x) / distance;
 		float sin = (transform.position.y - attacker.position.y) / distance;
 		Vector3 direction = new Vector3(cos, sin, 0);
-        rb.AddForce(direction * kb * 20000 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(direction * kb * 20000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
         // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 

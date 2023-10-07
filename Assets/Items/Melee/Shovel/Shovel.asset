@@ -15,11 +15,11 @@ MonoBehaviour:
   size: 7
   offset: 40
   swing_damage: 50
-  swing_knockback: 3.5
+  swing_knockback: 8
   primary_cooldown: 0.3
   thrust_damage: 80
-  thrust_knockback: 7
-  thrust_multiplier: 3
+  thrust_knockback: 12
+  thrust_multiplier: 0.25
   secondary_cooldown: 0.6
   primary: {fileID: 5562173928408626566, guid: f329a6fead7289b4f8b82b05b4ebe4b4, type: 3}
   secondary: {fileID: 5562173928408626566, guid: d90c59019e1c3dc48b21ea9616768f67, type: 3}

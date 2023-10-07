@@ -37,7 +37,7 @@ public class Pull : MonoBehaviour
             enemy.Hurt(item.GetStats()["pull_damage"]);
 
             Vector3 pullLine = player.transform.position - transform.position; 
-            collider.gameObject.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position) * 20, ForceMode2D.Impulse);
+            collider.gameObject.GetComponent<Rigidbody2D>().AddForce((player.transform.position - transform.position) * item.GetStats()["pull_force"] * 10, ForceMode2D.Impulse);
             enemy.Stun(0.7f);
 
             // Do hit idicator when enemy gets hurtd

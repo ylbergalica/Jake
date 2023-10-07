@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 40
   maxHealth: 100
-  speed: 60
+  speed: 40
   primaryDamage: 25
   primaryKnockback: 5
   throwChance: 10

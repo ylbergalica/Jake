@@ -12,6 +12,7 @@ public class Umbrella : ScriptableObject, IItem
     public float thrust_damage;
     public float swing_knockback;
     public float thrust_knockback;
+	public float pull_force;
     public float primary_cooldown;
     public float secondary_cooldown;
     public float tertiary_cooldown;
@@ -30,6 +31,7 @@ public class Umbrella : ScriptableObject, IItem
             {"thrust_damage", thrust_damage},
             {"swing_knockback", swing_knockback},
             {"thrust_knockback", thrust_knockback},
+			{"pull_force", pull_force},
             {"primary_cooldown", primary_cooldown},
             {"secondary_cooldown", secondary_cooldown},
             {"tertiary_cooldown", tertiary_cooldown},
