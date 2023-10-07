@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         rb = gameObject.GetComponent<Rigidbody2D>();
-        speed *= 1000;
+        speed *= 100;
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
 
@@ -81,16 +81,16 @@ public class Player : MonoBehaviour
     {
         // Movement Checks
         if(Input.GetKey("w")){
-            rb.AddForce(new Vector3(0, speed*Time.deltaTime, 0));
+            rb.AddForce(new Vector3(0, speed, 0));
         }
         if(Input.GetKey("a")){
-            rb.AddForce(new Vector3(-speed*Time.deltaTime, 0, 0));
+            rb.AddForce(new Vector3(-speed, 0, 0));
         }
         if(Input.GetKey("s")){
-            rb.AddForce(new Vector3(0, -speed*Time.deltaTime, 0));
+            rb.AddForce(new Vector3(0, -speed, 0));
         }
         if(Input.GetKey("d")){
-            rb.AddForce(new Vector3(speed*Time.deltaTime, 0, 0));
+            rb.AddForce(new Vector3(speed, 0, 0));
         }
 
 		// 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 				Rigidbody2D itemBody = collider.gameObject.GetComponent<Rigidbody2D>();
 				Vector3 direction = transform.position - collider.transform.position;
 				float distance = Vector3.Distance(transform.position, collider.transform.position);
-				itemBody.AddForce((direction * (Mathf.Pow(distance, 2f)/1.5f)) * Time.deltaTime, ForceMode2D.Force);
+				itemBody.AddForce((direction * (Mathf.Pow(distance, 2f)/1.5f)), ForceMode2D.Force);
 			}
 		}
     }

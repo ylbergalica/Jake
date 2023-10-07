@@ -50,7 +50,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				|| target.GetComponent<Player>().currentHealth < 0) {
 				target = null;
 			}
-			else if (distance < 400f 
+			else if (distance < 600f && distance > 200f
 				&& Random.Range(0, 100000) < throwChance
 				&& lastSecondary + stats["secondaryCooldown"] + secondaryLength < Time.time
 				&& timeToReady < Time.time) {
@@ -59,7 +59,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UseSecondary(gameObject);
 			}
-			else if (distance < 140f
+			else if (distance < 135f
 				&& lastPrimary + 0.1f + primaryLength < Time.time
 				&& timeToReady < Time.time) {
 				// Primary Attack if close enough

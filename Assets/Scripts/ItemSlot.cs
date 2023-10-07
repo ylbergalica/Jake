@@ -9,12 +9,6 @@ public class ItemSlot : MonoBehaviour
     public float offset;
     public Sprite sprite;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void SetSprite(Sprite sprite) {
         this.sprite = sprite;
 
