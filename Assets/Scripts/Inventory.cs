@@ -19,7 +19,7 @@ public class Inventory
     public ItemSlot itemSlot;
 
     // Start is called before the first frame update
-    public Inventory(int itemSlots, UI_Inventory ui_inventory)
+    public Inventory(int itemSlots)
     {
         itemList = new Item[itemSlots];
         this.itemSlots = itemSlots;
@@ -32,10 +32,13 @@ public class Inventory
 			{"Slam", false}
         };
 
-        this.ui_inventory = ui_inventory;
         this.allSlots = new List<ItemSlot>();
-        ui_inventory.Setup(this);
     }
+
+	public void AddUI (UI_Inventory ui_inventory) {
+		this.ui_inventory = ui_inventory;
+        ui_inventory.Setup(this);
+	}
 
     public void AddItemSlot(ItemSlot slot){
         allSlots.Add(slot);

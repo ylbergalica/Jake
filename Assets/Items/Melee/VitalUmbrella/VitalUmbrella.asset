@@ -19,7 +19,7 @@ MonoBehaviour:
   thrust_damage: 70
   swing_knockback: 6
   thrust_knockback: 13
-  pull_force: 7
+  pull_force: 6
   primary_cooldown: 0.1
   secondary_cooldown: 1
   tertiary_cooldown: 1

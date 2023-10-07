@@ -15,6 +15,17 @@ public class MainMenu : MonoBehaviour
         // GameObject.Find("Circle").GetComponent<BallMove>().SetGameOver(false);
 
         GameObject player = Instantiate(playerPref, spawnPoint, Quaternion.identity);
-        GameObject.Find("Camera").GetComponent<CameraFollow>().targetFollow = player;
+
+        GameObject camera = GameObject.Find("Camera");
+		camera.GetComponent<CameraFollow>().targetFollow = player;
+
+		Transform UI = camera.transform.Find("UI");
+		Transform UI_Inventory = UI.Find("Canvas").Find("UI_Inventory");
+		UI.gameObject.SetActive(true);
+
+		player.GetComponent<Player>().AddInventoryUI(UI_Inventory.gameObject.GetComponent<UI_Inventory>());
+
+		GameObject UI_HealthBar = UI.Find("Canvas").Find("HealthBar").gameObject;
+		UI_HealthBar.GetComponent<HealthBar>().player = player.GetComponent<Player>();
     }
 }

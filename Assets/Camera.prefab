@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dd2ef7245f8be4b8eac5cc39e35be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1010667056902049533, guid: 6e11709b8b3c2634dbe3a5cc99dadcb1, type: 3}
   totalHealthBar: {fileID: 3108631176828026669}
   currentHealthBar: {fileID: 3440991756991447047}
 --- !u!1 &3121341605974978441

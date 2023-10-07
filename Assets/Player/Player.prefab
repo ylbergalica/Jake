@@ -137,7 +137,7 @@ MonoBehaviour:
   ui_inventory: {fileID: 0}
   slotsCount: 22
   speed: 30
-  maxHealth: 600
+  maxHealth: 100
   currentHealth: 0
   grabRadius: 100
   iFramesDuration: 1.5

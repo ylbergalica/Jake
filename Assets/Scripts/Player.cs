@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     private bool isBusy;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
@@ -59,16 +59,8 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
 
-        inventory = new Inventory(slotsCount, ui_inventory);
+        inventory = new Inventory(slotsCount);
         invItems = new List<GameObject>();
-
-        this.ui_pockets = ui_inventory.ui_pockets;
-        this.ui_abilities = ui_inventory.ui_abilities;
-
-        ui_abilities.SetActive(false);
-        ui_pockets.SetActive(false);
-        activeSlot = inventory.ActivateSlot(0);
-        heldItem = inventory.GetItemIn(activeSlot);
 
         dodgeLength = dodgeAnim.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
@@ -293,6 +285,18 @@ public class Player : MonoBehaviour
         }
         Physics2D.IgnoreLayerCollision(6, 7, false);
     }
+
+	public void AddInventoryUI (UI_Inventory ui_inventory) {
+		inventory.AddUI(ui_inventory);
+		this.ui_inventory = ui_inventory;
+        this.ui_pockets = ui_inventory.ui_pockets;
+        this.ui_abilities = ui_inventory.ui_abilities;
+		ui_abilities.SetActive(false);
+        ui_pockets.SetActive(false);
+
+		activeSlot = inventory.ActivateSlot(0);
+        heldItem = inventory.GetItemIn(activeSlot);
+	}
 
     public Inventory GetInventory() {
         return this.inventory;
