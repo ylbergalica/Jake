@@ -61,6 +61,9 @@ public class Player : MonoBehaviour
 
         inventory = new Inventory(slotsCount);
         invItems = new List<GameObject>();
+		if (ui_inventory != null) {
+			AddInventoryUI(ui_inventory);
+		}
 
         dodgeLength = dodgeAnim.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
@@ -71,19 +74,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Movement Checks
-        if(Input.GetKey("w")){
-            rb.AddForce(new Vector3(0, speed, 0));
-        }
-        if(Input.GetKey("a")){
-            rb.AddForce(new Vector3(-speed, 0, 0));
-        }
-        if(Input.GetKey("s")){
-            rb.AddForce(new Vector3(0, -speed, 0));
-        }
-        if(Input.GetKey("d")){
-            rb.AddForce(new Vector3(speed, 0, 0));
-        }
+		// Movement on equal 8 directions
+		if (Input.GetKey("w") && Input.GetKey("a")) {
+			rb.AddForce(new Vector3(-speed / 1.42f, speed / 1.42f, 0));
+		}
+		else if (Input.GetKey("w") && Input.GetKey("d")) {
+			rb.AddForce(new Vector3(speed / 1.42f, speed / 1.42f, 0));
+		}
+		else if (Input.GetKey("s") && Input.GetKey("a")) {
+			rb.AddForce(new Vector3(-speed / 1.42f, -speed / 1.42f, 0));
+		}
+		else if (Input.GetKey("s") && Input.GetKey("d")) {
+			rb.AddForce(new Vector3(speed / 1.42f, -speed / 1.42f, 0));
+		}
+		else if (Input.GetKey("w")) {
+			rb.AddForce(new Vector3(0, speed, 0));
+		}
+		else if (Input.GetKey("a")) {
+			rb.AddForce(new Vector3(-speed, 0, 0));
+		}
+		else if (Input.GetKey("s")) {
+			rb.AddForce(new Vector3(0, -speed, 0));
+		}
+		else if (Input.GetKey("d")) {
+			rb.AddForce(new Vector3(speed, 0, 0));
+		}
 
 		// 
 		grabArea = Physics2D.OverlapCircleAll(transform.position, grabRadius);

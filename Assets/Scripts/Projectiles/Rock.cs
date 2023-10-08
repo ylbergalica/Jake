@@ -29,7 +29,8 @@ public class Rock : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (rb.velocity.magnitude > 150 && !HasHit(collision.gameObject.name)) {
+		if (collision.relativeVelocity.magnitude > 450 || rb.velocity.magnitude > 160
+			&& !HasHit(collision.gameObject.name)) {
 			if (collision.gameObject.CompareTag("Enemy"))
 			{
 				IEnemy enemy = collision.gameObject.GetComponent(typeof (IEnemy)) as IEnemy;
@@ -46,7 +47,16 @@ public class Rock : MonoBehaviour
 				{
 					player.Hurt(damage);
 					player.Knockback(transform, knockback);
+
 				}
+			}
+
+			if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) {
+				// Do hit idicator when enemy gets hurt
+				// Vector3 contact = collision.bounds.ClosestPoint(transform.position);
+				Vector3 contact = collision.GetContact(0).point;
+				GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
+				Instantiate(hitPrefab, contact, Quaternion.identity);
 			}
 		}
 		

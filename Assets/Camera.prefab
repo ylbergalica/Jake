@@ -2006,11 +2006,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1
-  far clip plane: 30356
+  near clip plane: -100
+  far clip plane: 1
   field of view: 60
   orthographic: 1
-  orthographic size: 500
+  orthographic size: 570
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

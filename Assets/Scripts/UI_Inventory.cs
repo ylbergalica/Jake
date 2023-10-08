@@ -38,9 +38,6 @@ public class UI_Inventory : MonoBehaviour
         for(int i = 2; i < inventory.itemSlots; i++){
             slot = Instantiate(itemSlot, ui_pockets.transform);
             slot.name = "ItemSlot" + i;
-			// int row = i / 5;
-			// int col = i % 5;
-            // slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * col + slot.offset * col, slot.width * row + slot.offset * row);
 			
             // add event listener to button
             slot.transform.Find("Button").GetComponent<Button>().onClick.AddListener(HandleSwap);

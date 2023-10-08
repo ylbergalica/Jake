@@ -50,7 +50,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				|| target.GetComponent<Player>().currentHealth < 0) {
 				target = null;
 			}
-			else if (distance < 600f && distance > 200f
+			else if (distance < 700f && distance > 300f
 				&& Random.Range(0, 100000) < throwChance
 				&& lastSecondary + stats["secondaryCooldown"] + secondaryLength < Time.time
 				&& timeToReady < Time.time) {

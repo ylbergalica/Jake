@@ -39,5 +39,18 @@ public class Swing : MonoBehaviour
             GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
             Instantiate(hitPrefab, contact, Quaternion.identity);
         }
+
+		if (collider.gameObject.tag == "Destroyable") {
+			// Vector2 contact = contacts[0];
+			Vector2 contact = collider.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+
+			// Look ahead of the contact point to see if there is a tile there
+			Vector2 direction = contact - (Vector2)transform.parent.position;
+			Debug.Log(direction.normalized * 10f);
+			Debug.Log(contact + direction.normalized * 10f);
+			Debug.Log(contact + new Vector2(10f, 10f));
+
+			collider.GetComponent<TileDestroyer>().DestroyTile(contact + direction.normalized * 10f);
+		}
     }
 }
