@@ -70,6 +70,8 @@ public class Umbrella : ScriptableObject, IItem
 		Vector3 realOffset = player.transform.up * offset;
 
         Instantiate(tertiary, player.transform.position + realOffset, player.transform.rotation, player.transform);
+		
+		Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f, 25f);
 	}
 
     public GameObject[] GetMoves() {

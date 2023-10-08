@@ -20,9 +20,13 @@ public class ParticleBurst : MonoBehaviour
 
         item = (IItem)itemReference;
 
+		float duration = particleSystem.main.duration;
         particleSystem.Play();
         // Debug.Log(particleSystem.main.duration);
-        Destroy(gameObject, particleSystem.main.duration + 0.3f);
+        Destroy(gameObject, duration + 0.3f);
+		
+		// Shake the camera
+		Camera.main.GetComponent<CameraFollow>().ShakeCamera(duration*0.3f, 5f + duration*0.5f);
     }
 
     // Update is called once per frame

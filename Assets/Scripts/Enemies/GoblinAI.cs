@@ -90,6 +90,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
         if(collider.gameObject.tag == "Player") {
             Player player = collider.gameObject.GetComponent<Player>();
             player.Hurt(stats["primaryDamage"]);
+			player.Knockback(transform, stats["primaryKnockback"]/4f);
 
 			float distance = Vector3.Distance(collider.transform.position, transform.position);
 			float cos = (transform.position.x - collider.transform.position.x) / distance;

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: GoblinObject
   m_EditorClassIdentifier: 
   offset: 40
-  maxHealth: 100
+  maxHealth: 1000
   speed: 40
   primaryDamage: 25
-  primaryKnockback: 5
+  primaryKnockback: 4
   throwChance: 10
   secondaryCooldown: 6
   rotationSpeed: 50

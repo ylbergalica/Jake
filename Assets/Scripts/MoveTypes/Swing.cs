@@ -32,25 +32,26 @@ public class Swing : MonoBehaviour
         if(collider.gameObject.tag == "Enemy"){
             IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["swing_damage"]);
-            enemy.Knockback(transform, item.GetStats()["swing_knockback"]);
+			
+			float knockback = item.GetStats()["swing_knockback"];
+            enemy.Knockback(transform, knockback);
 
             // Do hit idicator when enemy gets hurtd
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);
             GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
             Instantiate(hitPrefab, contact, Quaternion.identity);
+
+			// Shake the camera
+			Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f + knockback*0.005f, 20f + knockback*1.1f);
         }
 
 		if (collider.gameObject.tag == "Destroyable") {
+			// DEPRECATED
 			// Vector2 contact = contacts[0];
-			Vector2 contact = collider.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
-
+			// Vector2 contact = collider.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
 			// Look ahead of the contact point to see if there is a tile there
-			Vector2 direction = contact - (Vector2)transform.parent.position;
-			Debug.Log(direction.normalized * 10f);
-			Debug.Log(contact + direction.normalized * 10f);
-			Debug.Log(contact + new Vector2(10f, 10f));
-
-			collider.GetComponent<TileDestroyer>().DestroyTile(contact + direction.normalized * 10f);
+			// Vector2 direction = contact - (Vector2)transform.parent.position;
+			// collider.GetComponent<TileDestroyer>().DestroyTile(contact + direction.normalized * 10f);
 		}
     }
 }

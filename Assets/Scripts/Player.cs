@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+	private Light2D shadow;
 
     // Inventory
     [Header ("Inventory")]
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         rb = gameObject.GetComponent<Rigidbody2D>();
+		shadow = gameObject.GetComponent<Light2D>();
         speed *= 100;
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
@@ -233,6 +236,9 @@ public class Player : MonoBehaviour
     // Get Hurt and Start iFrames
     public void Hurt(float damage) {
         if (!isTekkai) {
+			// Shake the camera for .1s+.1% of damage, strength 60+70% of damage
+			Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f + damage*0.001f, 60f + damage*0.7f);
+
             currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
             StartCoroutine(Invulnerability()); // Needs research ##########
 
@@ -293,8 +299,10 @@ public class Player : MonoBehaviour
     private IEnumerator Invulnerability(){ // Needs research ##########
         Physics2D.IgnoreLayerCollision(6, 7, true);
         for(int i = 0; i < numberOfFlashes; i++) {
-            sprender.color = new Color(1, 1, 1, 0f);
+			shadow.color = new Color(1, 1, 1);
+            sprender.color = new Color(0, 0, 0, 0f);
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2)); // Needs research ##########
+			shadow.color = new Color(0, 0, 0);
             sprender.color = new Color(1, 1, 1, 1f);
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }

@@ -32,12 +32,17 @@ public class Thrust : MonoBehaviour
         if(collider.gameObject.tag == "Enemy"){
             IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
             enemy.Hurt(item.GetStats()["thrust_damage"]);
-            enemy.Knockback(transform, item.GetStats()["thrust_knockback"]);
+
+			float knockback = item.GetStats()["thrust_knockback"];
+            enemy.Knockback(transform, knockback);
 
             // Do hit idicator when enemy gets hurtd
             Vector3 contact = collider.bounds.ClosestPoint(transform.position);
             GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
             Instantiate(hitPrefab, contact, Quaternion.identity);
+
+			// Shake the camera on hit
+			Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f + knockback*0.005f, 40f + knockback*1.1f);
         }
     }
 }

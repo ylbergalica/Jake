@@ -11,5 +11,5 @@ PresetManager:
       m_ManagedTypeFallback: 
     second:
     - m_Preset: {fileID: 2655988077585873504, guid: fc602f553bd06b449a733ca11bd2713f, type: 2}
-      m_Filter: glob:"*.psd.png"
+      m_Filter: glob:"*.psd"
       m_Disabled: 0

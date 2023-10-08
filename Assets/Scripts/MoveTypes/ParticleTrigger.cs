@@ -33,6 +33,9 @@ public class ParticleTrigger : MonoBehaviour
             // Vector3 contact = collider.bounds.ClosestPoint(transform.position);
             GameObject hitPrefab = (GameObject)Resources.Load("Hit/HitImpact", typeof(GameObject));
             Instantiate(hitPrefab, pos, Quaternion.identity);
+			
+			// Shake the camera
+			Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f, 20f);
         }
     }
 }

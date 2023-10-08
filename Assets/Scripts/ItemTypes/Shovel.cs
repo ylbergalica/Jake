@@ -60,6 +60,7 @@ public class Shovel : ScriptableObject, IItem
         GameObject secondaryInst = Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 
         player.GetComponent<Player>().Knockback(secondaryInst.transform, thrust_knockback * thrust_multiplier);
+		Camera.main.GetComponent<CameraFollow>().ShakeCamera(0.1f, 20f);
 	}
 
 	public void UseTertiary(GameObject player)

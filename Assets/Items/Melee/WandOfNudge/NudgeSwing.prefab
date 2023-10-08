@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 788348777116406240}
   - component: {fileID: 1694241203094446986}
   - component: {fileID: 1097669700995614675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NudgeSwing
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
@@ -105,6 +105,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 788348777116406240}
     m_Modifications:
+    - target: {fileID: 5094594844968059401, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5094594844968059401, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
       propertyPath: moveWithCustomTransform
       value: 
@@ -225,29 +229,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5094594844968059402, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094594844968059402, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094594844968059402, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094594844968059402, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094594844968059402, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5094594844968059407, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
       propertyPath: m_Name
       value: NudgeParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5094594844968059407, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45360a755b332c143baacca0f3cea0b5, type: 3}
