@@ -38,12 +38,12 @@ public class Goblin : ScriptableObject, IGoblin
 			{"secondaryCooldown", secondaryCooldown},
         };
 
-        if (primary != null) {
-            primary.transform.localScale = new Vector3(4, 4, 1);
-        }
-		if (secondary != null) {
-            secondary.transform.localScale = new Vector3(7, 7, 1);
-        }
+        // if (primary != null) {
+        //     primary.transform.localScale = new Vector3(1, 1, 1);
+        // }
+		// if (secondary != null) {
+            // secondary.transform.localScale = new Vector3(1, 1, 1);
+        // }
     }
 
 	public Dictionary<string, float> GetStats() {
@@ -57,7 +57,7 @@ public class Goblin : ScriptableObject, IGoblin
 	}
 	
 	public void UseSecondary(GameObject goblin) {
-		Vector3 realOffset = goblin.transform.up * offset;
+		Vector3 realOffset = goblin.transform.up * offset * 2;
 
         Instantiate(secondary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}

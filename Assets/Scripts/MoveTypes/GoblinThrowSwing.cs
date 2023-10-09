@@ -18,6 +18,6 @@ public class GoblinThrowSwing : MonoBehaviour
     }
 
 	private void OnDestroy() {
-		GameObject projectile = Instantiate(throwable, transform.position + transform.up * 50, transform.rotation);
+		GameObject projectile = Instantiate(throwable, transform.position + transform.up * 30, transform.rotation);
 	}
 }

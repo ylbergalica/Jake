@@ -1226,7 +1226,7 @@ GameObject:
   - component: {fileID: 1383126405}
   - component: {fileID: 1383126404}
   - component: {fileID: 1383126403}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collidable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
