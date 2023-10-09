@@ -7,13 +7,13 @@ public class GoblinThrowSwing : MonoBehaviour
 	public GameObject throwable;
 	public ScriptableObject enemyReference;
 	private IGoblin enemyType;
-	private GoblinAI goblin;
+	private IEnemy goblin;
 
     // Start is called before the first frame update
     void Start()
     {
 		enemyType = (IGoblin)enemyReference;
-		goblin = transform.parent.GetComponent<GoblinAI>();
+		goblin = transform.parent.GetComponent<IEnemy>();
 		goblin.Stun(gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length);
     }
 

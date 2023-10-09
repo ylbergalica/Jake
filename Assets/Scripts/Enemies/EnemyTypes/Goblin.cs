@@ -12,7 +12,7 @@ public class Goblin : ScriptableObject, IGoblin
 	public float primaryDamage;
 	public float primaryKnockback;
 
-	public float throwChance;
+	public float secondaryChance;
 	public float secondaryCooldown;
 
     // Rotation Variables
@@ -34,16 +34,9 @@ public class Goblin : ScriptableObject, IGoblin
 			{"senseRadius", senseRadius},
 			{"primaryDamage", primaryDamage},
 			{"primaryKnockback", primaryKnockback},
-			{"throwChance", throwChance},
+			{"secondaryChance", secondaryChance},
 			{"secondaryCooldown", secondaryCooldown},
         };
-
-        // if (primary != null) {
-        //     primary.transform.localScale = new Vector3(1, 1, 1);
-        // }
-		// if (secondary != null) {
-            // secondary.transform.localScale = new Vector3(1, 1, 1);
-        // }
     }
 
 	public Dictionary<string, float> GetStats() {

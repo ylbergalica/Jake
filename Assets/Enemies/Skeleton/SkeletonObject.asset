@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44f347fb7d995d84e8d8c133092193a1, type: 3}
-  m_Name: GoblinObject
+  m_Name: SkeletonObject
   m_EditorClassIdentifier: 
   offset: 30
   maxHealth: 100
-  speed: 35
-  primaryDamage: 25
+  speed: 50
+  primaryDamage: 30
   primaryKnockback: 4
-  secondaryChance: 10
-  secondaryCooldown: 6
+  secondaryChance: 0
+  secondaryCooldown: 0
   rotationSpeed: 50
-  rotationModifier: 90
-  senseRadius: 600
-  primary: {fileID: 8134859221687891006, guid: f16798b855bb77d4eb02ae7461c0d2b0, type: 3}
-  secondary: {fileID: 8134859221687891006, guid: ab8ed2bcabd0717469c8e50eea916e95, type: 3}
+  rotationModifier: 50
+  senseRadius: 700
+  primary: {fileID: 0}
+  secondary: {fileID: 0}

@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwable: {fileID: 3103947200217329053, guid: d73a2af58523dcc49b9e979e4178fd90, type: 3}
-  enemyReference: {fileID: 11400000, guid: 74f83e00d523b9d4787194690b2db4ec, type: 2}
+  enemyReference: {fileID: 11400000, guid: 9e6e7b0dfa9f98945bbde0f5a1872533, type: 2}
 --- !u!95 &8074509828769750281
 Animator:
   serializedVersion: 3

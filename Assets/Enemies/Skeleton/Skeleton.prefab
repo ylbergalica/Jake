@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1695075415033085269}
   - component: {fileID: 5444415984029084573}
   - component: {fileID: 5816469538167404099}
-  - component: {fileID: 3404786284123809488}
+  - component: {fileID: -3046476545710791535}
+  - component: {fileID: 1328342631523033232}
   m_Layer: 7
-  m_Name: Goblin
+  m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695075415033085258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -694.2, y: 239.6, z: 0}
-  m_LocalScale: {x: 2.7, y: 2.7, z: 0}
+  m_LocalPosition: {x: -692.8, y: 243.5, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -86793591
   m_SortingLayer: 4
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 82e14d25abfb8284abe1ec2e4a9efd41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24c37c724c227f647be212a615f3456b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,9 +99,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.36}
   serializedVersion: 2
-  m_Radius: 15.899854
+  m_Radius: 12.687874
 --- !u!50 &5816469538167404099
 Rigidbody2D:
   serializedVersion: 4
@@ -113,16 +114,16 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 1.5
   m_LinearDrag: 10
-  m_AngularDrag: 60
+  m_AngularDrag: 30
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3404786284123809488
+--- !u!114 &-3046476545710791535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +132,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695075415033085258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6928a791ddc281f4ea09edd3a2ee48fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyReference: {fileID: 11400000, guid: 9e6e7b0dfa9f98945bbde0f5a1872533, type: 2}
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000a9b7fbab9945837b
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 1
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_Mesh: {fileID: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 42
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1328342631523033232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695075415033085258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24817421910c1e9439dab10602277899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyReference: {fileID: 11400000, guid: a422433393a8ccf449d20127a730eb70, type: 2}
