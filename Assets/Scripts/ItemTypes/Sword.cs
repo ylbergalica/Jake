@@ -24,7 +24,7 @@ public class Sword : ScriptableObject, IItem
         };
 
         if (primary != null) {
-            primary.transform.localScale = new Vector3(size/10, size/10, 1);
+            primary.transform.localScale = new Vector3(size, size, 1);
         }
     }
 

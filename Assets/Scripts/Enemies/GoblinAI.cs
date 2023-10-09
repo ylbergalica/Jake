@@ -59,7 +59,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UseSecondary(gameObject);
 			}
-			else if (distance < 135f
+			else if (distance < 120f
 				&& lastPrimary + 0.1f + primaryLength < Time.time
 				&& timeToReady < Time.time) {
 				// Primary Attack if close enough

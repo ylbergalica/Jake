@@ -14,6 +14,10 @@ public class Swing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if (Random.Range(-1, 1) < 0) {
+			transform.Rotate(0, 180, 0);
+		}
+
         lockRotParent = transform.parent.rotation;
         lockRot = transform.rotation;
 

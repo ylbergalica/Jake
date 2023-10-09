@@ -13,6 +13,10 @@ public class Pull : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if (Random.Range(-1, 1) < 0) {
+			transform.Rotate(0, 180, 0);
+		}
+		
         player = GameObject.FindWithTag("Player");
 
         lockRotParent = transform.parent.rotation;
