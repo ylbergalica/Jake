@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
 	private Light2D shadow;
+	private Vector3 scale;
 
     // Inventory
     [Header ("Inventory")]
@@ -50,6 +51,8 @@ public class Player : MonoBehaviour
 
     private bool isTekkai;
     private bool isBusy;
+	private bool isWalking;
+	private bool rightFoot = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
 
         rb = gameObject.GetComponent<Rigidbody2D>();
 		shadow = gameObject.GetComponent<Light2D>();
+		scale = transform.localScale;
         speed *= 100;
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
@@ -101,6 +105,22 @@ public class Player : MonoBehaviour
 		}
 		else if (Input.GetKey("d")) {
 			rb.AddForce(new Vector3(speed, 0, 0));
+		}
+
+		if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) {
+			if (!isWalking) StartCoroutine(Walking());
+		}
+		else isWalking = false;
+		
+		// Bobbing while walking
+		if (isWalking && rightFoot) {
+			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x + 2f, scale.y - 2f, 1), 0.05f);
+		}
+		else if (isWalking && !rightFoot) {
+			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x - 2f, scale.y + 2f, 1), 0.1f);
+		}
+		else if (!isWalking) {
+			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x, scale.y, 1), 0.1f);
 		}
 
 		// 
@@ -262,6 +282,16 @@ public class Player : MonoBehaviour
         rb.AddForce(direction * kb * 20000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
         // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
+
+	public IEnumerator Walking() {
+		isWalking = true;
+		while (isWalking) {
+			yield return new WaitForSeconds(0.2f);
+			rightFoot = !rightFoot;
+		}
+
+		yield break;
+	}
 
     public void Busy(float seconds) {
         StartCoroutine(IEBusy(seconds));

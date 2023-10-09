@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
         if (targetFollow != null && !shaking){
 			targetPos = targetFollow.transform.position;
 
-			transform.position = Vector3.Slerp(transform.position, new Vector3(targetPos.x, targetPos.y, 10), 0.2f);
+			transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, 10), 0.2f);
         }
 		else if (shaking) {
 			targetPos = targetFollow.transform.position;
