@@ -10,6 +10,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private Rigidbody2D rb;
     private float currentHealth;
 	private float speed;
+	private Coroutine stunned;
+	private float stunnedUntil;
 
 	// Targetting
     private Collider2D[] senseArea;
@@ -132,7 +134,12 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 	}
 
     public void Stun (float seconds) {
-        StartCoroutine(IEStun(seconds));
+		if (stunned != null && Time.time+seconds > stunnedUntil) {
+			StopCoroutine(IEStun(seconds));
+			speed = stats["speed"] * 100;
+		}
+		stunnedUntil = Time.time + seconds;
+		stunned = StartCoroutine(IEStun(seconds));
     }
 
     private IEnumerator IEStun(float seconds) {

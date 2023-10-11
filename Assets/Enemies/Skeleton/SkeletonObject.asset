@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f347fb7d995d84e8d8c133092193a1, type: 3}
   m_Name: SkeletonObject
   m_EditorClassIdentifier: 
-  offset: 30
-  maxHealth: 100
-  speed: 50
-  primaryDamage: 30
-  primaryKnockback: 4
+  maxHealth: 150
+  speed: 45
+  primaryDamage: 20
+  primaryKnockback: 6
+  primaryCooldown: 0.1
+  primaryOffset: 70
   secondaryChance: 0
-  secondaryCooldown: 0
-  rotationSpeed: 50
-  rotationModifier: 50
+  secondaryDamage: 0
+  secondaryCooldown: 0.3
+  secondaryOffset: 60
+  rotationSpeed: 40
+  rotationModifier: 90
   senseRadius: 700
-  primary: {fileID: 0}
-  secondary: {fileID: 0}
+  primary: {fileID: 8134859221687891006, guid: 4359ad9d1ca8f45458785b815e86cb75, type: 3}
+  secondary: {fileID: 8134859221687891006, guid: b26122ddbd8b30246af6b973c670f838, type: 3}

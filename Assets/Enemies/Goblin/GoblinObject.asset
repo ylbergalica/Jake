@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f347fb7d995d84e8d8c133092193a1, type: 3}
   m_Name: GoblinObject
   m_EditorClassIdentifier: 
-  offset: 30
   maxHealth: 100
   speed: 35
   primaryDamage: 25
   primaryKnockback: 4
+  primaryCooldown: 0
+  primaryOffset: 40
   secondaryChance: 10
+  secondaryDamage: 0
   secondaryCooldown: 6
+  secondaryOffset: 50
   rotationSpeed: 50
   rotationModifier: 90
   senseRadius: 600

@@ -10,12 +10,15 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
     private Rigidbody2D rb;
     private float currentHealth;
 	private float speed;
+	private Coroutine stunned;
+	private float stunnedUntil;
 
 	// Targetting
     private Collider2D[] senseArea;
 	private GameObject target;
 	private Vector3 senseOffset;
 	private bool isBusy;
+	private bool isCornered;
 
 	private float secondaryChance;
 
@@ -35,7 +38,7 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 		// secondaryChance = (stats["secondaryChance"]/100) * 10000;
 
 		primaryLength = enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-		// secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+		secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 	}
 
 	private void FixedUpdate() {
@@ -63,17 +66,23 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
                 // Chase Player
                 rb.AddForce(transform.up * speed);
 			}
-			else if (distance < 120f) {
-				Debug.Log("Too Close, Swing and Back Up");
-			}
-			else if (distance > 120f
-				&& lastPrimary + 0.1f + primaryLength < Time.time
+			else if ((distance > 200f || isCornered)
+				&& lastSecondary + stats["secondaryCooldown"] < Time.time
 				&& timeToReady < Time.time) {
-				// Primary Attack if close enough
+				// Shoot if far enough away
+				lastSecondary = Time.time;
+				timeToReady = Time.time + secondaryLength + 0.1f;
+				enemyType.UseSecondary(gameObject);
+			}
+			else if (distance < 200f && !isCornered
+				&& lastPrimary + stats["primaryCooldown"] < Time.time
+				&& timeToReady < Time.time) {
+				// Too close, swing and back up
 				lastPrimary = Time.time;
 				timeToReady = Time.time + primaryLength + 0.1f;
+				StartCoroutine(BackUp());
 				enemyType.UsePrimary(gameObject);
-			}	
+			}
 		}
 	}
 
@@ -92,8 +101,31 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
         }
     }
 
+	private void OnCollisionStay2D(Collision2D collider) {
+		if(collider.gameObject.tag == "Wall") {
+			isCornered = true;
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collider) {
+		if(collider.gameObject.tag == "Wall") {
+			isCornered = false;
+		}
+	}
+
+	public IEnumerator BackUp() {
+		yield return new WaitForSeconds(0.55f);
+		rb.AddForce(-transform.up * 90000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
+	}
+
     public void Hurt(float damage) {
         currentHealth = Mathf.Clamp(currentHealth - damage, -1, stats["maxHealth"]);
+
+		foreach(Transform child in transform) {
+			if (child.gameObject.CompareTag("EnemyAttack")) {
+				Destroy(child.gameObject);
+			}
+		}
 
         // Die
         if(currentHealth < 1) {
@@ -124,7 +156,12 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 	}
 
     public void Stun (float seconds) {
-        StartCoroutine(IEStun(seconds));
+		if (stunned != null && Time.time+seconds > stunnedUntil) {
+			StopCoroutine(IEStun(seconds));
+			speed = stats["speed"] * 100;
+		}
+		stunnedUntil = Time.time + seconds;
+		stunned = StartCoroutine(IEStun(seconds));
     }
 
     private IEnumerator IEStun(float seconds) {

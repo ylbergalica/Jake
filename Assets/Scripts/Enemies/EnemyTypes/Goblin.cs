@@ -5,15 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Goblin", menuName = "Enemy/Goblin")]
 public class Goblin : ScriptableObject, IGoblin
 {
-	public float offset;
     public float maxHealth;
     public float speed;
     
 	public float primaryDamage;
 	public float primaryKnockback;
+	public float primaryCooldown;
+	public float primaryOffset;
 
 	public float secondaryChance;
+	public float secondaryDamage;
 	public float secondaryCooldown;
+	public float secondaryOffset;
 
     // Rotation Variables
     public float rotationSpeed;
@@ -34,7 +37,9 @@ public class Goblin : ScriptableObject, IGoblin
 			{"senseRadius", senseRadius},
 			{"primaryDamage", primaryDamage},
 			{"primaryKnockback", primaryKnockback},
+			{"primaryCooldown", primaryCooldown},
 			{"secondaryChance", secondaryChance},
+			{"secondaryDamage", secondaryDamage},
 			{"secondaryCooldown", secondaryCooldown},
         };
     }
@@ -44,13 +49,13 @@ public class Goblin : ScriptableObject, IGoblin
     }
 
     public void UsePrimary(GameObject goblin) {
-		Vector3 realOffset = goblin.transform.up * offset;
+		Vector3 realOffset = goblin.transform.up * primaryOffset;
 
         Instantiate(primary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}
 	
 	public void UseSecondary(GameObject goblin) {
-		Vector3 realOffset = goblin.transform.up * offset * 2;
+		Vector3 realOffset = goblin.transform.up * secondaryOffset;
 
         Instantiate(secondary, goblin.transform.position + realOffset, goblin.transform.rotation, goblin.transform);
 	}
