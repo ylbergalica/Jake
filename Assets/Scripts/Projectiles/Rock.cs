@@ -29,7 +29,7 @@ public class Rock : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.relativeVelocity.magnitude > 450 || rb.velocity.magnitude > 160
+		if (collision.relativeVelocity.magnitude > 500 || rb.velocity.magnitude > 200
 			&& !HasHit(collision.gameObject.name)) {
 			if (collision.gameObject.CompareTag("Enemy"))
 			{

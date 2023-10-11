@@ -12,6 +12,7 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 	private float speed;
 	private Coroutine stunned;
 	private float stunnedUntil;
+    private bool lockRot;
 
 	// Targetting
     private Collider2D[] senseArea;
@@ -20,12 +21,11 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 	private bool isBusy;
 	private bool isCornered;
 
-	private float secondaryChance;
-
 	private float timeToReady;
     private float lastPrimary;
     private float primaryLength;
     private float lastSecondary;
+	private float secondaryChance;
     private float secondaryLength;
 
 	void Awake() {
@@ -47,7 +47,7 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 
         // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
-            if (collider.gameObject.tag == "Player" && !isBusy) {
+            if (collider.gameObject.tag == "Player" && !isBusy && !lockRot) {
 				// roses are red, violets are blue, your code is my code too
 				Vector3 vectorToTarget = collider.transform.position - transform.position;
 				float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
@@ -72,6 +72,7 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 				// Shoot if far enough away
 				lastSecondary = Time.time;
 				timeToReady = Time.time + secondaryLength + 0.1f;
+				StartCoroutine(StopToAim());
 				enemyType.UseSecondary(gameObject);
 			}
 			else if (distance < 200f && !isCornered
@@ -111,6 +112,13 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
 		if(collider.gameObject.tag == "Wall") {
 			isCornered = false;
 		}
+	}
+
+	private IEnumerator StopToAim() {
+		yield return new WaitForSeconds(1f);
+		lockRot = true;
+		yield return new WaitForSeconds(0.5f);
+		lockRot = false;
 	}
 
 	public IEnumerator BackUp() {

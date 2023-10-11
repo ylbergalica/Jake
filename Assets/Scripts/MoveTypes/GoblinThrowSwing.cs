@@ -9,15 +9,21 @@ public class GoblinThrowSwing : MonoBehaviour
 	private IGoblin enemyType;
 	private IEnemy goblin;
 
+	private float length;
+
     // Start is called before the first frame update
     void Start()
     {
+		length = gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+
 		enemyType = (IGoblin)enemyReference;
 		goblin = transform.parent.GetComponent<IEnemy>();
-		goblin.Stun(gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length);
+		goblin.Stun(length);
+		StartCoroutine(Throw());
     }
 
-	private void OnDestroy() {
+	private IEnumerator Throw() {
+		yield return new WaitForSeconds(length-0.01f);
 		GameObject projectile = Instantiate(throwable, transform.position + transform.up * 30, transform.rotation);
 	}
 }
