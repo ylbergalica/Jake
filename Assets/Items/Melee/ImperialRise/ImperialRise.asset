@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3ab8719354b9844a5aea1e948efba7, type: 3}
   m_Name: ImperialRise
   m_EditorClassIdentifier: 
-  size: 4
+  size: 1
   offset: 50
   swing_damage: 60
   primary_cooldown: 0.3

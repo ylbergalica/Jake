@@ -27,6 +27,8 @@ public class GoblinAI : MonoBehaviour, IEnemy {
     private float lastSecondary;
     private float secondaryLength;
 
+	public float meleeReach;
+
 	void Awake() {
 		enemyType = (IGoblin)enemyReference;
 		stats = enemyType.GetStats();
@@ -61,7 +63,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UseSecondary(gameObject);
 			}
-			else if (distance < 120f
+			else if (distance < meleeReach
 				&& lastPrimary + 0.1f + primaryLength < Time.time
 				&& timeToReady < Time.time) {
 				// Primary Attack if close enough

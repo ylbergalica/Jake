@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112c42109fb23c842bc17dcdbfc684f9, type: 3}
   m_Name: ObjectSlingShot
   m_EditorClassIdentifier: 
-  size: 0
-  offset: 0
-  primary_cooldown: 0
-  primary: {fileID: 0}
+  size: 2.5
+  offset: 80
+  primary_cooldown: 0.2
+  primary_damage: 25
+  primary_knockback: 4
+  primary_projectile_size: 1.6
+  primary_projectile_speed: 19
+  primary_projectile_lifetime: 2
+  primary: {fileID: 8134859221687891006, guid: 42f2d0deb91d0574d9c7b326b3dcd076, type: 3}

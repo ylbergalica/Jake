@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
         mousePos.y = mousePos.y - objectPos.y;
 
         angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle-90)), 0.1f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle-90)), 0.4f);
 
         // Hotbar Selected Slot
         if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
         }
 
         // Open Inventory Pockets
-        if(Input.GetKeyDown(KeyCode.I)){
+        if(Input.GetKeyDown(KeyCode.Escape)){
             if(ui_pockets.activeSelf == false){
                 ui_pockets.SetActive(true);
                 ui_abilities.SetActive(true);

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3ab8719354b9844a5aea1e948efba7, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
-  size: 1.3
-  offset: 0
+  size: 1.5
+  offset: 10
   swing_damage: 20
-  primary_cooldown: 0.3
+  primary_cooldown: 0
   swing_knockback: 3
   primary: {fileID: 5562173928408626566, guid: f7989e06d8675474fa99b5b35cce7472, type: 3}
