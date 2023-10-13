@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 		
 		// Bobbing while walking
 		if (isWalking && rightFoot) {
-			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x + 2f, scale.y - 2f, 1), 0.05f);
+			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x + 2f, scale.y - 2f, 1), 0.1f);
 		}
 		else if (isWalking && !rightFoot) {
 			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x - 2f, scale.y + 2f, 1), 0.1f);
