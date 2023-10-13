@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fff240daf655eb41aa3672d5c7ff688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: ImperialRise
+  itemName: Imperial Rise
   itemCategory: 0
   sprite: {fileID: 21300000, guid: a7963427cafce0d44a6dc195c794210f, type: 3}
   itemType: 0

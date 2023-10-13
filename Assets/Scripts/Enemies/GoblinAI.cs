@@ -78,7 +78,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
                 Vector3 vectorToTarget = collider.transform.position - transform.position;
                 float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
                 Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, quart, stats["rotationSpeed"]);
+                transform.rotation = Quaternion.Lerp(transform.rotation, quart, stats["rotationSpeed"]*0.01f);
 
                 // Chase Player
                 rb.AddForce(transform.up * speed);

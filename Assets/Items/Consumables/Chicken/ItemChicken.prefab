@@ -121,7 +121,7 @@ MonoBehaviour:
   itemName: Chicken
   itemCategory: 4
   sprite: {fileID: 21300000, guid: de82c5a2ff652fe428b2274b8c5e9996, type: 3}
-  itemType: 1
+  itemType: 5
   itemReference: {fileID: 11400000, guid: 997b1c4a20142c54b9a99417b85821ff, type: 2}
 --- !u!58 &5091006680544909783
 CircleCollider2D:

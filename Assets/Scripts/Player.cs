@@ -123,7 +123,6 @@ public class Player : MonoBehaviour
 			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x, scale.y, 1), 0.1f);
 		}
 
-		// 
 		grabArea = Physics2D.OverlapCircleAll(transform.position, grabRadius);
 		foreach (Collider2D collider in grabArea){
 			if (collider.gameObject.CompareTag("Item")) {
@@ -146,7 +145,7 @@ public class Player : MonoBehaviour
         mousePos.y = mousePos.y - objectPos.y;
 
         angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle-90)), 0.1f);
 
         // Hotbar Selected Slot
         if(Input.GetKeyDown(KeyCode.Alpha1)){
