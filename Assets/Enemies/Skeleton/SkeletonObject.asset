@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f347fb7d995d84e8d8c133092193a1, type: 3}
   m_Name: SkeletonObject
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 1000
   speed: 45
   primaryDamage: 20
-  primaryKnockback: 6
+  primaryKnockback: 5
   primaryCooldown: 0.1
   primaryOffset: 70
   secondaryChance: 0

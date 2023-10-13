@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock : MonoBehaviour, IProjectile
 {
 	public float speed = 10f;
 	public float lifetime = 5f;
@@ -20,6 +20,13 @@ public class Rock : MonoBehaviour
 		Destroy(gameObject, lifetime);
 	}
 
+	public void SetStats(float lifetime, float speed, float damage, float knockback) {
+		this.lifetime = lifetime;
+		this.speed = speed;
+		this.damage = damage;
+		this.knockback = knockback;
+	}
+
 	private bool HasHit(string objectName) {
 		if (hitObjects.Contains(objectName)) {
 			return true;
@@ -27,9 +34,13 @@ public class Rock : MonoBehaviour
 		return false;
 	}
 
+	public void AddHitObject(string objectName) {
+		hitObjects.Add(objectName);
+	}
+
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.relativeVelocity.magnitude > 500 || rb.velocity.magnitude > 200
+		if ((collision.relativeVelocity.magnitude > 500 || rb.velocity.magnitude > 200)
 			&& !HasHit(collision.gameObject.name)) {
 			if (collision.gameObject.CompareTag("Enemy"))
 			{
