@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 	public float grabRadius;
 	private Collider2D[] grabArea;
 	private float grabMultiplier;
+	private ArrayList grabTags;
+	private Dictionary<string, GameObject> indicators;
 
     // iFrames
     [Header ("iFrames")]
@@ -65,6 +67,8 @@ public class Player : MonoBehaviour
         speed *= 100;
         currentHealth = maxHealth;
         sprender = gameObject.GetComponent<SpriteRenderer>();
+		grabTags = new ArrayList();
+		indicators = new Dictionary<string, GameObject>();
 
         inventory = new Inventory(slotsCount);
         invItems = new List<GameObject>();
@@ -123,14 +127,50 @@ public class Player : MonoBehaviour
 			gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(scale.x, scale.y, 1), 0.1f);
 		}
 
+		// Pick up Items
 		grabArea = Physics2D.OverlapCircleAll(transform.position, grabRadius);
-		foreach (Collider2D collider in grabArea){
+		GameObject closestItem = null;
+		grabTags.Clear();
+		foreach (Collider2D collider in grabArea) {
 			if (collider.gameObject.CompareTag("Item")) {
-				// Pick up Items
-				Rigidbody2D itemBody = collider.gameObject.GetComponent<Rigidbody2D>();
-				Vector3 direction = transform.position - collider.transform.position;
+				grabTags.Add(collider.gameObject.name);
+				// Instantiate indicator and add to dictionary if it is not already there
+				if (!indicators.ContainsKey(collider.gameObject.name)) {
+					GameObject indicator = Instantiate((GameObject)Resources.Load("PickUp/IndicatePickUp", typeof(GameObject)), collider.transform.position, Quaternion.identity);
+					indicator.transform.parent = collider.transform;
+					indicators.Add(collider.gameObject.name, indicator);
+				}
+
+				// Find the closest Item
+				if (closestItem == null) closestItem = collider.gameObject;
+				
 				float distance = Vector3.Distance(transform.position, collider.transform.position);
+				if (distance < Vector3.Distance(transform.position, closestItem.transform.position)) {
+					closestItem = collider.gameObject;
+				}
+			}
+		}
+		// Clear indicator dictionary
+		if (indicators.Count > 0) {
+			foreach (KeyValuePair<string, GameObject> entry in indicators) {
+				if (!grabTags.Contains(entry.Key)) {
+					Destroy(entry.Value);
+					indicators.Remove(entry.Key);
+				}
+			}
+		}
+
+		if (Input.GetKey("e") && grabArea.Length > 0) {
+			if (closestItem) {
+				// Grab Item
+				Rigidbody2D itemBody = closestItem.gameObject.GetComponent<Rigidbody2D>();
+				Vector3 direction = transform.position - closestItem.transform.position;
+				float distance = Vector3.Distance(transform.position, closestItem.transform.position);
 				itemBody.AddForce((direction * (Mathf.Pow(distance, 1.5f)/5f)), ForceMode2D.Force);
+				
+				// Destroy indicator and remove from dictionary
+				Destroy(indicators[closestItem.name]);
+				indicators.Remove(closestItem.name);
 			}
 		}
     }
@@ -219,9 +259,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) {
+    private void OnTriggerStay2D(Collider2D collider) {
         // Pick up Items
-        if(collider.gameObject.CompareTag("Item")){ // GET ITEM
+        if(collider.gameObject.CompareTag("Item") && collider.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude != 0) { // GET ITEM
             PickUpItem(collider.gameObject);
         }
         else if (collider.gameObject.CompareTag("Ability")) { // GET ABILITY

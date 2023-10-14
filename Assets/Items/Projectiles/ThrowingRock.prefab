@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8197042792816748624}
   m_Layer: 7
   m_Name: ThrowingRock
-  m_TagString: EnemyAttack
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
