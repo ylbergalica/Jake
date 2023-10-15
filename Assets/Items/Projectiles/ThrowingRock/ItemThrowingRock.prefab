@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 572306393
   m_SortingLayer: 2
   m_SortingOrder: 40
-  m_Sprite: {fileID: 21300000, guid: 126c4bb681613634bb4f144eda157778, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1b728981867c234482c999510bd7ed3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,6 +136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rock
   itemCategory: 1
-  sprite: {fileID: 21300000, guid: 126c4bb681613634bb4f144eda157778, type: 3}
+  sprite: {fileID: 21300000, guid: c1b728981867c234482c999510bd7ed3, type: 3}
   itemType: 3
   itemReference: {fileID: 11400000, guid: 6e2ac38065b9213478944aa9eef5b75d, type: 2}

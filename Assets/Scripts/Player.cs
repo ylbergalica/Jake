@@ -236,11 +236,14 @@ public class Player : MonoBehaviour
                 RefreshAnimations();
                 
                 if(heldItem != null && heldItem.isItemReady(Time.time) && heldItem.isMoveReady(1, Time.time)){
-					if (heldItem.itemType == ItemType.Throwable) heldItem.SetLastUse(1, 0); 
-					else heldItem.SetLastUse(1, Time.time);
-					
-
                     heldItem.UsePrimary(gameObject);
+
+					if (heldItem.itemType == ItemType.Throwable) {
+						heldItem.SetLastUse(1, 0);
+						// inventory.RemoveItemIn(activeSlot);
+						// Destroy(heldItem.gameObject);
+					} 
+					else heldItem.SetLastUse(1, Time.time);
                 }
             }
             else if(Input.GetMouseButtonDown(1)){
@@ -287,6 +290,7 @@ public class Player : MonoBehaviour
 		if (item == null) {
 			IProjectile projectileRef = itemObject.GetComponent(typeof (IProjectile)) as IProjectile;
 			item = projectileRef.GetItem();
+			Debug.Log(item.itemName);
 		}
 
 		// Add item to inventory and refresh activeslot
@@ -400,6 +404,10 @@ public class Player : MonoBehaviour
 
 		activeSlot = inventory.ActivateSlot(0);
         heldItem = inventory.GetItemIn(activeSlot);
+	}
+
+	public ItemSlot GetActiveSlot() {
+		return this.activeSlot;
 	}
 
     public Inventory GetInventory() {

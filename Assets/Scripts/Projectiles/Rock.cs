@@ -20,8 +20,8 @@ public class Rock : MonoBehaviour, IProjectile
 	{
 		rb = GetComponent<Rigidbody2D>();
 		rb.AddForce(transform.up * speed * 50, ForceMode2D.Impulse);
-		// impendingDeath = DestroyAfterTime(lifetime);
-		// StartCoroutine(impendingDeath);
+		impendingDeath = DestroyAfterTime(lifetime);
+		StartCoroutine(impendingDeath);
 	}
 
 	private void FixedUpdate()
@@ -97,7 +97,7 @@ public class Rock : MonoBehaviour, IProjectile
 		isPicked = true;
 		gameObject.tag = "Item";
 		GetComponent<Collider2D>().isTrigger = true;
-		// StopCoroutine(impendingDeath);
+		StopCoroutine(impendingDeath);
 	}
 
 	public IEnumerator DestroyAfterTime(float time) {

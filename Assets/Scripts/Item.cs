@@ -55,8 +55,8 @@ public class Item : MonoBehaviour
         item.UsePrimary(player);
 
 		if (itemType == ItemType.Throwable) {
-			Inventory inventory = player.GetComponent<Player>().GetInventory();
-			inventory.RemoveItem(this);
+			Player playerRef = player.GetComponent<Player>();
+			playerRef.GetInventory().RemoveItemIn(playerRef.GetActiveSlot());
 			Destroy(gameObject);
 		}
     }
@@ -65,8 +65,8 @@ public class Item : MonoBehaviour
         item.UseSecondary(player);
 
         if(itemCategory == ItemCategory.Consumable) {
-            Inventory inventory = player.GetComponent<Player>().GetInventory();
-            inventory.RemoveItem(this);
+            Player playerRef = player.GetComponent<Player>();
+            playerRef.GetInventory().RemoveItemIn(playerRef.GetActiveSlot());
             Destroy(gameObject);
         }
     }

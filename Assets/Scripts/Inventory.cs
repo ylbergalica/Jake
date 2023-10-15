@@ -45,17 +45,19 @@ public class Inventory
         // itemList.Add(slot, null);
     }
 
-    public void AddItem(Item item){
+    public int AddItem(Item item){
+		int slot = -1;
         for(int i = 0; i <= itemList.Length; i++){
             if(itemList[i] == null) {
                 itemList[i] = item;
+				slot = i;
                 break;
             }
         }
-
         itemCount++;
 
         ui_inventory.RefreshInventory();
+		return slot;
     }
 
 	public bool HasAbility(string abilityName) {
@@ -112,6 +114,11 @@ public class Inventory
         }
     }
 
+	public Item GetItemIn(int slotIndex) {
+		if (itemList.Length > slotIndex) return itemList[slotIndex];
+		else return null;
+	}
+
     public void SetItemIn(ItemSlot slot, Item item){
         itemList[allSlots.IndexOf(slot)] = item;
     }
@@ -138,6 +145,20 @@ public class Inventory
         itemList[Array.IndexOf(itemList, item)] = null;
         ui_inventory.RefreshInventory();
     }
+
+	public void RemoveItemIn(ItemSlot slot) {
+		if (itemList.Length > allSlots.IndexOf(slot)) {
+			itemList[allSlots.IndexOf(slot)] = null;
+			ui_inventory.RefreshInventory();
+		}
+	}
+
+	public void RemoveItemIn(int slotIndex) {
+		if (itemList.Length > slotIndex) {
+			itemList[slotIndex] = null;
+			ui_inventory.RefreshInventory();
+		}
+	}
         
     override public string ToString(){
         string output = "Inventory: ";
