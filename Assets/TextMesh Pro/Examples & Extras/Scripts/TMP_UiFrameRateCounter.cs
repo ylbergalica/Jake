@@ -51,7 +51,7 @@ namespace TMPro.Examples
 
         void Start()
         {
-            m_LastInterval = Time.realtimeSinceStartup;
+            m_LastInterval = Time.time;
             m_Frames = 0;
         }
 
@@ -64,7 +64,7 @@ namespace TMPro.Examples
             last_AnchorPosition = AnchorPosition;
 
             m_Frames += 1;
-            float timeNow = Time.realtimeSinceStartup;
+            float timeNow = Time.time;
 
             if (timeNow > m_LastInterval + UpdateInterval)
             {

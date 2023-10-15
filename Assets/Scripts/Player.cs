@@ -163,14 +163,20 @@ public class Player : MonoBehaviour
 		if (Input.GetKey("e") && grabArea.Length > 0) {
 			if (closestItem) {
 				// Grab Item
-				Rigidbody2D itemBody = closestItem.gameObject.GetComponent<Rigidbody2D>();
-				Vector3 direction = transform.position - closestItem.transform.position;
-				float distance = Vector3.Distance(transform.position, closestItem.transform.position);
-				itemBody.AddForce((direction * (Mathf.Pow(distance, 1.5f)/5f)), ForceMode2D.Force);
-				
-				// Destroy indicator and remove from dictionary
-				Destroy(indicators[closestItem.name]);
-				indicators.Remove(closestItem.name);
+				try {
+					IProjectile projectileRef = closestItem.gameObject.GetComponent(typeof (IProjectile)) as IProjectile;
+					projectileRef.PreparePickUp();
+				}
+				finally {
+					Rigidbody2D itemBody = closestItem.gameObject.GetComponent<Rigidbody2D>();
+					Vector3 direction = transform.position - closestItem.transform.position;
+					float distance = Vector3.Distance(transform.position, closestItem.transform.position);
+					itemBody.AddForce((direction * (Mathf.Pow(distance, 1.5f)/5f)), ForceMode2D.Force);
+					
+					// Destroy indicator and remove from dictionary
+					Destroy(indicators[closestItem.name]);
+					indicators.Remove(closestItem.name);
+				}
 			}
 		}
     }
@@ -219,8 +225,8 @@ public class Player : MonoBehaviour
                 ui_inventory.RefreshInventory();
                 RefreshAnimations();
                 
-                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(3, Time.realtimeSinceStartup)){
-                    heldItem.SetLastUse(3, Time.realtimeSinceStartup);
+                if(heldItem != null && heldItem.isItemReady(Time.time) && heldItem.isMoveReady(3, Time.time)){
+                    heldItem.SetLastUse(3, Time.time);
 
                     heldItem.UseTertiary(gameObject);
                 }
@@ -229,8 +235,10 @@ public class Player : MonoBehaviour
                 ui_inventory.RefreshInventory();
                 RefreshAnimations();
                 
-                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(1, Time.realtimeSinceStartup)){
-                    heldItem.SetLastUse(1, Time.realtimeSinceStartup);
+                if(heldItem != null && heldItem.isItemReady(Time.time) && heldItem.isMoveReady(1, Time.time)){
+					if (heldItem.itemType == ItemType.Throwable) heldItem.SetLastUse(1, 0); 
+					else heldItem.SetLastUse(1, Time.time);
+					
 
                     heldItem.UsePrimary(gameObject);
                 }
@@ -239,8 +247,8 @@ public class Player : MonoBehaviour
                 ui_inventory.RefreshInventory();
                 RefreshAnimations();
                 
-                if(heldItem != null && heldItem.isItemReady(Time.realtimeSinceStartup) && heldItem.isMoveReady(2, Time.realtimeSinceStartup)){
-                    heldItem.SetLastUse(2, Time.realtimeSinceStartup);
+                if(heldItem != null && heldItem.isItemReady(Time.time) && heldItem.isMoveReady(2, Time.time)){
+                    heldItem.SetLastUse(2, Time.time);
 
                     heldItem.UseSecondary(gameObject);
                 }
@@ -249,10 +257,10 @@ public class Player : MonoBehaviour
             // Dodging
             if(inventory.HasAbility("Dodge") 
 				&& Input.GetKeyDown(KeyCode.Space) 
-				&& Time.realtimeSinceStartup > dodgeLast + dodgeCooldown + dodgeLength) {
+				&& Time.time > dodgeLast + dodgeCooldown + dodgeLength) {
 				// Dodge
                 Instantiate(dodgeAnim, transform.position, transform.rotation, transform);
-                dodgeLast = Time.realtimeSinceStartup;
+                dodgeLast = Time.time;
                 Busy(dodgeLength);
 				StartCoroutine(Dodge());
             }
@@ -276,6 +284,10 @@ public class Player : MonoBehaviour
 		invItems.Add(itemObject);
 
 		Item item = itemObject.GetComponent<Item>();
+		if (item == null) {
+			IProjectile projectileRef = itemObject.GetComponent(typeof (IProjectile)) as IProjectile;
+			item = projectileRef.GetItem();
+		}
 
 		// Add item to inventory and refresh activeslot
 		inventory.AddItem(item);

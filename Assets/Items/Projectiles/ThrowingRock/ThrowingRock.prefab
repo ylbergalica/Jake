@@ -116,7 +116,7 @@ Rigidbody2D:
   m_Mass: 0.7
   m_LinearDrag: 0.5
   m_AngularDrag: 0.5
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: ad159edc1c23ac448a95404794ab73b9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -138,3 +138,4 @@ MonoBehaviour:
   lifetime: 5
   damage: 25
   knockback: 1.5
+  itemObject: {fileID: 2562294015000786353, guid: aa510a665d207c149bf909419889a3e5, type: 3}

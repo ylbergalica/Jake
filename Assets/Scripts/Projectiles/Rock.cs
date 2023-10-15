@@ -8,8 +8,11 @@ public class Rock : MonoBehaviour, IProjectile
 	public float lifetime = 5f;
 	public float damage = 10f;
 	public float knockback = 1.5f;
+	public Item itemObject;
 
 	private Rigidbody2D rb;
+	private bool isPicked = false;
+	private IEnumerator impendingDeath;
 
 	private List<string> hitObjects = new List<string>();
 
@@ -17,7 +20,14 @@ public class Rock : MonoBehaviour, IProjectile
 	{
 		rb = GetComponent<Rigidbody2D>();
 		rb.AddForce(transform.up * speed * 50, ForceMode2D.Impulse);
-		Destroy(gameObject, lifetime);
+		// impendingDeath = DestroyAfterTime(lifetime);
+		// StartCoroutine(impendingDeath);
+	}
+
+	private void FixedUpdate()
+	{
+		if (rb.velocity.magnitude < 150f) SetCanPickup(true);
+		else if (!isPicked) SetCanPickup(false);
 	}
 
 	public void SetStats(float lifetime, float speed, float damage, float knockback) {
@@ -72,5 +82,27 @@ public class Rock : MonoBehaviour, IProjectile
 		}
 		
 		hitObjects.Add(collision.gameObject.name);
+	}
+	
+	public void SetCanPickup(bool isPickup) {	
+		if (isPickup) gameObject.tag = "Item";
+		else gameObject.tag = "Projectile";
+	}
+
+	public Item GetItem() {
+		return itemObject;
+	}
+
+	public void PreparePickUp() {
+		isPicked = true;
+		gameObject.tag = "Item";
+		GetComponent<Collider2D>().isTrigger = true;
+		// StopCoroutine(impendingDeath);
+	}
+
+	public IEnumerator DestroyAfterTime(float time) {
+		yield return new WaitForSeconds(time);
+		Debug.Log("Destroying rock");
+		Destroy(gameObject);
 	}
 }

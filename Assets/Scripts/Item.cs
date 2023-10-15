@@ -47,11 +47,18 @@ public class Item : MonoBehaviour
 	}
 
     public Dictionary<string, float> GetStats() {
+		item = (IItem)itemReference;
         return item.GetStats();
     }
 
     public void UsePrimary(GameObject player){
         item.UsePrimary(player);
+
+		if (itemType == ItemType.Throwable) {
+			Inventory inventory = player.GetComponent<Player>().GetInventory();
+			inventory.RemoveItem(this);
+			Destroy(gameObject);
+		}
     }
 
     public void UseSecondary(GameObject player) {
@@ -69,8 +76,8 @@ public class Item : MonoBehaviour
     }
     
     public bool isItemReady(float current) {
-        // Time.realtimeSinceStartup > heldItem.GetLastUse(1) + heldItem.GetStats()["primary_cooldown"]){
-                // heldItem.SetLastUse(1, Time.realtimeSinceStartup);
+        // Time.time > heldItem.GetLastUse(1) + heldItem.GetStats()["primary_cooldown"]){
+                // heldItem.SetLastUse(1, Time.time);
         for (int i=1; i < 5; i++) {
             if (current < GetLastUse(i)){
                 return false;
