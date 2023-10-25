@@ -120,8 +120,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wand Of Nudge
   itemCategory: 2
-  sprite: {fileID: 21300000, guid: 609b7e6e022240d4cb975717e9bd2e0f, type: 3}
   itemType: 4
+  itemDescription: Wrath's bird, flying with intent
+  itemMetric: 0
+  sprite: {fileID: 21300000, guid: 609b7e6e022240d4cb975717e9bd2e0f, type: 3}
   itemReference: {fileID: 11400000, guid: 459d64fb2cdf2e7459e08e89ad88bcee, type: 2}
 --- !u!58 &7174763508716965080
 CircleCollider2D:

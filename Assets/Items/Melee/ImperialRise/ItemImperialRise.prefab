@@ -120,8 +120,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Imperial Rise
   itemCategory: 0
-  sprite: {fileID: 21300000, guid: a7963427cafce0d44a6dc195c794210f, type: 3}
   itemType: 0
+  itemDescription: A historical symbol of ascension
+  itemMetric: 7
+  sprite: {fileID: 21300000, guid: a7963427cafce0d44a6dc195c794210f, type: 3}
   itemReference: {fileID: 11400000, guid: d620b6b23c52ede4eb414a978a1aa9f8, type: 2}
 --- !u!58 &3553216738189183461
 CircleCollider2D:

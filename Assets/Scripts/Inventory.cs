@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Inventory
 {
+	public static Inventory instance;
+
     private UI_Inventory ui_inventory;
     private Item[] itemList;
     private List<ItemSlot> allSlots;
 
-    // private Item[] abilityList;
-    // private ItemSlot[] abilities;
     private Dictionary<string, bool> abilities;
 
     private int itemCount;
@@ -21,6 +21,8 @@ public class Inventory
     // Start is called before the first frame update
     public Inventory(int itemSlots)
     {
+		instance = this;
+
         itemList = new Item[itemSlots];
         this.itemSlots = itemSlots;
         // abilityList = new Item[5];

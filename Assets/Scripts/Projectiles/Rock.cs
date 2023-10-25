@@ -96,13 +96,13 @@ public class Rock : MonoBehaviour, IProjectile
 	public void PreparePickUp() {
 		isPicked = true;
 		gameObject.tag = "Item";
+		gameObject.layer = 9;
 		GetComponent<Collider2D>().isTrigger = true;
 		StopCoroutine(impendingDeath);
 	}
 
 	public IEnumerator DestroyAfterTime(float time) {
 		yield return new WaitForSeconds(time);
-		Debug.Log("Destroying rock");
 		Destroy(gameObject);
 	}
 }

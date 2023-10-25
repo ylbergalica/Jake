@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ThrowingRockObject
   m_EditorClassIdentifier: 
   size: 2
-  damage: 0
+  damage: 40
   speed: 10
   lifetime: 2.5
   knockback: 0
+  primary_cooldown: 0
   throwable: {fileID: 3103947200217329053, guid: d73a2af58523dcc49b9e979e4178fd90, type: 3}

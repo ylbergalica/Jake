@@ -28,6 +28,7 @@ public class UI_Inventory : MonoBehaviour
             slot = Instantiate(itemSlot, ui_hotBar.transform);
             slot.name = "ItemSlot" + i;
             slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(slot.width * i + slot.offset * i, 0);
+			slot.GetComponent<ItemSlot>().index = i;
 
             // add event listener to button
             slot.transform.Find("Button").GetComponent<Button>().onClick.AddListener(HandleSwap);
@@ -38,6 +39,7 @@ public class UI_Inventory : MonoBehaviour
         for(int i = 2; i < inventory.itemSlots; i++){
             slot = Instantiate(itemSlot, ui_pockets.transform);
             slot.name = "ItemSlot" + i;
+			slot.GetComponent<ItemSlot>().index = i;
 			
             // add event listener to button
             slot.transform.Find("Button").GetComponent<Button>().onClick.AddListener(HandleSwap);

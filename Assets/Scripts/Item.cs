@@ -6,9 +6,12 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public ItemCategory itemCategory;
-    public Sprite sprite;
     public ItemType itemType;
+	public string itemDescription;
+	public float itemMetric;
+    public Sprite sprite;
     public ScriptableObject itemReference;
+
     private IItem item;
     private float lastPrimary;
     private float primaryLength;

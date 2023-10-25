@@ -118,10 +118,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fff240daf655eb41aa3672d5c7ff688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Broken Hero Sword
+  itemName: Broken Sword
   itemCategory: 0
-  sprite: {fileID: 21300000, guid: 0915126548d7dd143b1ef2b601ca8e16, type: 3}
   itemType: 0
+  itemDescription: Once a formidable weapon, now a relic of its former purpose
+  itemMetric: 3
+  sprite: {fileID: 21300000, guid: 0915126548d7dd143b1ef2b601ca8e16, type: 3}
   itemReference: {fileID: 11400000, guid: 64f517c46b63ed845886a3d65b5568f3, type: 2}
 --- !u!58 &2119960374072660746
 CircleCollider2D:
