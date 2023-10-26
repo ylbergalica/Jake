@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 419699207460349400}
   - component: {fileID: -8197042792816748624}
   m_Layer: 7
-  m_Name: SkeletonArrow
+  m_Name: Arrow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,3 +148,4 @@ MonoBehaviour:
   lifetime: 3
   damage: 30
   knockback: 1
+  itemObject: {fileID: 2562294015000786353, guid: fef98eee06b8add4bbf386c0bd93e807, type: 3}
