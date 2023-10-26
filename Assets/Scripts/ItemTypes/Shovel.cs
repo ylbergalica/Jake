@@ -6,10 +6,11 @@ using UnityEngine;
 public class Shovel : ScriptableObject, IItem
 {
 	public float size;
-    public float offset;
+    public float swing_offset;
     public float swing_damage;
     public float swing_knockback;
     public float primary_cooldown;
+    public float thrust_offset;
     public float thrust_damage;
     public float thrust_knockback;
 	public float thrust_multiplier;
@@ -22,7 +23,8 @@ public class Shovel : ScriptableObject, IItem
     private void OnEnable() {
         stats = new Dictionary<string, float> {
             {"size", size},
-            {"offset", offset},
+			{"swing_offset", swing_offset},
+			{"thrust_offset", thrust_offset},
             {"swing_damage", swing_damage},
             {"thrust_damage", thrust_damage},
             {"swing_knockback", swing_knockback},
@@ -33,7 +35,7 @@ public class Shovel : ScriptableObject, IItem
         };
 
         if (primary != null) {
-            primary.transform.localScale = new Vector3(size/10, size/10, 1);
+            primary.transform.localScale = new Vector3(size, size, 1);
         }
     }
 
@@ -48,14 +50,14 @@ public class Shovel : ScriptableObject, IItem
 
 	public void UsePrimary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.up * offset;
+		Vector3 realOffset = player.transform.up * swing_offset;
 
         Instantiate(primary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
 
 	public void UseSecondary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.up * offset;
+		Vector3 realOffset = player.transform.up * thrust_offset;
 
         GameObject secondaryInst = Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 

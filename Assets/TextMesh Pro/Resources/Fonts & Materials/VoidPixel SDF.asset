@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: VoidPixel SDF
   m_EditorClassIdentifier: 
-  hashCode: -1327138055
+  hashCode: -1986871187
   material: {fileID: 4688615397063070461}
-  materialHashCode: -1920106311
+  materialHashCode: 1270111405
   m_Version: 1.1.0
   m_SourceFontFileGUID: 6c743faa4499f1a458f2d6c74bad4f8d
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 6c743faa4499f1a458f2d6c74bad4f8d, type: 3}
