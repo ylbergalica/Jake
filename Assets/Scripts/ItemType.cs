@@ -9,6 +9,7 @@ public enum ItemType
     Umbrella,
 	Throwable,
 	Bow,
+	Pistol,
     Wand,
     Food,
 }
