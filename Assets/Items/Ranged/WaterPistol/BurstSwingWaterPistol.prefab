@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2491828334539070565}
   - component: {fileID: 2675781003966687884}
   - component: {fileID: -8711476107686033463}
-  - component: {fileID: 5917971013151696735}
+  - component: {fileID: 734245179969427423}
   m_Layer: 8
-  m_Name: ShootSwingWaterPistol
+  m_Name: BurstSwingWaterPistol
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,12 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRay: 0
-  burst: 1
-  burstDelay: 0
+  burst: 3
+  burstDelay: 0.15
   projectile: {fileID: 3103947200217329053, guid: 7998044310e42294e880fbf330b19140, type: 3}
   itemReference: {fileID: 11400000, guid: da46edf01fd6d304faf3b927059fe0b2, type: 2}
-  lockRotationTiming: 0.5
---- !u!95 &5917971013151696735
+  lockRotationTiming: 0.6
+--- !u!95 &734245179969427423
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ Animator:
   m_GameObject: {fileID: 8134859221687891006}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 17d3b112a23856a44a27040b4e1561d3, type: 2}
+  m_Controller: {fileID: 9100000, guid: edd303259d6ba0442a70f9b7b3f0d6c3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

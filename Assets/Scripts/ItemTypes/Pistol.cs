@@ -80,7 +80,7 @@ public class Pistol : ScriptableObject, IItem
 	}
 
     public GameObject[] GetMoves() {
-        GameObject[] moves = {this.primary};
+        GameObject[] moves = {this.primary, this.secondary};
 
         return moves;
     }
