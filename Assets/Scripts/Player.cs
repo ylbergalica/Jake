@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private Vector3 mousePos;
     private Vector3 objectPos;
     private float angle;
+	public float rotationSpeed;
 
     // Stats
     [Header ("Stats")]
@@ -85,6 +86,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		// Rotate Player Towards Mouse
+        mousePos = Input.mousePosition;
+        mousePos.z = 0;
+        objectPos = Camera.main.WorldToScreenPoint(transform.position);
+
+		// roses are red, violets are blue, your code is my code too
+		Vector3 vectorToTarget = mousePos - objectPos;
+		float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
+		Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
+		transform.rotation = Quaternion.Lerp(transform.rotation, quart, rotationSpeed*0.01f);
+
 		// Movement on equal 8 directions
 		if (Input.GetKey("w") && Input.GetKey("a")) {
 			rb.AddForce(new Vector3(-speed / 1.42f, speed / 1.42f, 0));
@@ -182,17 +194,6 @@ public class Player : MonoBehaviour
     }
 
     void Update(){
-        // Rotate Player Towards Mouse
-        mousePos = Input.mousePosition;
-        mousePos.z = 0;
-        objectPos = Camera.main.WorldToScreenPoint(transform.position);
-        
-        mousePos.x = mousePos.x - objectPos.x;
-        mousePos.y = mousePos.y - objectPos.y;
-
-        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle-90)), 0.4f);
-
         // Hotbar Selected Slot
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             // Hotbar Slot 1
@@ -337,6 +338,25 @@ public class Player : MonoBehaviour
         rb.AddForce(direction * kb * 20000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
         // rb.AddForce(-transform.up * kb * 10000 * Time.deltaTime, ForceMode2D.Impulse);
     }
+
+	public void SetRotationSpeed(float value) {
+		this.rotationSpeed = value;
+	}
+
+	public void SetRotationSpeed(float value, float duration) {
+		StartCoroutine(RotationConstraint(value, duration));
+	}
+
+	public void ResetRotationSpeed() {
+		this.rotationSpeed = 80f;
+	}
+
+	public IEnumerator RotationConstraint(float value, float duration) {
+		this.rotationSpeed = value;
+		yield return new WaitForSeconds(duration);
+		this.rotationSpeed = 80f;
+		yield break;
+	}
 
 	public IEnumerator Walking() {
 		isWalking = true;

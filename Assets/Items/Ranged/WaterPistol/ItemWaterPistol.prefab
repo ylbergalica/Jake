@@ -119,9 +119,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.41790888, y: -0.33338013}
+  m_Offset: {x: 0.1809204, y: -0.04371948}
   serializedVersion: 2
-  m_Radius: 1.5459106
+  m_Radius: 1.387915
 --- !u!114 &-8524922835071750819
 MonoBehaviour:
   m_ObjectHideFlags: 0

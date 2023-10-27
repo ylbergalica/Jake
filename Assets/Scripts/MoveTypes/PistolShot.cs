@@ -41,19 +41,10 @@ public class PistolShot : MonoBehaviour
 		StartCoroutine(Shoot());
     }
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (lockRotation) {
-			transform.parent.rotation = lockRotParent;
-			transform.rotation = lockRot;
-		}
-	}
-
 	private IEnumerator Shoot() {
-        lockRotParent = transform.parent.rotation;
-        lockRot = transform.rotation;
-		lockRotation = true;
+		if (burst > 1) {
+			player.SetRotationSpeed(5f);
+		}
 
 		Vector3 realOffset = player.transform.up * item.GetStats()["offset"];
 		float projectileSize = item.GetStats()["primary_projectile_size"];
@@ -79,8 +70,6 @@ public class PistolShot : MonoBehaviour
 			yield return new WaitForSeconds(burstDelay);
 		}
 		
-		yield return new WaitForSeconds(lockRotationTiming);
-
-		lockRotation = false;
+		player.SetRotationSpeed(0f, lockRotationTiming);
 	}
 }
