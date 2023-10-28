@@ -2,97 +2,107 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonAI : MonoBehaviour, IEnemy {
+public class SlimeAI : MonoBehaviour, IEnemy {
 	public ScriptableObject enemyReference;
 	private IDummy enemyType;
 	private Dictionary<string, float> stats;
 
     private Rigidbody2D rb;
     private float currentHealth;
-	private float speed;
+	public float bounce;
+	private float tempSpeed;
 	private Coroutine stunned;
 	private float stunnedUntil;
-    private bool lockRot;
 
 	// Targetting
     private Collider2D[] senseArea;
 	private GameObject target;
 	private Vector3 senseOffset;
 	private bool isBusy;
-	private bool isCornered;
+	private bool isChasing = false;
+	private bool isResting;
+
+	private float secondaryChance;
 
 	private float timeToReady;
     private float lastPrimary;
     private float primaryLength;
-    private float lastSecondary;
-	private float secondaryChance;
-    private float secondaryLength;
+
+	public int type;
+	// 1 BLUE 27C6F1 Size 1.5
+	// 2 RED E0512E
+	// 3 GOLD FFD400
+	// 4 GREEN 3FDB37
+	// 5 PURPLE C12BB7
+	public float maxHealth;
+	public float primaryDamage;
+	public float primaryKnockback;
+	private Color color;
+	private float size;
+	public float meleeReach;
 
 	void Awake() {
 		enemyType = (IDummy)enemyReference;
 		stats = enemyType.GetStats();
 
 		rb = gameObject.GetComponent<Rigidbody2D>();
-        speed = stats["speed"] * 100;
-        currentHealth = stats["maxHealth"];
+        bounce *= 1000;
+		tempSpeed = bounce;
+        currentHealth = maxHealth;
 		// secondaryChance = (stats["secondaryChance"]/100) * 10000;
 
-		primaryLength = enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-		secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+		// primaryLength = enemyType.GetMoves()[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+		// secondaryLength = enemyType.GetMoves()[1].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 	}
 
 	private void FixedUpdate() {
 		senseOffset = transform.up * (stats["senseRadius"] / 3f);
 		senseArea = Physics2D.OverlapCircleAll(transform.position + senseOffset, stats["senseRadius"]);
 
+		// Check if target is still in range
+		if (target != null && false) {
+			float distance = Vector3.Distance(target.transform.position, transform.position);
+
+			if (distance > stats["senseRadius"]
+				|| target.GetComponent<Player>().currentHealth < 0) {
+				target = null;
+			}
+			else if (distance < meleeReach
+				&& lastPrimary + 0.1f + primaryLength < Time.time
+				&& timeToReady < Time.time) {
+				// Primary Attack if close enough
+				lastPrimary = Time.time;
+				timeToReady = Time.time + primaryLength + 0.1f;
+				enemyType.UsePrimary(gameObject);
+			}	
+		}
+
         // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
-            if (collider.gameObject.tag == "Player" && !isBusy && !lockRot) {
-				// roses are red, violets are blue, your code is my code too
-				Vector3 vectorToTarget = collider.transform.position - transform.position;
-				float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
-				Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
-				transform.rotation = Quaternion.Lerp(transform.rotation, quart, stats["rotationSpeed"]*0.01f);
+            if (collider.gameObject.tag == "Player" && !isBusy) {
+                // roses are red, violets are blue, your code is my code too
+                Vector3 vectorToTarget = collider.transform.position - transform.position;
+                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
+                Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.Lerp(transform.rotation, quart, stats["rotationSpeed"]*0.01f);
 
+                // Chase Player by Bouncing towards them
+				if (!isChasing)	StartCoroutine(Chase());
+				if (!isResting) {
+					rb.AddForce(transform.up * bounce, ForceMode2D.Force);
+					Debug.Log("Bounce!");
+				}
 				target = collider.gameObject;
             }
         }
-
-		// Check if target is still in range
-		if (target != null) {
-			float distance = Vector3.Distance(target.transform.position, transform.position);
-
-			if (distance > 600f) {
-                // Chase Player
-                rb.AddForce(transform.up * speed);
-			}
-			else if ((distance > 200f || isCornered)
-				&& lastSecondary + stats["secondaryCooldown"] < Time.time
-				&& timeToReady < Time.time) {
-				// Shoot if far enough away
-				lastSecondary = Time.time;
-				timeToReady = Time.time + secondaryLength + 0.1f;
-				StartCoroutine(StopToAim());
-				enemyType.UseSecondary(gameObject);
-			}
-			else if (distance < 200f && !isCornered
-				&& lastPrimary + stats["primaryCooldown"] < Time.time
-				&& timeToReady < Time.time) {
-				// Too close, swing and back up
-				lastPrimary = Time.time;
-				timeToReady = Time.time + primaryLength + 0.1f;
-				StartCoroutine(BackUp());
-				enemyType.UsePrimary(gameObject);
-			}
-		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collider) {
         // Do Damage to Player and get KB
         if(collider.gameObject.tag == "Player") {
             Player player = collider.gameObject.GetComponent<Player>();
-            player.Hurt(stats["primaryDamage"]);
-			player.Knockback(transform, stats["primaryKnockback"]/4f);
+            player.Hurt(primaryDamage);
+			player.Knockback(transform, primaryKnockback/4f);
 
 			float distance = Vector3.Distance(collider.transform.position, transform.position);
 			float cos = (transform.position.x - collider.transform.position.x) / distance;
@@ -102,38 +112,19 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
         }
     }
 
-	private void OnCollisionStay2D(Collision2D collider) {
-		if(collider.gameObject.tag == "Wall") {
-			isCornered = true;
+	public IEnumerator Chase() {
+		isChasing = true;
+		Debug.Log("CHASING!");
+		while (isChasing) {
+			isResting = true;
+			yield return new WaitForSeconds(1f);
+			isResting = false;
+			yield return new WaitForSeconds(0.2f);
 		}
-	}
-
-	private void OnCollisionExit2D(Collision2D collider) {
-		if(collider.gameObject.tag == "Wall") {
-			isCornered = false;
-		}
-	}
-
-	private IEnumerator StopToAim() {
-		yield return new WaitForSeconds(1f);
-		lockRot = true;
-		yield return new WaitForSeconds(0.5f);
-		lockRot = false;
-	}
-
-	public IEnumerator BackUp() {
-		yield return new WaitForSeconds(0.55f);
-		rb.AddForce(-transform.up * 90000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
 	}
 
     public void Hurt(float damage) {
-        currentHealth = Mathf.Clamp(currentHealth - damage, -1, stats["maxHealth"]);
-
-		foreach(Transform child in transform) {
-			if (child.gameObject.CompareTag("EnemyAttack")) {
-				Destroy(child.gameObject);
-			}
-		}
+        currentHealth = Mathf.Clamp(currentHealth - damage, -1, maxHealth);
 
         // Die
         if(currentHealth < 1) {
@@ -142,7 +133,7 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
     }
 
     public void Heal(float healing) {
-        currentHealth = Mathf.Clamp(currentHealth + healing, -1, stats["maxHealth"]);
+        currentHealth = Mathf.Clamp(currentHealth + healing, -1, maxHealth);
     }
 
     public void Knockback(Transform attacker, float kb) {
@@ -166,17 +157,17 @@ public class SkeletonAI : MonoBehaviour, IEnemy {
     public void Stun (float seconds) {
 		if (stunned != null && Time.time+seconds > stunnedUntil) {
 			StopCoroutine(IEStun(seconds));
-			speed = stats["speed"] * 100;
+			bounce = tempSpeed;
 		}
 		stunnedUntil = Time.time + seconds;
 		stunned = StartCoroutine(IEStun(seconds));
     }
 
     private IEnumerator IEStun(float seconds) {
-        float tempSpeed = speed;
-        speed = 0;
+        tempSpeed = bounce;
+        bounce = 0;
 
         yield return new WaitForSeconds(seconds);
-        speed = tempSpeed;
+        bounce = tempSpeed;
     }
 }

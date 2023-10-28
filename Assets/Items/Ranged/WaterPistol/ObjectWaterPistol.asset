@@ -20,7 +20,7 @@ MonoBehaviour:
   primary_projectile_size: 3.5
   primary_projectile_speed: 20
   primary_projectile_lifetime: 0
-  secondary_cooldown: 5
+  secondary_cooldown: 2.5
   secondary_damage: 25
   secondary_knockback: 3
   secondary_projectile_size: 3.5

@@ -8,7 +8,7 @@ public class GoblinSwing : MonoBehaviour
     private Quaternion lockRotParent;
 
 	public ScriptableObject enemyReference;
-	private IGoblin enemyType;
+	private IDummy enemyType;
 	private GoblinAI goblin;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class GoblinSwing : MonoBehaviour
         lockRot = transform.rotation;
 		float swingLength = gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
-		enemyType = (IGoblin)enemyReference;
+		enemyType = (IDummy)enemyReference;
 		goblin = transform.parent.GetComponent<GoblinAI>();
 		goblin.Stun(swingLength);
 		goblin.Busy(swingLength);

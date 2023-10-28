@@ -6,7 +6,7 @@ public class GoblinThrowSwing : MonoBehaviour
 {
 	public GameObject throwable;
 	public ScriptableObject enemyReference;
-	private IGoblin enemyType;
+	private IDummy enemyType;
 	private IEnemy goblin;
 
 	private float length;
@@ -16,7 +16,7 @@ public class GoblinThrowSwing : MonoBehaviour
     {
 		length = gameObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
 
-		enemyType = (IGoblin)enemyReference;
+		enemyType = (IDummy)enemyReference;
 		goblin = transform.parent.GetComponent<IEnemy>();
 		goblin.Stun(length);
 		StartCoroutine(Throw());

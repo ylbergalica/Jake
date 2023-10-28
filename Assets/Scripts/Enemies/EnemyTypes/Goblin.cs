@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Goblin", menuName = "Enemy/Goblin")]
-public class Goblin : ScriptableObject, IGoblin
+public class Goblin : ScriptableObject, IDummy
 {
     public float maxHealth;
     public float speed;

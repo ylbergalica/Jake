@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoblinAI : MonoBehaviour, IEnemy {
 	public ScriptableObject enemyReference;
-	private IGoblin enemyType;
+	private IDummy enemyType;
 	private Dictionary<string, float> stats;
 
     private Rigidbody2D rb;
@@ -30,7 +30,7 @@ public class GoblinAI : MonoBehaviour, IEnemy {
 	public float meleeReach;
 
 	void Awake() {
-		enemyType = (IGoblin)enemyReference;
+		enemyType = (IDummy)enemyReference;
 		stats = enemyType.GetStats();
 
 		rb = gameObject.GetComponent<Rigidbody2D>();
