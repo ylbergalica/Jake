@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc26fc17dd4ab84cbb6ff6e689def87, type: 3}
   m_Name: Chicken
   m_EditorClassIdentifier: 
-  healing: 30
-  cooldown: 0
+  healing: 600
+  secondary_cooldown: 0

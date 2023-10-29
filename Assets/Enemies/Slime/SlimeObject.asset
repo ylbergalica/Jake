@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4ede9fd28009d4796a819e71d48a3b, type: 3}
   m_Name: SlimeObject
   m_EditorClassIdentifier: 
-  type: 0
-  maxHealth: 100
   speed: 40
-  primaryDamage: 20
-  primaryKnockback: 3
-  primaryCooldown: 0
-  rotationSpeed: 0
-  rotationModifier: 0
+  primaryCooldown: 1.5
+  rotationSpeed: 10
+  rotationModifier: 90
   senseRadius: 500

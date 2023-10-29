@@ -8,8 +8,10 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 	private Dictionary<string, float> stats;
 
     private Rigidbody2D rb;
+	private Animator animator;
     private float currentHealth;
 	public float bounce;
+	public float bounceTime;
 	private float tempSpeed;
 	private Coroutine stunned;
 	private float stunnedUntil;
@@ -21,6 +23,7 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 	private bool isBusy;
 	private bool isChasing = false;
 	private bool isResting;
+	private bool isAttacking;
 
 	private float secondaryChance;
 
@@ -46,6 +49,7 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 		stats = enemyType.GetStats();
 
 		rb = gameObject.GetComponent<Rigidbody2D>();
+		animator = gameObject.GetComponent<Animator>();
         bounce *= 1000;
 		tempSpeed = bounce;
         currentHealth = maxHealth;
@@ -60,7 +64,7 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 		senseArea = Physics2D.OverlapCircleAll(transform.position + senseOffset, stats["senseRadius"]);
 
 		// Check if target is still in range
-		if (target != null && false) {
+		if (target != null) {
 			float distance = Vector3.Distance(target.transform.position, transform.position);
 
 			if (distance > stats["senseRadius"]
@@ -68,31 +72,36 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 				target = null;
 			}
 			else if (distance < meleeReach
-				&& lastPrimary + 0.1f + primaryLength < Time.time
-				&& timeToReady < Time.time) {
+				&& lastPrimary + stats["primaryCooldown"] + 0.1f < Time.time
+				&& !isAttacking) {
 				// Primary Attack if close enough
 				lastPrimary = Time.time;
-				timeToReady = Time.time + primaryLength + 0.1f;
 				enemyType.UsePrimary(gameObject);
 			}	
+		}
+		else if (target == null) {
+			isChasing = false;
 		}
 
         // Check Sense Area for a Player
         foreach (Collider2D collider in senseArea){
             if (collider.gameObject.tag == "Player" && !isBusy) {
                 // roses are red, violets are blue, your code is my code too
-                Vector3 vectorToTarget = collider.transform.position - transform.position;
-                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
-                Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.rotation = Quaternion.Lerp(transform.rotation, quart, stats["rotationSpeed"]*0.01f);
+				if (isResting) {
+					Vector3 vectorToTarget = collider.transform.position - transform.position;
+					float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - stats["rotationModifier"];
+					Quaternion quart = Quaternion.AngleAxis(angle, Vector3.forward);
+					transform.rotation = Quaternion.Lerp(transform.rotation, quart, stats["rotationSpeed"]*0.01f);
+				}
 
                 // Chase Player by Bouncing towards them
 				if (!isChasing)	StartCoroutine(Chase());
-				if (!isResting) {
+				else if (!isResting) {
 					rb.AddForce(transform.up * bounce, ForceMode2D.Force);
-					Debug.Log("Bounce!");
 				}
 				target = collider.gameObject;
+
+				break;
             }
         }
 	}
@@ -114,13 +123,30 @@ public class SlimeAI : MonoBehaviour, IEnemy {
 
 	public IEnumerator Chase() {
 		isChasing = true;
-		Debug.Log("CHASING!");
 		while (isChasing) {
 			isResting = true;
 			yield return new WaitForSeconds(1f);
 			isResting = false;
-			yield return new WaitForSeconds(0.2f);
+			if (rb.drag != 10) rb.drag = 10;
+			yield return new WaitForSeconds(bounceTime);
 		}
+	}
+	
+	public void Attack() {
+		isAttacking = true;
+		animator.SetTrigger("Attack");
+		StartCoroutine(IAttack());
+	}
+
+	private IEnumerator IAttack() {
+		while (!isResting) {
+			yield return new WaitForSeconds(0.1f);
+		}
+		bounce *= 2f;
+		yield return new WaitForSeconds(1f + bounceTime);
+		rb.drag -= 5;
+		bounce /= 2f;
+		isAttacking = false;
 	}
 
     public void Hurt(float damage) {

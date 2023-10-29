@@ -31,10 +31,7 @@ public class Slime : ScriptableObject, IDummy
     }
 
     public void UsePrimary(GameObject slime) {
-		// Vector3 realOffset = slime.transform.up * primaryOffset;
-
-        // Instantiate(primary, slime.transform.position + realOffset, slime.transform.rotation, slime.transform);
-		Debug.Log("JUMP!");
+		slime.GetComponent<SlimeAI>().Attack();
 	}
 	
 	public void UseSecondary(GameObject slime) {

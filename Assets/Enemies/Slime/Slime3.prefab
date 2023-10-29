@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5632122584367129006}
   - component: {fileID: 1331282940056217396}
   - component: {fileID: 3381934701139676665}
+  - component: {fileID: -4324885399936420756}
   m_Layer: 7
   m_Name: Slime3
   m_TagString: Enemy
@@ -97,7 +98,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 6
+  m_Mass: 3.5
   m_LinearDrag: 10
   m_AngularDrag: 60
   m_GravityScale: 0
@@ -135,9 +136,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyReference: {fileID: 11400000, guid: 418157013aa8e7546bfe88f65019d282, type: 2}
-  bounce: 20
+  bounce: 35
+  bounceTime: 0.2
   type: 3
-  maxHealth: 400
+  maxHealth: 500
   primaryDamage: 70
   primaryKnockback: 10
-  meleeReach: 100
+  meleeReach: 250
+--- !u!95 &-4324885399936420756
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201584594543768348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc02d0ded27015a4791335ce3b9b7914, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
