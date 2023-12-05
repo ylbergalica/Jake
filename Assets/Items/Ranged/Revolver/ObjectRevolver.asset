@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 1.7
   offset: 50
-  primary_cooldown: 0.6
+  primary_cooldown: 0.2
   primary_damage: 60
   primary_knockback: 6
-  primary_projectile_size: 3.5
-  primary_projectile_speed: 30
+  primary_projectile_size: 3
+  primary_projectile_speed: 50
   primary_projectile_lifetime: 0
   secondary_cooldown: 3.6
   secondary_damage: 50
   secondary_knockback: 6
-  secondary_projectile_size: 3.5
-  secondary_projectile_speed: 30
+  secondary_projectile_size: 3
+  secondary_projectile_speed: 50
   secondary_projectile_lifetime: 0
   primary: {fileID: 8134859221687891006, guid: 0c5da15d4b199244695db333f6019378, type: 3}
   secondary: {fileID: 0}

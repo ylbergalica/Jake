@@ -85,7 +85,8 @@ public class Bullet : MonoBehaviour, IProjectile
 			light.enabled = false;
 			rb.velocity = Vector2.zero;
 			collider.enabled = false;
-			animator.SetBool("Hit", true);
+			if (animator) animator.SetBool("Hit", true);
+			else Destroy(gameObject);
 		}
 	}
 

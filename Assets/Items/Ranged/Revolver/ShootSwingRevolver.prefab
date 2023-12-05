@@ -99,7 +99,7 @@ MonoBehaviour:
   isRay: 0
   burst: 1
   burstDelay: 0
-  projectile: {fileID: 3103947200217329053, guid: 7998044310e42294e880fbf330b19140, type: 3}
+  projectile: {fileID: 3103947200217329053, guid: be2b104416cb90744875b1d072a0a228, type: 3}
   itemReference: {fileID: 11400000, guid: f09e92d60cd10a7418baf593e1c6b000, type: 2}
   lockRotationTiming: 0.5
 --- !u!95 &8518734028310150686
