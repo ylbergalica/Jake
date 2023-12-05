@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlimeObject
   m_EditorClassIdentifier: 
   speed: 40
-  primaryCooldown: 1.5
+  primaryCooldown: 2
   rotationSpeed: 10
   rotationModifier: 90
   senseRadius: 500
