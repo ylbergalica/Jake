@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class Bullet : MonoBehaviour, IProjectile
 {
@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour, IProjectile
 	private Rigidbody2D rb;
 	private Animator animator;
 	private Collider2D collider;
-	private Light2D light;
+	private UnityEngine.Rendering.Universal.Light2D light;
 
 	private List<string> hitObjects = new List<string>();
 
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour, IProjectile
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		collider = GetComponent<Collider2D>();
-		light = GetComponent<Light2D>();
+		light = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 		rb.AddForce(transform.up * speed * 50, ForceMode2D.Impulse);
 	}
 

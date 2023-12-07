@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-	private Light2D shadow;
+	private UnityEngine.Rendering.Universal.Light2D shadow;
 	private Vector3 scale;
 
     // Inventory
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         rb = gameObject.GetComponent<Rigidbody2D>();
-		shadow = gameObject.GetComponent<Light2D>();
+		shadow = gameObject.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 		scale = transform.localScale;
         speed *= 100;
         currentHealth = maxHealth;

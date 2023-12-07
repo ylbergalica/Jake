@@ -5,6 +5,8 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
 	private Animator animator;
+	// arraylist of items
+	public List<Item> items = new List<Item>();
 
     // Start is called before the first frame update
     void Start()
@@ -13,17 +15,21 @@ public class Chest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    // void Update()
+    // {
         
-    }
+    // }
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.gameObject.layer == 8)
 		{
-			animator.SetBool("Open", true);
-			Debug.Log(animator.GetBool("Open"));
+			animator.SetBool("isOpen", true);
+
+			foreach (Item item in items)
+			{
+				Debug.Log(item.name);
+			}
 		}
 	}
 }
