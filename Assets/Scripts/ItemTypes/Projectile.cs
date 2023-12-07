@@ -40,7 +40,8 @@ public class Projectile : ScriptableObject, IItem
 		GameObject projectile = Instantiate(throwable, player.transform.position + player.transform.up * 20, player.transform.rotation);
 		IProjectile projectileRef = projectile.GetComponent(typeof(IProjectile)) as IProjectile;
 		projectileRef.SetStats(lifetime, speed, damage, knockback);
-		projectileRef.AddHitObject(player.gameObject.name);
+		projectile.gameObject.layer = 8;
+		// projectileRef.AddHitObject(player.gameObject.name);
 	}
 
 	public void UseSecondary(GameObject player)

@@ -53,7 +53,8 @@ public class PistolShot : MonoBehaviour
 			animator.Play(clipName, 0, 0f);
 			GameObject projectileObject = Instantiate(projectile, transform.position + transform.up * -2f, transform.rotation);
 			projectileObject.transform.localScale = new Vector3(projectileSize, projectileSize, 1);
-
+			projectileObject.gameObject.layer = 8;
+			
 			IProjectile projectileRef = projectileObject.GetComponent(typeof(IProjectile)) as IProjectile;
 
 			projectileRef.SetStats(

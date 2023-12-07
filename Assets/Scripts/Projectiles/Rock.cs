@@ -12,6 +12,7 @@ public class Rock : MonoBehaviour, IProjectile
 
 	private Rigidbody2D rb;
 	private bool isPicked = false;
+	private bool canPickup = false;
 	private IEnumerator impendingDeath;
 
 	private List<string> hitObjects = new List<string>();
@@ -84,9 +85,11 @@ public class Rock : MonoBehaviour, IProjectile
 		hitObjects.Add(collision.gameObject.name);
 	}
 	
-	public void SetCanPickup(bool isPickup) {	
+	public void SetCanPickup(bool isPickup) {
 		if (isPickup) gameObject.tag = "Item";
 		else gameObject.tag = "Projectile";
+
+		this.isPicked = isPickup;
 	}
 
 	public Item GetItem() {
@@ -95,10 +98,15 @@ public class Rock : MonoBehaviour, IProjectile
 
 	public void PreparePickUp() {
 		isPicked = true;
+		canPickup = true;
 		gameObject.tag = "Item";
 		gameObject.layer = 9;
 		GetComponent<Collider2D>().isTrigger = true;
 		StopCoroutine(impendingDeath);
+	}
+
+	public bool CanPickup() {
+		return canPickup;
 	}
 
 	public IEnumerator DestroyAfterTime(float time) {

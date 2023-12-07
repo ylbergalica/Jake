@@ -184,6 +184,7 @@ public class Player : MonoBehaviour
 					Vector3 direction = transform.position - closestItem.transform.position;
 					float distance = Vector3.Distance(transform.position, closestItem.transform.position);
 					itemBody.AddForce((direction * (Mathf.Pow(distance, 1.5f)/5f)), ForceMode2D.Force);
+					closestItem.gameObject.GetComponent<Item>().SetCanPickup(true);
 					
 					// Destroy indicator and remove from dictionary
 					Destroy(indicators[closestItem.name]);
@@ -273,7 +274,14 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider) {
         // Pick up Items
-        if(collider.gameObject.CompareTag("Item") && collider.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude != 0) { // GET ITEM
+		bool canPickup = false;
+		try {
+			IProjectile projectile = collider.gameObject.GetComponent(typeof(IProjectile)) as IProjectile;
+			canPickup = projectile.CanPickup();
+		}
+		catch {canPickup = collider.gameObject.GetComponent<Item>().CanPickup();}
+
+        if(collider.gameObject.CompareTag("Item") && canPickup) { // GET ITEM
             PickUpItem(collider.gameObject);
         }
         else if (collider.gameObject.CompareTag("Ability")) { // GET ABILITY

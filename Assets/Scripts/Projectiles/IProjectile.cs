@@ -8,4 +8,5 @@ public interface IProjectile
 	public void AddHitObject(string objectName);
 	public Item GetItem();
 	public void PreparePickUp();
+	public bool CanPickup();
 }

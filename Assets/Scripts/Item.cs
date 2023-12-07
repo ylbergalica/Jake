@@ -22,6 +22,8 @@ public class Item : MonoBehaviour
     private float lastEffect;
 
 	private float randomTimeFactor;
+	//hide from editor
+	private bool canPickup = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,9 @@ public class Item : MonoBehaviour
 		float bobbingValue = Mathf.Sin((Time.time + randomTimeFactor) * 2.5f) * 0.4f;
 		transform.position = new Vector3(transform.position.x, transform.position.y + bobbingValue, transform.position.z);
 	}
+
+	public bool CanPickup() {return canPickup;}
+	public void SetCanPickup(bool canPickup) {this.canPickup = canPickup;}
 
     public Dictionary<string, float> GetStats() {
 		item = (IItem)itemReference;

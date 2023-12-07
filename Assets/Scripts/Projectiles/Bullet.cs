@@ -97,4 +97,8 @@ public class Bullet : MonoBehaviour, IProjectile
 	public void PreparePickUp() {
 		return;
 	}
+
+	public bool CanPickup() {
+		return false;
+	}
 }

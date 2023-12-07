@@ -14,22 +14,28 @@ public class Chest : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.layer == 8)
-		{
-			animator.SetBool("isOpen", true);
+		if (other.gameObject.layer == 8) Open();
+	}
 
-			foreach (Item item in items)
-			{
-				Debug.Log(item.name);
-			}
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.layer == 8) Open();
+	}
+
+	void OnParticleCollision(GameObject collider)
+	{
+		if (collider.gameObject.layer == 8) Open();
+	}
+
+	void Open() {
+		animator.SetBool("isOpen", true);
+
+		Item spawnedItem;
+		foreach (Item item in items)
+		{
+			spawnedItem = Instantiate(item, transform.position, Quaternion.identity);
+			spawnedItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 30000 * Time.fixedDeltaTime, ForceMode2D.Impulse);
 		}
 	}
 }
