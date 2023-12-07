@@ -29,6 +29,7 @@ public class Chest : MonoBehaviour
 	}
 
 	void Open() {
+		if (animator.GetBool("isOpen")) return;
 		animator.SetBool("isOpen", true);
 
 		Item spawnedItem;
