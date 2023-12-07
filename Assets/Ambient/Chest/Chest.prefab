@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ad4c3d82465a343b68014dad6fff7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  grabRadius: 160
+  startingItems: []
 --- !u!95 &3374590527537285865
 Animator:
   serializedVersion: 5
