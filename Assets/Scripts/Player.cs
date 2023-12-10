@@ -221,6 +221,19 @@ public class Player : MonoBehaviour
             ui_inventory.ResetStage();
         }
 
+		// Throw Away Item in Active Slot when pressing G
+		if (Input.GetKeyDown(KeyCode.G)) {
+			if (heldItem != null) {
+				inventory.RemoveItemIn(activeSlot);
+				// Set it back to active, set the position to the player, and push it away in the direction the player is looking
+				heldItem.gameObject.SetActive(true);
+				heldItem.SetCanPickup(false);
+				heldItem.transform.position = transform.position;
+				heldItem.GetComponent<Rigidbody2D>().AddForce(transform.up * 30000f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+				heldItem = null;
+			}
+		}
+
         if (!isBusy) {
             // Use Item in Active Slot
             if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)){

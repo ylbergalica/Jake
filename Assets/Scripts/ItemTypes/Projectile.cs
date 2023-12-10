@@ -6,6 +6,7 @@ using UnityEngine;
 public class Projectile : ScriptableObject, IItem
 {
     public float size;
+	public float offset;
     public float damage;
 	public float speed;
 	public float lifetime;
@@ -18,6 +19,7 @@ public class Projectile : ScriptableObject, IItem
     private void OnEnable() {
         stats = new Dictionary<string, float> {
             {"size", size},
+			{"offset", offset},
             {"damage", damage},
 			{"speed", speed},
 			{"lifetime", lifetime},
@@ -37,11 +39,11 @@ public class Projectile : ScriptableObject, IItem
 
 	public void UsePrimary(GameObject player)
 	{
-		GameObject projectile = Instantiate(throwable, player.transform.position + player.transform.up * 20, player.transform.rotation);
+		GameObject projectile = Instantiate(throwable, player.transform.position + player.transform.up * offset, player.transform.rotation);
 		IProjectile projectileRef = projectile.GetComponent(typeof(IProjectile)) as IProjectile;
 		projectileRef.SetStats(lifetime, speed, damage, knockback);
 		projectile.gameObject.layer = 8;
-		// projectileRef.AddHitObject(player.gameObject.name);
+		projectileRef.AddHitObject(player.gameObject.name);
 	}
 
 	public void UseSecondary(GameObject player)
