@@ -6,6 +6,7 @@ using UnityEngine;
 public class Inventory
 {
 	public static Inventory instance;
+	private Player player;
 
     private UI_Inventory ui_inventory;
     private Item[] itemList;
@@ -141,6 +142,27 @@ public class Inventory
         return itemCount;
     }
 
+	public void ThrowItemIn(int index){
+		// Set it back to active, set the position to the player, and push it away in the direction the player is looking
+		Item item = GetItemIn(index);
+		item.gameObject.SetActive(true);
+		item.SetCanPickup(false);
+		item.gameObject.transform.position = player.gameObject.transform.position;
+		item.GetComponent<Rigidbody2D>().AddForce(player.gameObject.transform.up * 30000f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+		
+		RemoveItemIn(index);
+	}
+
+	public void ThrowItemIn(ItemSlot slot) {
+		Item item = GetItemIn(slot);
+		item.gameObject.SetActive(true);
+		item.SetCanPickup(false);
+		item.gameObject.transform.position = player.gameObject.transform.position;
+		item.GetComponent<Rigidbody2D>().AddForce(player.gameObject.transform.up * 30000f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+		
+		RemoveItemIn(allSlots.IndexOf(slot));
+	}
+
     public void RemoveItem(Item item){
         // itemList[slot] = null;
         // var result = Array.Find(itemList, element => element == item);
@@ -161,6 +183,9 @@ public class Inventory
 			ui_inventory.RefreshInventory();
 		}
 	}
+
+	public Player GetPlayer() { return this.player; }
+	public void SetPlayer(Player player) { this.player = player; }
         
     override public string ToString(){
         string output = "Inventory: ";

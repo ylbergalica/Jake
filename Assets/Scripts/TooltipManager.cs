@@ -31,17 +31,17 @@ public class TooltipManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Input.mousePosition;
+        // transform.position = Input.mousePosition;
     }
 
-	public void SetAndShowTooltip(string name, string description, string metric) {
+	public void SetAndShowTooltip(string name, string description, ItemSlot slot) {
 		gameObject.SetActive(true);
 		Cursor.visible = false;
-		transform.position = Input.mousePosition;
+		float offset = (slot.width/2) + 20;
+		transform.position = slot.gameObject.transform.position + new Vector3(offset, -offset, 0);
 
 		itemName.text = name;
 		itemDescription.text = description;
-		itemMetric.text = metric;
 	}
 
 	public void HideTooltip() {

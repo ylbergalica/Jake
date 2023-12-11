@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+	[HideInInspector]public bool isHovered;
 	public int index;
     public float width;
     public float offset;
@@ -31,23 +32,28 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         icon.GetComponent<Image>().color = tempColor;
     }
 
+	// When pressing 'G', throw item and remove from inventory
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.G) && isHovered) {
+			Inventory.instance.ThrowItemIn(index);
+		}
+	}
+
 	public void OnPointerEnter(PointerEventData eventData) {
 		if (transform.parent.name == "UI_Abilities") {
 			return;
 		}
 		
 		item = Inventory.instance.GetItemIn(index);
-		string metricType = "Damage";
-		if (item.itemCategory == ItemCategory.Consumable) {
-			metricType = "Healing";
-		}
+		TooltipManager.instance.SetAndShowTooltip(item.itemName, item.itemDescription, this);
 
-		string metric = $"{metricType}: {item.itemMetric}";
-
-		TooltipManager.instance.SetAndShowTooltip(item.itemName, item.itemDescription, metric);
+		Debug.Log("Hovering over " + item.itemName + " at index " + index);
+		this.isHovered = true;
 	}
 
 	public void OnPointerExit(PointerEventData eventData) {
 		TooltipManager.instance.HideTooltip();
+
+		this.isHovered = false;
 	}
 }

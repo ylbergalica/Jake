@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     private bool isBusy;
 	private bool isWalking;
 	private bool rightFoot = true;
+	[HideInInspector]public bool isInUI = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour
 		indicators = new Dictionary<string, GameObject>();
 
         inventory = new Inventory(slotsCount);
+		inventory.SetPlayer(this);
         invItems = new List<GameObject>();
 		if (ui_inventory != null) {
 			AddInventoryUI(ui_inventory);
@@ -87,9 +89,11 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
 		// Rotate Player Towards Mouse
-        mousePos = Input.mousePosition;
-        mousePos.z = 0;
-        objectPos = Camera.main.WorldToScreenPoint(transform.position);
+        if (!isInUI) {
+			mousePos = Input.mousePosition;
+			mousePos.z = 0;
+			objectPos = Camera.main.WorldToScreenPoint(transform.position);
+		}
 
 		// roses are red, violets are blue, your code is my code too
 		Vector3 vectorToTarget = mousePos - objectPos;
@@ -219,22 +223,18 @@ public class Player : MonoBehaviour
             }
 
             ui_inventory.ResetStage();
+			isInUI = !isInUI;
         }
 
 		// Throw Away Item in Active Slot when pressing G
-		if (Input.GetKeyDown(KeyCode.G)) {
+		if (Input.GetKeyDown(KeyCode.G) && !isInUI) {
 			if (heldItem != null) {
-				inventory.RemoveItemIn(activeSlot);
-				// Set it back to active, set the position to the player, and push it away in the direction the player is looking
-				heldItem.gameObject.SetActive(true);
-				heldItem.SetCanPickup(false);
-				heldItem.transform.position = transform.position;
-				heldItem.GetComponent<Rigidbody2D>().AddForce(transform.up * 30000f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+				inventory.ThrowItemIn(activeSlot.index);
 				heldItem = null;
 			}
 		}
 
-        if (!isBusy) {
+        if (!isBusy && !isInUI) {
             // Use Item in Active Slot
             if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)){
                 ui_inventory.RefreshInventory();
