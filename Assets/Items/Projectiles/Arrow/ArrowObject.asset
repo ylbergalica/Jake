@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ArrowObject
   m_EditorClassIdentifier: 
   size: 2
+  offset: 60
   damage: 40
   speed: 10
   lifetime: 2.5

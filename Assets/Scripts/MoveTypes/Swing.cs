@@ -6,6 +6,7 @@ public class Swing : MonoBehaviour
 {
     public ScriptableObject itemReference;
     private IItem item;
+	private Dictionary<string, float> stats;
 
     private Quaternion lockRot;
     private Quaternion lockRotParent;
@@ -22,6 +23,8 @@ public class Swing : MonoBehaviour
         lockRot = transform.rotation;
 
         item = (IItem)itemReference;
+		stats = item.GetStats();
+		transform.localScale = new Vector3(stats["size"], stats["size"], 1);
     }
 
     // Update is called once per frame
@@ -35,9 +38,9 @@ public class Swing : MonoBehaviour
         // Damage an Enemy
         if(collider.gameObject.tag == "Enemy"){
             IEnemy enemy = collider.GetComponent(typeof(IEnemy)) as IEnemy;
-            enemy.Hurt(item.GetStats()["swing_damage"]);
+            enemy.Hurt(stats["swing_damage"]);
 			
-			float knockback = item.GetStats()["swing_knockback"];
+			float knockback = stats["swing_knockback"];
             enemy.Knockback(transform, knockback);
 
             // Do hit idicator when enemy gets hurtd

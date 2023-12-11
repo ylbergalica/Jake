@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ThrowingRockObject
   m_EditorClassIdentifier: 
   size: 2
+  offset: 50
   damage: 40
   speed: 10
   lifetime: 2.5

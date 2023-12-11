@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86bd0365da170c4da70b1aa131b7073, type: 3}
   m_Name: Shovel
   m_EditorClassIdentifier: 
-  size: 1.2
+  size: 2
   swing_offset: 40
   swing_damage: 50
   swing_knockback: 8
