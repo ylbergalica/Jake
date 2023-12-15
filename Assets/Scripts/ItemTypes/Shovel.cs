@@ -37,6 +37,9 @@ public class Shovel : ScriptableObject, IItem
         if (primary != null) {
             primary.transform.localScale = new Vector3(size, size, 1);
         }
+		if (secondary != null) {
+			secondary.transform.localScale = new Vector3(size, size, 1);
+		}
     }
 
     public Dictionary<string, float> GetStats() {

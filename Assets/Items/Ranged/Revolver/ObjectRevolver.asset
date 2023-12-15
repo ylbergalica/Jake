@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 1.7
   offset: 50
-  primary_cooldown: 0.2
+  primary_cooldown: 0.25
   primary_damage: 60
   primary_knockback: 6
   primary_projectile_size: 3

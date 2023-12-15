@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78188f8b76319f64a9507a2e3926e51c, type: 3}
   m_Name: VitalUmbrella
   m_EditorClassIdentifier: 
-  size: 5
+  size: 1.3
   offset: 40
   swing_damage: 40
   pull_damage: 20

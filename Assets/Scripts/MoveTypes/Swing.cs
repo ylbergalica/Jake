@@ -24,7 +24,6 @@ public class Swing : MonoBehaviour
 
         item = (IItem)itemReference;
 		stats = item.GetStats();
-		transform.localScale = new Vector3(stats["size"], stats["size"], 1);
     }
 
     // Update is called once per frame

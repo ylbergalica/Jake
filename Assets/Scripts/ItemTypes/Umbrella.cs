@@ -37,9 +37,15 @@ public class Umbrella : ScriptableObject, IItem
             {"tertiary_cooldown", tertiary_cooldown},
         };
 
-        if (primary != null) {
-            primary.transform.localScale = new Vector3(size/10, size/10, 1);
+        if (primary) {
+            primary.transform.localScale = new Vector3(size, size, 1);
         }
+		if (secondary) {
+            secondary.transform.localScale = new Vector3(size, size, 1);
+        }
+		if (tertiary) {
+			tertiary.transform.localScale = new Vector3(size, size, 1);
+		}
     }
 
     public Dictionary<string, float> GetStats() {
@@ -60,7 +66,7 @@ public class Umbrella : ScriptableObject, IItem
 
 	public void UseSecondary(GameObject player)
 	{
-		Vector3 realOffset = player.transform.up * offset;
+		Vector3 realOffset = player.transform.up * offset * 2.2f;
 
         Instantiate(secondary, player.transform.position + realOffset, player.transform.rotation, player.transform);
 	}
